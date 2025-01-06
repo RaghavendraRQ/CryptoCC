@@ -47901,10 +47901,10 @@ int main() {
     std::string name;
     std::cout << "Enter your name: ";
     std::cin >> name;
-    std::cout << "Hello, " << name << "!" << std::endl;
-    int mul, bias;
-    std::cout << "Enter the multiplier and bias: ";
-    std::cin >> mul >> bias;
+
+
+
+
     Substitution substitution;
     const std::string cipher = substitution.encrypt(name);
     std::cout << "Encrypted name: " << cipher << std::endl;
