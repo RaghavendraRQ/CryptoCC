@@ -8,7 +8,7 @@
 #include <map>
 #include <string>
 
-namespace Affine {
+namespace Classic::Affine {
     inline std::map<int, int> inverse_map = {
             {1, 1},
             {3, 9},
@@ -23,7 +23,7 @@ namespace Affine {
             {23, 17},
             {25, 25}
     };
-    std::string encrypt(const std::string &text, int multiplier, int bias);
+    std::string encrypt(const std::string &plain_text, int multiplier, int bias);
     std::string decrypt(const std::string &cipher, int multiplier, int bias);
     int modInverse(int a, int m);
 }

@@ -5,3 +5,5 @@ build CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o: dyndep
 
+build CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o: dyndep
+

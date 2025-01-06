@@ -3,7 +3,7 @@
 //
 #include <classic/affine.h>
 
-namespace Affine {
+namespace Classic::Affine {
     int modInverse(int a, const int m) {
         a = a % m;
         for (int x = 1; x < m; x++)
@@ -12,16 +12,16 @@ namespace Affine {
         return 1;
     }
 
-    std::string encrypt(const std::string &text, const int multiplier, const int bias) {
+    std::string encrypt(const std::string &plain_text, const int multiplier, const int bias) {
         if (!inverse_map.contains(multiplier))
             return "Invalid multiplier";
 
         std::string cipher_text;
-        for (int i = 0; i < text.length(); i++) {
-            if (isupper(text[i]))
-                cipher_text += static_cast<char>((multiplier * (text[i] - 65) + bias) % 26 + 65);
+        for (int i = 0; i < plain_text.length(); i++) {
+            if (isupper(plain_text[i]))
+                cipher_text += static_cast<char>((multiplier * (plain_text[i] - 65) + bias) % 26 + 65);
             else
-                cipher_text += static_cast<char>((multiplier * (text[i] - 97) + bias) % 26 + 97);
+                cipher_text += static_cast<char>((multiplier * (plain_text[i] - 97) + bias) % 26 + 97);
         }
         return cipher_text;
     }

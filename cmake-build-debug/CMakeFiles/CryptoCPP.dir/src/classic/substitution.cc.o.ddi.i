@@ -1,15 +1,14 @@
-# 0 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/affine.cc"
+# 0 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/substitution.cc"
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 0 "<command-line>" 2
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/affine.cc"
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/substitution.cc"
 
 
 
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 1
-
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 1
 
 
 
@@ -25560,7 +25559,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
     }
 
 }
-# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 2
+# 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 2
 # 1 "/usr/include/c++/14.2.0/string" 1 3
 # 36 "/usr/include/c++/14.2.0/string" 3
        
@@ -36451,66 +36450,68 @@ namespace std __attribute__ ((__visibility__ ("default")))
     }
 
 }
-# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 2
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 2
 
 
-# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h"
-namespace Classic::Affine {
-    inline std::map<int, int> inverse_map = {
-            {1, 1},
-            {3, 9},
-            {5, 21},
-            {7, 15},
-            {9, 3},
-            {11, 19},
-            {15, 7},
-            {17, 23},
-            {19, 11},
-            {21, 5},
-            {23, 17},
-            {25, 25}
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h"
+namespace Classic {
+    class Substitution {
+        std::map<char, char> key = {
+                {'A', 'D'}, {'B', 'E'}, {'C', 'F'}, {'D', 'G'}, {'E', 'H'}, {'F', 'I'}, {'G', 'J'}, {'H', 'K'},
+                {'I', 'L'}, {'J', 'M'}, {'K', 'N'}, {'L', 'O'}, {'M', 'P'}, {'N', 'Q'}, {'O', 'R'}, {'P', 'S'},
+                {'Q', 'T'}, {'R', 'U'}, {'S', 'V'}, {'T', 'W'}, {'U', 'X'}, {'V', 'Y'}, {'W', 'Z'}, {'X', 'A'},
+                {'Y', 'B'}, {'Z', 'C'}
+        };
+        std::map<char, char> reverse_key = {
+                {'D', 'A'}, {'E', 'B'}, {'F', 'C'}, {'G', 'D'}, {'H', 'E'}, {'I', 'F'}, {'J', 'G'}, {'K', 'H'},
+                {'L', 'I'}, {'M', 'J'}, {'N', 'K'}, {'O', 'L'}, {'P', 'M'}, {'Q', 'N'}, {'R', 'O'}, {'S', 'P'},
+                {'T', 'Q'}, {'U', 'R'}, {'V', 'S'}, {'W', 'T'}, {'X', 'U'}, {'Y', 'V'}, {'Z', 'W'}, {'A', 'X'},
+                {'B', 'Y'}, {'C', 'Z'}
+        };
+        void set_reverse_key();
+    public:
+        std::string encrypt(const std::string &plain_text);
+        std::string decrypt(const std::string &cipher_text);
+
+        int set_key(const std::map<char, char> &new_key);
     };
-    std::string encrypt(const std::string &plain_text, int multiplier, int bias);
-    std::string decrypt(const std::string &cipher, int multiplier, int bias);
-    int modInverse(int a, int m);
 }
-# 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/affine.cc" 2
+# 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/substitution.cc" 2
 
-namespace Classic::Affine {
-    int modInverse(int a, const int m) {
-        a = a % m;
-        for (int x = 1; x < m; x++)
-            if (a * x % m == 1)
-                return x;
-        return 1;
+namespace Classic {
+    void Substitution::set_reverse_key() {
+        for (const auto& [unit, mapped] : key)
+            reverse_key[mapped] = unit;
     }
 
-    std::string encrypt(const std::string &plain_text, const int multiplier, const int bias) {
-        if (!inverse_map.contains(multiplier))
-            return "Invalid multiplier";
-
+    std::string Substitution::encrypt(const std::string &plain_text) {
         std::string cipher_text;
-        for (int i = 0; i < plain_text.length(); i++) {
+        for (int i = 0; i < plain_text.length(); i++)
             if (isupper(plain_text[i]))
-                cipher_text += static_cast<char>((multiplier * (plain_text[i] - 65) + bias) % 26 + 65);
+                cipher_text += key[plain_text[i]];
             else
-                cipher_text += static_cast<char>((multiplier * (plain_text[i] - 97) + bias) % 26 + 97);
-        }
+                cipher_text += tolower(key[toupper(plain_text[i])]);
+
         return cipher_text;
     }
-    std::string decrypt(const std::string &cipher, const int multiplier, const int bias) {
-        if (!inverse_map.contains(multiplier))
-            return "Invalid multiplier";
 
+    std::string Substitution::decrypt(const std::string &cipher_text) {
         std::string plain_text;
-        const int inverse = inverse_map[multiplier];
-        for (int i = 0; i < cipher.length(); i++) {
-            if (isupper(cipher[i]))
-                plain_text += static_cast<char>((inverse * (cipher[i] - 65 - bias + 26) % 26) + 65);
+        for (int i = 0; i < cipher_text.length(); i++)
+            if (isupper(cipher_text[i]))
+                plain_text += reverse_key[cipher_text[i]];
             else
-                plain_text += static_cast<char>((inverse * (cipher[i] - 97 - bias + 26) % 26) + 97);
-        }
+                plain_text += tolower(reverse_key[toupper(cipher_text[i])]);
+
         return plain_text;
     }
 
+    int Substitution::set_key(const std::map<char, char> &new_key) {
+        if (new_key.size() != 26)
+            return 1;
+        key.clear();
+        key = new_key;
+        set_reverse_key();
+        return 0;
+    }
 }

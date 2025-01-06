@@ -43294,8 +43294,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 2 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 1
-
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 1
 
 
 
@@ -47868,34 +47867,37 @@ namespace std __attribute__ ((__visibility__ ("default")))
     }
 
 }
-# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 2
+# 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 2
 
 
 
-# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h"
-namespace Affine {
-    inline std::map<int, int> inverse_map = {
-            {1, 1},
-            {3, 9},
-            {5, 21},
-            {7, 15},
-            {9, 3},
-            {11, 19},
-            {15, 7},
-            {17, 23},
-            {19, 11},
-            {21, 5},
-            {23, 17},
-            {25, 25}
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h"
+namespace Classic {
+    class Substitution {
+        std::map<char, char> key = {
+                {'A', 'D'}, {'B', 'E'}, {'C', 'F'}, {'D', 'G'}, {'E', 'H'}, {'F', 'I'}, {'G', 'J'}, {'H', 'K'},
+                {'I', 'L'}, {'J', 'M'}, {'K', 'N'}, {'L', 'O'}, {'M', 'P'}, {'N', 'Q'}, {'O', 'R'}, {'P', 'S'},
+                {'Q', 'T'}, {'R', 'U'}, {'S', 'V'}, {'T', 'W'}, {'U', 'X'}, {'V', 'Y'}, {'W', 'Z'}, {'X', 'A'},
+                {'Y', 'B'}, {'Z', 'C'}
+        };
+        std::map<char, char> reverse_key = {
+                {'D', 'A'}, {'E', 'B'}, {'F', 'C'}, {'G', 'D'}, {'H', 'E'}, {'I', 'F'}, {'J', 'G'}, {'K', 'H'},
+                {'L', 'I'}, {'M', 'J'}, {'N', 'K'}, {'O', 'L'}, {'P', 'M'}, {'Q', 'N'}, {'R', 'O'}, {'S', 'P'},
+                {'T', 'Q'}, {'U', 'R'}, {'V', 'S'}, {'W', 'T'}, {'X', 'U'}, {'Y', 'V'}, {'Z', 'W'}, {'A', 'X'},
+                {'B', 'Y'}, {'C', 'Z'}
+        };
+        void set_reverse_key();
+    public:
+        std::string encrypt(const std::string &plain_text);
+        std::string decrypt(const std::string &cipher_text);
+
+        int set_key(const std::map<char, char> &new_key);
     };
-    std::string encrypt(const std::string &text, int multiplier, int bias);
-    std::string decrypt(const std::string &cipher, int multiplier, int bias);
-    int modInverse(int a, int m);
 }
 # 3 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
 int main() {
-
+    using namespace Classic;
     std::string name;
     std::cout << "Enter your name: ";
     std::cin >> name;
@@ -47903,8 +47905,9 @@ int main() {
     int mul, bias;
     std::cout << "Enter the multiplier and bias: ";
     std::cin >> mul >> bias;
-    std::string cipher = Affine::encrypt(name, mul, bias);
+    Substitution substitution;
+    const std::string cipher = substitution.encrypt(name);
     std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << Affine::decrypt(cipher, mul, bias) << std::endl;
+    std::cout << "Decrypted name: " << substitution.decrypt(cipher) << std::endl;
     return 0;
 }

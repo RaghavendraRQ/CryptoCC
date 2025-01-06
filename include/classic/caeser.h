@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace Caeser {
+namespace Classic::Caeser {
     std::string encrypt(const std::string &text, int shift);
     std::string decrypt(const std::string &cipher, int shift);
 }

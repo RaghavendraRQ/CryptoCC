@@ -10,4 +10,7 @@ add_executable(CryptoCPP main.cpp
         include/classic/caeser.h
         src/classic/caeser.cc
         include/classic/affine.h
-        src/classic/affine.cc)
+        src/classic/affine.cc
+        include/cipher.h
+        include/classic/substitution.h
+        src/classic/substitution.cc)
