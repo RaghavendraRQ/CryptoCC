@@ -1,5 +1,5 @@
 #include <iostream>
-#include <classic/caeser.h>
+#include <classic/affine.h>
 
 int main() {
 
@@ -7,11 +7,11 @@ int main() {
     std::cout << "Enter your name: ";
     std::cin >> name;
     std::cout << "Hello, " << name << "!" << std::endl;
-    int shifts;
-    std::cout << "Enter the number of shifts: ";
-    std::cin >> shifts;
-    std::string cipher = Caeser::encrypt(name, shifts);
+    int mul, bias;
+    std::cout << "Enter the multiplier and bias: ";
+    std::cin >> mul >> bias;
+    const std::string cipher = Affine::encrypt(name, mul, bias);
     std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << Caeser::decrypt(cipher, shifts) << std::endl;
+    std::cout << "Decrypted name: " << Affine::decrypt(cipher, mul, bias) << std::endl;
     return 0;
 }

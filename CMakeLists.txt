@@ -8,4 +8,6 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_executable(CryptoCPP main.cpp
         include/classic/caeser.h
-        src/classic/caeser.cc)
+        src/classic/caeser.cc
+        include/classic/affine.h
+        src/classic/affine.cc)

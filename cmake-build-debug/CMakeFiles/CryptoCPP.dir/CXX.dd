@@ -1,0 +1,7 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/CryptoCPP.dir/main.cpp.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o: dyndep
+
