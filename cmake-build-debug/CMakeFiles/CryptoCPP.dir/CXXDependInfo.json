@@ -1,0 +1,18 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug",
+	"dir-cur-src" : "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP",
+	"dir-top-bld" : "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug",
+	"dir-top-src" : "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug/CMakeFiles/CryptoCPP.dir"
+}
