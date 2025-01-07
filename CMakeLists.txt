@@ -13,4 +13,6 @@ add_executable(CryptoCPP main.cpp
         src/classic/affine.cc
         include/cipher.h
         include/classic/substitution.h
-        src/classic/substitution.cc)
+        src/classic/substitution.cc
+        include/classic/playfair.h
+        src/classic/playfair.cc)
