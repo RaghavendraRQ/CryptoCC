@@ -7,3 +7,7 @@ build CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o: dyndep
 
+build CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o: dyndep
+

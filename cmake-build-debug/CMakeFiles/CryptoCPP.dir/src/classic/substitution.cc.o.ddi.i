@@ -47893,6 +47893,9 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 # 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/substitution.cc"
 namespace Classic {
+
+
+
     void Substitution::set_reverse_key() {
         try {
             for (const auto& [unit, mapped] : key)
@@ -47901,6 +47904,12 @@ namespace Classic {
             std::cerr << e.what() << std::endl;
         }
     }
+
+
+
+
+
+
 
     std::string Substitution::encrypt(const std::string &plain_text) {
         std::string cipher_text;
@@ -47913,6 +47922,12 @@ namespace Classic {
         return cipher_text;
     }
 
+
+
+
+
+
+
     std::string Substitution::decrypt(const std::string &cipher_text) {
         std::string plain_text;
         for (int i = 0; i < cipher_text.length(); i++)
@@ -47923,6 +47938,12 @@ namespace Classic {
 
         return plain_text;
     }
+
+
+
+
+
+
 
     int Substitution::set_key(const std::map<char, char> &new_key) {
         if (new_key.size() != 26)
