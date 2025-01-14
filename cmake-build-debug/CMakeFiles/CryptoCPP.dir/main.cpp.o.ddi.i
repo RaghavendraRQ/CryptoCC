@@ -53294,9 +53294,14 @@ namespace Classic::Caeser {
 
 
 
+
 namespace Attacks::Caeser {
     void bruteForce(const std::string &cipher_text);
-    std::map<char, int> frequencyAnalysis(const std::string &cipher_text);
+    std::map<char, char> frequencyAnalysis(const std::string &cipher_text);
+
+    namespace impl {
+        std::vector<std::pair<char, int>> sortFrequency(std::map<char, int> map);
+    }
 }
 # 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
@@ -53315,7 +53320,9 @@ int main() {
     std::cout << "Decrypted name: " << Caeser::decrypt(cipher, 3) << std::endl;
 
     Attacks::Caeser::bruteForce(cipher);
-    Attacks::Caeser::frequencyAnalysis(cipher);
+    auto mapper = Attacks::Caeser::frequencyAnalysis(cipher);
+    for (const auto& [key, value] : mapper)
+        std::cout << key << " : " << value << std::endl;
 
     return 0;
 }

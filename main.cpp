@@ -44,7 +44,9 @@ int main() {
     std::cout << "Decrypted name: " << Caeser::decrypt(cipher, 3) << std::endl;
 
     Attacks::Caeser::bruteForce(cipher);
-    Attacks::Caeser::frequencyAnalysis(cipher);
+    auto mapper = Attacks::Caeser::frequencyAnalysis(cipher);
+    for (const auto& [key, value] : mapper)
+        std::cout << key << " : " << value << std::endl;
 
     return 0;
 }
