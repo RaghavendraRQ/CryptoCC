@@ -17,4 +17,9 @@ add_executable(CryptoCPP main.cpp
         include/classic/playfair.h
         src/classic/playfair.cc
         include/classic/hillcipher.h
-        src/classic/hillcipher.cc)
+        src/classic/hillcipher.cc
+        include/classic/vigenere.h
+        src/classic/vigenere.cc
+        include/attacks/caeser.h
+        src/attacks/caeser.cc
+        tests/caeser_attack.cc)

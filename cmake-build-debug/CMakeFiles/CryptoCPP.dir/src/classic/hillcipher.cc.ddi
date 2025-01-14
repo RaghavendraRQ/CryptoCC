@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

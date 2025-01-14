@@ -17,8 +17,10 @@ namespace Classic::Caeser {
         for (int i = 0; i < plain_text.length(); i++) {
             if (isupper(plain_text[i]))
                 cipher_text += static_cast<char>((plain_text[i] + shift - 65) % 26 + 65);
-            else
+            else if (islower(plain_text[i]))
                 cipher_text += static_cast<char>((plain_text[i] + shift - 97) % 26 + 97);
+            else
+                cipher_text += plain_text[i];
         }
         return cipher_text;
     }
@@ -35,8 +37,10 @@ namespace Classic::Caeser {
         for (int i = 0; i < cipher_text.length(); i++) {
             if (isupper(cipher_text[i]))
                 plain_text += static_cast<char>((cipher_text[i] - shift - 65 + 26) % 26 + 65);
-            else
+            else if (islower(cipher_text[i]))
                 plain_text += static_cast<char>((cipher_text[i] - shift - 97 + 26) % 26 + 97);
+            else
+                plain_text += cipher_text[i];
         }
         return plain_text;
     }

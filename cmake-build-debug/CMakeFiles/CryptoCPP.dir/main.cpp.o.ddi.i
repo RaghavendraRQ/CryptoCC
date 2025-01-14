@@ -53270,24 +53270,52 @@ namespace Classic::HillCipher {
     }
 }
 # 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/vigenere.h" 1
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/vigenere.h"
+namespace Classic::Vigenere {
+    std::string encrypt(const std::string &plain_text, const std::string &key);
+    std::string decrypt(const std::string &cipher_text, const std::string &key);
+}
+# 6 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h" 1
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h"
+namespace Classic::Caeser {
+    std::string encrypt(const std::string &plain_text, int shift);
+    std::string decrypt(const std::string &cipher_text, int shift);
+}
+# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/caeser.h" 1
+
+
+
+       
+
+
+
+
+namespace Attacks::Caeser {
+    void bruteForce(const std::string &cipher_text);
+    std::map<char, int> frequencyAnalysis(const std::string &cipher_text);
+}
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
 int main() {
     using namespace Classic;
     std::string name, key;
     std::cout << "Enter your name: ";
-    std::cin >> name;
+
+    std::getline(std::cin, name);
+
     std::cout << "Enter the key: ";
     std::cin >> key;
-# 26 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
-    const HillCipher::hill_key_t key_matrix = {
-        {17, 17, 5},
-        {21, 18, 21},
-        {2, 2, 19}
-    };
-
-    const std::string cipher = HillCipher::encrypt(name, key_matrix);
+# 42 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    const std::string cipher = Caeser::encrypt(name, 3);
     std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << HillCipher::decrypt(cipher, key_matrix) << std::endl;
+    std::cout << "Decrypted name: " << Caeser::decrypt(cipher, 3) << std::endl;
+
+    Attacks::Caeser::bruteForce(cipher);
+    Attacks::Caeser::frequencyAnalysis(cipher);
 
     return 0;
 }

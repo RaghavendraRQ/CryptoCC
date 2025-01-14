@@ -11,3 +11,9 @@ build CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o: dyndep
 
+build CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/tests/caeser_attack.cc.o: dyndep
+
