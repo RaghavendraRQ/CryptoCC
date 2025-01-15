@@ -53277,13 +53277,25 @@ namespace Classic::Vigenere {
     std::string decrypt(const std::string &cipher_text, const std::string &key);
 }
 # 6 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/columnar.h" 1
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/columnar.h"
+namespace Classic::Columnar {
+    const std::string filling_char = "X";
+    std::string encrypt(const std::string &plain_text, const std::string &key);
+    std::string decrypt(const std::string &cipher_text, const std::string &key);
+
+    namespace impl {
+        void padString(std::string &text, const int &n);
+    }
+}
+# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h" 1
 # 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h"
 namespace Classic::Caeser {
     std::string encrypt(const std::string &plain_text, int shift);
     std::string decrypt(const std::string &cipher_text, int shift);
 }
-# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/caeser.h" 1
 
@@ -53303,7 +53315,16 @@ namespace Attacks::Caeser {
         std::vector<std::pair<char, int>> sortFrequency(std::map<char, int> map);
     }
 }
-# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/plaintext.h" 1
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/plaintext.h"
+namespace Attacks::KnownPlainText {
+    std::string vigenere(const std::string &cipher_text, const std::string &known_plain_text);
+    namespace impl {
+        std::string findVigenereKey(const std::string &cipher_text, const std::string &known_plain_text);
+    }
+}
+# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
 int main() {
     using namespace Classic;
@@ -53314,15 +53335,10 @@ int main() {
 
     std::cout << "Enter the key: ";
     std::cin >> key;
-# 42 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
-    const std::string cipher = Caeser::encrypt(name, 3);
+# 44 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    const std::string cipher = Columnar::encrypt(name, key);
     std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << Caeser::decrypt(cipher, 3) << std::endl;
-
-    Attacks::Caeser::bruteForce(cipher);
-    auto mapper = Attacks::Caeser::frequencyAnalysis(cipher);
-    for (const auto& [key, value] : mapper)
-        std::cout << key << " : " << value << std::endl;
-
+    std::cout << "Decrypted name: " << Columnar::decrypt(cipher, key) << std::endl;
+# 55 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;
 }

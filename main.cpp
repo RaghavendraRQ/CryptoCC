@@ -3,9 +3,11 @@
 #include <classic/playfair.h>
 #include <classic/hillcipher.h>
 #include <classic/vigenere.h>
+#include <classic/columnar.h>
 #include <classic/caeser.h>
 
 #include <attacks/caeser.h>
+#include <attacks/plaintext.h>
 
 int main() {
     using namespace Classic;
@@ -39,14 +41,16 @@ int main() {
     // std::cout << "Encrypted name: " << cipher << std::endl;
     // std::cout << "Decrypted name: " << HillCipher::decrypt(cipher, key_matrix) << std::endl;
 
-    const std::string cipher = Caeser::encrypt(name, 3);
+    const std::string cipher = Columnar::encrypt(name, key);
     std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << Caeser::decrypt(cipher, 3) << std::endl;
+    std::cout << "Decrypted name: " << Columnar::decrypt(cipher, key) << std::endl;
 
-    Attacks::Caeser::bruteForce(cipher);
-    auto mapper = Attacks::Caeser::frequencyAnalysis(cipher);
-    for (const auto& [key, value] : mapper)
-        std::cout << key << " : " << value << std::endl;
+    // std::string know_plain_text;
+    // std::cout << "Enter know plain text: ", std::cin >> know_plain_text;
+    // cipher = "VBTBLMPEDB";
+    //
+    // std::cout << Attacks::KnownPlainText::vigenere(cipher, know_plain_text);
+    //
 
     return 0;
 }

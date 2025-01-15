@@ -70564,6 +70564,12 @@ namespace Attacks::Caeser {
         }
     }
 
+
+
+
+
+
+
     std::map<char, char> frequencyAnalysis(const std::string &cipher_text) {
         constexpr std::array frequentLetters = {'E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D'};
         std::map <char, int> frequencyCount;

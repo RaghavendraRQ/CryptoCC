@@ -15,5 +15,7 @@ build CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o: dyndep
 
-build CMakeFiles/CryptoCPP.dir/tests/caeser_attack.cc.o: dyndep
+build CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o: dyndep
 

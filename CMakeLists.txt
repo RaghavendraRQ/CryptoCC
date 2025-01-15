@@ -22,4 +22,7 @@ add_executable(CryptoCPP main.cpp
         src/classic/vigenere.cc
         include/attacks/caeser.h
         src/attacks/caeser.cc
-        tests/caeser_attack.cc)
+        include/attacks/plaintext.h
+        src/attacks/plaintext.cc
+        include/classic/columnar.h
+        src/classic/columnar.cc)
