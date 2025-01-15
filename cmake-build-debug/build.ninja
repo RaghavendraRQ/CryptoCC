@@ -219,7 +219,41 @@ build CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o: CXX_COMPILER__CryptoCP
   OBJECT_FILE_DIR = CMakeFiles/CryptoCPP.dir/src/classic
   dyndep = CMakeFiles/CryptoCPP.dir/CXX.dd
 
-build CMakeFiles/CryptoCPP.dir/CXX.dd | /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug/CMakeFiles/CryptoCPP.dir/CXXModules.json CMakeFiles/CryptoCPP.dir/main.cpp.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o.modmap: CXX_DYNDEP__CryptoCPP_Debug CMakeFiles/CryptoCPP.dir/main.cpp.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o.ddi | /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug/CMakeFiles/CryptoCPP.dir/CXXDependInfo.json
+build CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.ddi: CXX_SCAN__CryptoCPP_Debug /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.cc || cmake_object_order_depends_target_CryptoCPP
+  DEP_FILE = CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.ddi
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include
+  OBJ_FILE = CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.ddi.i
+
+build CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o: CXX_COMPILER__CryptoCPP_scanned_Debug /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.cc | CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.modmap || cmake_object_order_depends_target_CryptoCPP CMakeFiles/CryptoCPP.dir/CXX.dd
+  DEP_FILE = CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.d
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.modmap
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include
+  OBJECT_DIR = CMakeFiles/CryptoCPP.dir
+  OBJECT_FILE_DIR = CMakeFiles/CryptoCPP.dir/lib
+  dyndep = CMakeFiles/CryptoCPP.dir/CXX.dd
+
+build CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.ddi: CXX_SCAN__CryptoCPP_Debug /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/modern/des.cc || cmake_object_order_depends_target_CryptoCPP
+  DEP_FILE = CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.ddi
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include
+  OBJ_FILE = CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.ddi.i
+
+build CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o: CXX_COMPILER__CryptoCPP_scanned_Debug /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/modern/des.cc | CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.modmap || cmake_object_order_depends_target_CryptoCPP CMakeFiles/CryptoCPP.dir/CXX.dd
+  DEP_FILE = CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.d
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.modmap
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include
+  OBJECT_DIR = CMakeFiles/CryptoCPP.dir
+  OBJECT_FILE_DIR = CMakeFiles/CryptoCPP.dir/src/modern
+  dyndep = CMakeFiles/CryptoCPP.dir/CXX.dd
+
+build CMakeFiles/CryptoCPP.dir/CXX.dd | /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug/CMakeFiles/CryptoCPP.dir/CXXModules.json CMakeFiles/CryptoCPP.dir/main.cpp.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o.modmap CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.modmap CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.modmap: CXX_DYNDEP__CryptoCPP_Debug CMakeFiles/CryptoCPP.dir/main.cpp.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o.ddi CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o.ddi CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o.ddi | /home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/cmake-build-debug/CMakeFiles/CryptoCPP.dir/CXXDependInfo.json
 
 
 # =============================================================================
@@ -229,7 +263,7 @@ build CMakeFiles/CryptoCPP.dir/CXX.dd | /home/raghavendra/Myworkspace/CyberSecur
 #############################################
 # Link the executable CryptoCPP
 
-build CryptoCPP: CXX_EXECUTABLE_LINKER__CryptoCPP_Debug CMakeFiles/CryptoCPP.dir/main.cpp.o CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o
+build CryptoCPP: CXX_EXECUTABLE_LINKER__CryptoCPP_Debug CMakeFiles/CryptoCPP.dir/main.cpp.o CMakeFiles/CryptoCPP.dir/src/classic/caeser.cc.o CMakeFiles/CryptoCPP.dir/src/classic/affine.cc.o CMakeFiles/CryptoCPP.dir/src/classic/substitution.cc.o CMakeFiles/CryptoCPP.dir/src/classic/playfair.cc.o CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/CryptoCPP.dir
   POST_BUILD = :

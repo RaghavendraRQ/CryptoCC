@@ -1,13 +1,10 @@
 #include <iostream>
-#include <classic/substitution.h>
-#include <classic/playfair.h>
-#include <classic/hillcipher.h>
-#include <classic/vigenere.h>
-#include <classic/columnar.h>
-#include <classic/caeser.h>
+
+#include <classic.h>
 
 #include <attacks/caeser.h>
 #include <attacks/plaintext.h>
+
 
 int main() {
     using namespace Classic;
@@ -40,7 +37,6 @@ int main() {
     // const std::string cipher = HillCipher::encrypt(name, key_matrix);
     // std::cout << "Encrypted name: " << cipher << std::endl;
     // std::cout << "Decrypted name: " << HillCipher::decrypt(cipher, key_matrix) << std::endl;
-
     const std::string cipher = Columnar::encrypt(name, key);
     std::cout << "Encrypted name: " << cipher << std::endl;
     std::cout << "Decrypted name: " << Columnar::decrypt(cipher, key) << std::endl;

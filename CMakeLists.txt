@@ -25,4 +25,9 @@ add_executable(CryptoCPP main.cpp
         include/attacks/plaintext.h
         src/attacks/plaintext.cc
         include/classic/columnar.h
-        src/classic/columnar.cc)
+        src/classic/columnar.cc
+        include/classic.h
+        lib/stringUtils.h
+        lib/stringUtils.cc
+        include/modern/des.h
+        src/modern/des.cc)
