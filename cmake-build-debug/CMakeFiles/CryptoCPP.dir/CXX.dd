@@ -25,3 +25,5 @@ build CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/attacks/frequency.cc.o: dyndep
 
+build CMakeFiles/CryptoCPP.dir/src/mycipher.cc.o: dyndep
+

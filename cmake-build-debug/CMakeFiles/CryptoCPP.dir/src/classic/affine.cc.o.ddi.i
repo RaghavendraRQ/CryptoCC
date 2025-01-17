@@ -36470,19 +36470,22 @@ namespace Classic::Affine {
             {23, 17},
             {25, 25}
     };
+# 34 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h"
     std::string encrypt(const std::string &plain_text, int multiplier, int bias);
+# 45 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h"
     std::string decrypt(const std::string &cipher, int multiplier, int bias);
+
+
+
+
+
+
+
     int modInverse(int a, int m);
 }
 # 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/affine.cc" 2
 
 namespace Classic::Affine {
-
-
-
-
-
-
 
     int modInverse(int a, const int m) {
         a = a % m;
@@ -36491,7 +36494,7 @@ namespace Classic::Affine {
                 return x;
         return 1;
     }
-# 29 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/affine.cc"
+
     std::string encrypt(const std::string &plain_text, int multiplier, int bias) {
         if (!inverse_map.contains(multiplier))
             return "Invalid multiplier";
@@ -36508,7 +36511,7 @@ namespace Classic::Affine {
         }
         return cipher_text;
     }
-# 54 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/affine.cc"
+
     std::string decrypt(const std::string &cipher, int multiplier, int bias) {
         if (!inverse_map.contains(multiplier))
             return "Invalid multiplier";

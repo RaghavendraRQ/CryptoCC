@@ -36470,8 +36470,28 @@ namespace Classic {
         };
         void set_reverse_key();
     public:
+
+
+
+
+
+
+
         std::string encrypt(const std::string &plain_text);
+
+
+
+
+
+
+
         std::string decrypt(const std::string &cipher_text);
+
+
+
+
+
+
 
         int set_key(const std::map<char, char> &new_key);
     };
@@ -47905,12 +47925,6 @@ namespace Classic {
         }
     }
 
-
-
-
-
-
-
     std::string Substitution::encrypt(const std::string &plain_text) {
         std::string cipher_text;
         for (int i = 0; i < plain_text.length(); i++)
@@ -47922,12 +47936,6 @@ namespace Classic {
         return cipher_text;
     }
 
-
-
-
-
-
-
     std::string Substitution::decrypt(const std::string &cipher_text) {
         std::string plain_text;
         for (int i = 0; i < cipher_text.length(); i++)
@@ -47938,12 +47946,6 @@ namespace Classic {
 
         return plain_text;
     }
-
-
-
-
-
-
 
     int Substitution::set_key(const std::map<char, char> &new_key) {
         if (new_key.size() != 26)

@@ -31914,6 +31914,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 namespace CryptoCPP::StringUtils {
     void removeSpaces(std::string &text);
     void padString(std::string &text, const int &n, const char &filling_char='X');
+    void toUpper(std::string &text);
 }
 # 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.cc" 2
 # 1 "/usr/include/c++/14.2.0/algorithm" 1 3
@@ -42558,7 +42559,7 @@ lexicographical_compare(_ExecutionPolicy&& __exec, _ForwardIterator1 __first1, _
 
 
 # 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.cc"
-namespace impl {
+namespace CryptoCPP::StringUtils {
 
     void removeSpaces(std::string &text) {
         std::erase_if(text, isspace);
@@ -42568,5 +42569,9 @@ namespace impl {
         const size_t padding = text.length() % n == 0 ? 0 : n - text.length() % n;
         for (int i = 0; i < padding; i++)
             text += filling_char;
+    }
+
+    void toUpper(std::string &text) {
+        std::ranges::transform(text, text.begin(), ::toupper);
     }
 }

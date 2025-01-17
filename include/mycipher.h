@@ -12,11 +12,8 @@ namespace Classic {
     // Creating my own cipher
     class MyCipher {
         std::string m_key;
-        /**
-         *
-         * @return std::array<std::string, 3> - 3 keys generated from the input key
-         */
         [[nodiscard]] std::array<std::string, 3> m_generate_keys() const;
+        [[nodiscard]] static std::string xorString(const std::string& text, const std::string& key);
     public:
         explicit MyCipher(std::string key) : m_key(std::move(key)) {}
         [[nodiscard]] std::string encrypt(const std::string &plain_text) const;

@@ -1,11 +1,11 @@
 
 #include <iostream>
 
-#include <classic.h>
+// #include <classic.h>
 #include <mycipher.h>
 
-#include <attacks/bruteforce.h>
-#include <attacks/plaintext.h>
+// #include <attacks/bruteforce.h>
+// #include <attacks/plaintext.h>
 
 
 int main() {

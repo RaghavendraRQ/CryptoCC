@@ -31913,18 +31913,26 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 # 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h"
 namespace Classic::Caeser {
+
+
+
+
+
+
+
     std::string encrypt(const std::string &plain_text, int shift);
+
+
+
+
+
+
+
     std::string decrypt(const std::string &cipher_text, int shift);
 }
 # 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/classic/caeser.cc" 2
 
 namespace Classic::Caeser {
-
-
-
-
-
-
 
     std::string encrypt(const std::string &plain_text, int shift) {
         std::string cipher_text;
@@ -31939,13 +31947,6 @@ namespace Classic::Caeser {
         }
         return cipher_text;
     }
-
-
-
-
-
-
-
     std::string decrypt(const std::string &cipher_text, int shift) {
         std::string plain_text;
         shift %= 26;
