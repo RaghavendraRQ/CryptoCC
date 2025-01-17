@@ -65971,6 +65971,7 @@ namespace Classic::Columnar {
         return cipher_text;
     }
 
+
     std::string decrypt(const std::string &cipher_text, const std::string &key) {
         std::string plain_text;
         const int key_length = key.length();

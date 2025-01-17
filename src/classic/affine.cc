@@ -35,8 +35,10 @@ namespace Classic::Affine {
         for (int i = 0; i < plain_text.length(); i++) {
             if (isupper(plain_text[i]))
                 cipher_text += static_cast<char>((multiplier * (plain_text[i] - 65) + bias) % 26 + 65);
-            else
+            else if (islower(plain_text[i]))
                 cipher_text += static_cast<char>((multiplier * (plain_text[i] - 97) + bias) % 26 + 97);
+            else
+                cipher_text += plain_text[i];
         }
         return cipher_text;
     }
@@ -61,8 +63,10 @@ namespace Classic::Affine {
         for (int i = 0; i < cipher.length(); i++) {
             if (isupper(cipher[i]))
                 plain_text += static_cast<char>((inverse * (cipher[i] - 65 - bias + 26) % 26) + 65);
-            else
+            else if (islower(cipher[i]))
                 plain_text += static_cast<char>((inverse * (cipher[i] - 97 - bias + 26) % 26) + 97);
+            else
+                plain_text += cipher[i];
         }
         return plain_text;
     }

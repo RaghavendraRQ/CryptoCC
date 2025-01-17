@@ -1,24 +1,12 @@
 //
-// Created by raghavendra on 1/14/25.
+// Created by raghavendra on 1/15/25.
 //
-#include "classic/caeser.h"
-
-#include <attacks/caeser.h>
-
-#include <iostream>
+#include <attacks/frequency.h>
 #include <ranges>
 #include <algorithm>
 
 
-namespace Attacks::Caeser {
-
-    void bruteForce(const std::string &cipher_text) {
-
-        for (std::cout << "Starting a brute force on C:" << cipher_text << std::endl; auto const i: std::views::iota(0, 26)) {
-            std::cout << "shift: " << i << " ";
-            std::cout << Classic::Caeser::decrypt(cipher_text, i) << std::endl;
-        }
-    }
+namespace Attacks::FrequencyAnalysis {
 
     /**
      * Computes frequency analysis on the given text and return top 10 mapped ones.
@@ -36,7 +24,6 @@ namespace Attacks::Caeser {
                 frequencyCount[character]++;
 
         // Too much ain't it ?
-        // TODO: Fuck this hard
 
         const auto time_pass = impl::sortFrequency(frequencyCount);     // Not a time pass by the way
         for (const int mapper_size = std::min(frequentLetters.size(), time_pass.size());    // Fuck this!!

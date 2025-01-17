@@ -43294,7 +43294,26 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 2 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 1
+
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 1
+
+
+
+
+
+
+
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h" 1
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h"
+
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h"
+namespace Classic::Caeser {
+    std::string encrypt(const std::string &plain_text, int shift);
+    std::string decrypt(const std::string &cipher_text, int shift);
+}
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 1
+
 
 
 
@@ -43330,6 +43349,8 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 
+
+# 40 "/usr/include/c++/14.2.0/ext/aligned_buffer.h" 3
 namespace __gnu_cxx
 {
 
@@ -47867,34 +47888,31 @@ namespace std __attribute__ ((__visibility__ ("default")))
     }
 
 }
-# 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 2
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h" 2
 
 
 
-# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h"
-namespace Classic {
-    class Substitution {
-        std::map<char, char> key = {
-                {'A', 'D'}, {'B', 'E'}, {'C', 'F'}, {'D', 'G'}, {'E', 'H'}, {'F', 'I'}, {'G', 'J'}, {'H', 'K'},
-                {'I', 'L'}, {'J', 'M'}, {'K', 'N'}, {'L', 'O'}, {'M', 'P'}, {'N', 'Q'}, {'O', 'R'}, {'P', 'S'},
-                {'Q', 'T'}, {'R', 'U'}, {'S', 'V'}, {'T', 'W'}, {'U', 'X'}, {'V', 'Y'}, {'W', 'Z'}, {'X', 'A'},
-                {'Y', 'B'}, {'Z', 'C'}
-        };
-        std::map<char, char> reverse_key = {
-                {'D', 'A'}, {'E', 'B'}, {'F', 'C'}, {'G', 'D'}, {'H', 'E'}, {'I', 'F'}, {'J', 'G'}, {'K', 'H'},
-                {'L', 'I'}, {'M', 'J'}, {'N', 'K'}, {'O', 'L'}, {'P', 'M'}, {'Q', 'N'}, {'R', 'O'}, {'S', 'P'},
-                {'T', 'Q'}, {'U', 'R'}, {'V', 'S'}, {'W', 'T'}, {'X', 'U'}, {'Y', 'V'}, {'Z', 'W'}, {'A', 'X'},
-                {'B', 'Y'}, {'C', 'Z'}
-        };
-        void set_reverse_key();
-    public:
-        std::string encrypt(const std::string &plain_text);
-        std::string decrypt(const std::string &cipher_text);
-
-        int set_key(const std::map<char, char> &new_key);
+# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/affine.h"
+namespace Classic::Affine {
+    inline std::map<int, int> inverse_map = {
+            {1, 1},
+            {3, 9},
+            {5, 21},
+            {7, 15},
+            {9, 3},
+            {11, 19},
+            {15, 7},
+            {17, 23},
+            {19, 11},
+            {21, 5},
+            {23, 17},
+            {25, 25}
     };
+    std::string encrypt(const std::string &plain_text, int multiplier, int bias);
+    std::string decrypt(const std::string &cipher, int multiplier, int bias);
+    int modInverse(int a, int m);
 }
-# 3 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/playfair.h" 1
 
 
@@ -48339,7 +48357,7 @@ namespace Classic::Playfair {
 
     void convertCase(std::string &plain_text);
 }
-# 4 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/hillcipher.h" 1
 # 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/hillcipher.h"
 # 1 "/usr/include/c++/14.2.0/vector" 1 3
@@ -53269,14 +53287,39 @@ namespace Classic::HillCipher {
         std::vector<int> multiply(const hill_key_t &key, const std::vector<int> &text);
     }
 }
-# 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 12 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h" 1
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/substitution.h"
+namespace Classic {
+    class Substitution {
+        std::map<char, char> key = {
+                {'A', 'D'}, {'B', 'E'}, {'C', 'F'}, {'D', 'G'}, {'E', 'H'}, {'F', 'I'}, {'G', 'J'}, {'H', 'K'},
+                {'I', 'L'}, {'J', 'M'}, {'K', 'N'}, {'L', 'O'}, {'M', 'P'}, {'N', 'Q'}, {'O', 'R'}, {'P', 'S'},
+                {'Q', 'T'}, {'R', 'U'}, {'S', 'V'}, {'T', 'W'}, {'U', 'X'}, {'V', 'Y'}, {'W', 'Z'}, {'X', 'A'},
+                {'Y', 'B'}, {'Z', 'C'}
+        };
+        std::map<char, char> reverse_key = {
+                {'D', 'A'}, {'E', 'B'}, {'F', 'C'}, {'G', 'D'}, {'H', 'E'}, {'I', 'F'}, {'J', 'G'}, {'K', 'H'},
+                {'L', 'I'}, {'M', 'J'}, {'N', 'K'}, {'O', 'L'}, {'P', 'M'}, {'Q', 'N'}, {'R', 'O'}, {'S', 'P'},
+                {'T', 'Q'}, {'U', 'R'}, {'V', 'S'}, {'W', 'T'}, {'X', 'U'}, {'Y', 'V'}, {'Z', 'W'}, {'A', 'X'},
+                {'B', 'Y'}, {'C', 'Z'}
+        };
+        void set_reverse_key();
+    public:
+        std::string encrypt(const std::string &plain_text);
+        std::string decrypt(const std::string &cipher_text);
+
+        int set_key(const std::map<char, char> &new_key);
+    };
+}
+# 13 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/vigenere.h" 1
 # 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/vigenere.h"
 namespace Classic::Vigenere {
     std::string encrypt(const std::string &plain_text, const std::string &key);
     std::string decrypt(const std::string &cipher_text, const std::string &key);
 }
-# 6 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 14 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/columnar.h" 1
 # 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/columnar.h"
 namespace Classic::Columnar {
@@ -53288,16 +53331,10 @@ namespace Classic::Columnar {
         void padString(std::string &text, const int &n);
     }
 }
-# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h" 1
-# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic/caeser.h"
-namespace Classic::Caeser {
-    std::string encrypt(const std::string &plain_text, int shift);
-    std::string decrypt(const std::string &cipher_text, int shift);
-}
-# 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 15 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/classic.h" 2
+# 4 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/caeser.h" 1
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/bruteforce.h" 1
 
 
 
@@ -53305,17 +53342,6686 @@ namespace Classic::Caeser {
 
 
 
+# 1 "/usr/include/c++/14.2.0/ranges" 1 3
+# 35 "/usr/include/c++/14.2.0/ranges" 3
+       
+# 36 "/usr/include/c++/14.2.0/ranges" 3
 
 
-namespace Attacks::Caeser {
-    void bruteForce(const std::string &cipher_text);
-    std::map<char, char> frequencyAnalysis(const std::string &cipher_text);
 
+
+
+
+
+# 1 "/usr/include/c++/14.2.0/iterator" 1 3
+# 58 "/usr/include/c++/14.2.0/iterator" 3
+       
+# 59 "/usr/include/c++/14.2.0/iterator" 3
+
+
+
+
+
+
+# 1 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 1 3
+# 33 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+       
+# 34 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+
+
+
+
+
+
+
+# 40 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+
+
+
+
+ 
+# 50 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+
+  template<typename _Tp, typename _CharT = char,
+           typename _Traits = char_traits<_CharT>, typename _Dist = ptrdiff_t>
+    class istream_iterator
+    : public iterator<input_iterator_tag, _Tp, _Dist, const _Tp*, const _Tp&>
+    {
+    public:
+      typedef _CharT char_type;
+      typedef _Traits traits_type;
+      typedef basic_istream<_CharT, _Traits> istream_type;
+
+    private:
+      istream_type* _M_stream;
+      _Tp _M_value;
+
+
+
+      bool _M_ok;
+
+    public:
+
+      constexpr istream_iterator()
+      noexcept(is_nothrow_default_constructible<_Tp>::value)
+      : _M_stream(0), _M_value(), _M_ok(false) {}
+
+
+      istream_iterator(istream_type& __s)
+      : _M_stream(std::__addressof(__s)), _M_ok(true)
+      { _M_read(); }
+
+      constexpr
+      istream_iterator(const istream_iterator& __obj)
+      noexcept(is_nothrow_copy_constructible<_Tp>::value)
+      : _M_stream(__obj._M_stream), _M_value(__obj._M_value),
+        _M_ok(__obj._M_ok)
+      { }
+
+
+      constexpr
+      istream_iterator(default_sentinel_t)
+      noexcept(is_nothrow_default_constructible_v<_Tp>)
+      : istream_iterator() { }
+
+
+
+      istream_iterator& operator=(const istream_iterator&) = default;
+      ~istream_iterator() = default;
+
+
+      [[__nodiscard__]]
+      const _Tp&
+      operator*() const noexcept
+      {
+
+
+                        ;
+ return _M_value;
+      }
+
+      [[__nodiscard__]]
+      const _Tp*
+      operator->() const noexcept
+      { return std::__addressof((operator*())); }
+
+      istream_iterator&
+      operator++()
+      {
+
+
+                        ;
+ _M_read();
+ return *this;
+      }
+
+      istream_iterator
+      operator++(int)
+      {
+
+
+                        ;
+ istream_iterator __tmp = *this;
+ _M_read();
+ return __tmp;
+      }
+
+    private:
+      bool
+      _M_equal(const istream_iterator& __x) const noexcept
+      {
+
+
+ return (_M_ok == __x._M_ok) && (!_M_ok || _M_stream == __x._M_stream);
+      }
+
+      void
+      _M_read()
+      {
+        if (_M_stream && !(*_M_stream >> _M_value))
+          {
+            _M_stream = 0;
+            _M_ok = false;
+          }
+      }
+
+
+
+      [[__nodiscard__]]
+      friend bool
+      operator==(const istream_iterator& __x, const istream_iterator& __y)
+      noexcept
+      { return __x._M_equal(__y); }
+# 176 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+      [[nodiscard]]
+      friend bool
+      operator==(const istream_iterator& __i, default_sentinel_t) noexcept
+      { return !__i._M_stream; }
+
+    };
+# 194 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+  template<typename _Tp, typename _CharT = char,
+           typename _Traits = char_traits<_CharT> >
+    class ostream_iterator
+    : public iterator<output_iterator_tag, void, void, void, void>
+    {
+    public:
+
+
+
+      using difference_type = ptrdiff_t;
+
+      typedef _CharT char_type;
+      typedef _Traits traits_type;
+      typedef basic_ostream<_CharT, _Traits> ostream_type;
+
+
+    private:
+      ostream_type* _M_stream;
+      const _CharT* _M_string;
+
+    public:
+
+      ostream_iterator(ostream_type& __s) noexcept
+      : _M_stream(std::__addressof(__s)), _M_string(0) {}
+# 229 "/usr/include/c++/14.2.0/bits/stream_iterator.h" 3
+      ostream_iterator(ostream_type& __s, const _CharT* __c) noexcept
+      : _M_stream(std::__addressof(__s)), _M_string(__c) { }
+
+
+      ostream_iterator(const ostream_iterator& __obj) noexcept
+      : _M_stream(__obj._M_stream), _M_string(__obj._M_string) { }
+
+
+      ostream_iterator& operator=(const ostream_iterator&) = default;
+
+
+
+
+      ostream_iterator&
+      operator=(const _Tp& __value)
+      {
+
+
+                        ;
+ *_M_stream << __value;
+ if (_M_string)
+          *_M_stream << _M_string;
+ return *this;
+      }
+
+      [[__nodiscard__]]
+      ostream_iterator&
+      operator*() noexcept
+      { return *this; }
+
+      ostream_iterator&
+      operator++() noexcept
+      { return *this; }
+
+      ostream_iterator&
+      operator++(int) noexcept
+      { return *this; }
+    };
+#pragma GCC diagnostic pop
+
+
+
+
+}
+# 66 "/usr/include/c++/14.2.0/iterator" 2 3
+# 78 "/usr/include/c++/14.2.0/iterator" 3
+# 1 "/usr/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.0/bits/version.h" 3
+# 79 "/usr/include/c++/14.2.0/iterator" 2 3
+# 44 "/usr/include/c++/14.2.0/ranges" 2 3
+# 1 "/usr/include/c++/14.2.0/optional" 1 3
+# 33 "/usr/include/c++/14.2.0/optional" 3
+       
+# 34 "/usr/include/c++/14.2.0/optional" 3
+
+
+
+# 1 "/usr/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.0/bits/version.h" 3
+# 38 "/usr/include/c++/14.2.0/optional" 2 3
+
+
+
+
+
+
+
+# 1 "/usr/include/c++/14.2.0/bits/enable_special_members.h" 1 3
+# 33 "/usr/include/c++/14.2.0/bits/enable_special_members.h" 3
+       
+# 34 "/usr/include/c++/14.2.0/bits/enable_special_members.h" 3
+
+
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+  struct _Enable_default_constructor_tag
+  {
+    explicit constexpr _Enable_default_constructor_tag() = default;
+  };
+
+
+
+
+
+
+template<bool _Switch, typename _Tag = void>
+  struct _Enable_default_constructor
+  {
+    constexpr _Enable_default_constructor() noexcept = default;
+    constexpr _Enable_default_constructor(_Enable_default_constructor const&)
+      noexcept = default;
+    constexpr _Enable_default_constructor(_Enable_default_constructor&&)
+      noexcept = default;
+    _Enable_default_constructor&
+    operator=(_Enable_default_constructor const&) noexcept = default;
+    _Enable_default_constructor&
+    operator=(_Enable_default_constructor&&) noexcept = default;
+
+
+    constexpr explicit
+    _Enable_default_constructor(_Enable_default_constructor_tag) { }
+  };
+
+
+
+
+
+
+
+template<bool _Switch, typename _Tag = void>
+  struct _Enable_destructor { };
+
+
+
+
+
+
+template<bool _Copy, bool _CopyAssignment,
+         bool _Move, bool _MoveAssignment,
+         typename _Tag = void>
+  struct _Enable_copy_move { };
+# 96 "/usr/include/c++/14.2.0/bits/enable_special_members.h" 3
+template<bool _Default, bool _Destructor,
+         bool _Copy, bool _CopyAssignment,
+         bool _Move, bool _MoveAssignment,
+         typename _Tag = void>
+  struct _Enable_special_members
+  : private _Enable_default_constructor<_Default, _Tag>,
+    private _Enable_destructor<_Destructor, _Tag>,
+    private _Enable_copy_move<_Copy, _CopyAssignment,
+                              _Move, _MoveAssignment,
+                              _Tag>
+  { };
+
+
+
+template<typename _Tag>
+  struct _Enable_default_constructor<false, _Tag>
+  {
+    constexpr _Enable_default_constructor() noexcept = delete;
+    constexpr _Enable_default_constructor(_Enable_default_constructor const&)
+      noexcept = default;
+    constexpr _Enable_default_constructor(_Enable_default_constructor&&)
+      noexcept = default;
+    _Enable_default_constructor&
+    operator=(_Enable_default_constructor const&) noexcept = default;
+    _Enable_default_constructor&
+    operator=(_Enable_default_constructor&&) noexcept = default;
+
+
+    constexpr explicit
+    _Enable_default_constructor(_Enable_default_constructor_tag) { }
+  };
+
+template<typename _Tag>
+  struct _Enable_destructor<false, _Tag>
+  { ~_Enable_destructor() noexcept = delete; };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, true, true, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, false, true, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, false, true, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, true, false, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, true, false, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, false, false, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, false, false, true, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = default;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, true, true, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, true, true, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, false, true, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, false, true, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, true, false, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, true, false, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = default;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<true, false, false, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+template<typename _Tag>
+  struct _Enable_copy_move<false, false, false, false, _Tag>
+  {
+    constexpr _Enable_copy_move() noexcept = default;
+    constexpr _Enable_copy_move(_Enable_copy_move const&) noexcept = delete;
+    constexpr _Enable_copy_move(_Enable_copy_move&&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move const&) noexcept = delete;
+    _Enable_copy_move&
+    operator=(_Enable_copy_move&&) noexcept = delete;
+  };
+
+
+
+}
+# 46 "/usr/include/c++/14.2.0/optional" 2 3
+# 58 "/usr/include/c++/14.2.0/optional" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+
+
+
+  template<typename _Tp>
+    class optional;
+
+
+  struct nullopt_t
+  {
+
+
+
+
+
+    enum class _Construct { _Token };
+
+
+    explicit constexpr nullopt_t(_Construct) noexcept { }
+  };
+
+
+  inline constexpr nullopt_t nullopt { nullopt_t::_Construct::_Token };
+
+  template<typename _Fn> struct _Optional_func { _Fn& _M_f; };
+
+
+
+
+
+
+  class bad_optional_access : public exception
+  {
+  public:
+    bad_optional_access() = default;
+    virtual ~bad_optional_access() = default;
+
+    const char* what() const noexcept override
+    { return "bad optional access"; }
+  };
+
+
+  [[__noreturn__]] inline void
+  __throw_bad_optional_access()
+  { (throw (bad_optional_access())); }
+
+
+
+  template <typename _Tp>
+    struct _Optional_payload_base
+    {
+      using _Stored_type = remove_const_t<_Tp>;
+
+      _Optional_payload_base() = default;
+      ~_Optional_payload_base() = default;
+
+      template<typename... _Args>
+ constexpr
+ _Optional_payload_base(in_place_t __tag, _Args&&... __args)
+ : _M_payload(__tag, std::forward<_Args>(__args)...),
+   _M_engaged(true)
+ { }
+
+      template<typename _Up, typename... _Args>
+ constexpr
+ _Optional_payload_base(std::initializer_list<_Up> __il,
+          _Args&&... __args)
+ : _M_payload(__il, std::forward<_Args>(__args)...),
+   _M_engaged(true)
+ { }
+
+
+
+      constexpr
+      _Optional_payload_base(bool ,
+        const _Optional_payload_base& __other)
+      {
+ if (__other._M_engaged)
+   this->_M_construct(__other._M_get());
+      }
+
+
+
+      constexpr
+      _Optional_payload_base(bool ,
+        _Optional_payload_base&& __other)
+      {
+ if (__other._M_engaged)
+   this->_M_construct(std::move(__other._M_get()));
+      }
+
+
+
+      _Optional_payload_base(const _Optional_payload_base&) = default;
+
+
+
+      _Optional_payload_base(_Optional_payload_base&&) = default;
+
+      _Optional_payload_base&
+      operator=(const _Optional_payload_base&) = default;
+
+      _Optional_payload_base&
+      operator=(_Optional_payload_base&&) = default;
+
+
+      constexpr void
+      _M_copy_assign(const _Optional_payload_base& __other)
+      {
+ if (this->_M_engaged && __other._M_engaged)
+   this->_M_get() = __other._M_get();
+ else
+   {
+     if (__other._M_engaged)
+       this->_M_construct(__other._M_get());
+     else
+       this->_M_reset();
+   }
+      }
+
+
+      constexpr void
+      _M_move_assign(_Optional_payload_base&& __other)
+      noexcept(__and_v<is_nothrow_move_constructible<_Tp>,
+         is_nothrow_move_assignable<_Tp>>)
+      {
+ if (this->_M_engaged && __other._M_engaged)
+   this->_M_get() = std::move(__other._M_get());
+ else
+   {
+     if (__other._M_engaged)
+       this->_M_construct(std::move(__other._M_get()));
+     else
+       this->_M_reset();
+   }
+      }
+
+      struct _Empty_byte { };
+
+      template<typename _Up, bool = is_trivially_destructible_v<_Up>>
+ union _Storage
+ {
+   constexpr _Storage() noexcept : _M_empty() { }
+
+   template<typename... _Args>
+     constexpr
+     _Storage(in_place_t, _Args&&... __args)
+     : _M_value(std::forward<_Args>(__args)...)
+     { }
+
+   template<typename _Vp, typename... _Args>
+     constexpr
+     _Storage(std::initializer_list<_Vp> __il, _Args&&... __args)
+     : _M_value(__il, std::forward<_Args>(__args)...)
+     { }
+
+
+   template<typename _Fn, typename _Arg>
+     constexpr
+     _Storage(_Optional_func<_Fn> __f, _Arg&& __arg)
+     : _M_value(std::__invoke(std::forward<_Fn>(__f._M_f),
+         std::forward<_Arg>(__arg)))
+     { }
+
+
+   _Empty_byte _M_empty;
+   _Up _M_value;
+ };
+
+      template<typename _Up>
+ union _Storage<_Up, false>
+ {
+   constexpr _Storage() noexcept : _M_empty() { }
+
+   template<typename... _Args>
+     constexpr
+     _Storage(in_place_t, _Args&&... __args)
+     : _M_value(std::forward<_Args>(__args)...)
+     { }
+
+   template<typename _Vp, typename... _Args>
+     constexpr
+     _Storage(std::initializer_list<_Vp> __il, _Args&&... __args)
+     : _M_value(__il, std::forward<_Args>(__args)...)
+     { }
+
+
+   template<typename _Fn, typename _Arg>
+     constexpr
+     _Storage(_Optional_func<_Fn> __f, _Arg&& __arg)
+     : _M_value(std::__invoke(std::forward<_Fn>(__f._M_f),
+         std::forward<_Arg>(__arg)))
+     { }
+
+
+
+   constexpr ~_Storage() { }
+
+   _Empty_byte _M_empty;
+   _Up _M_value;
+ };
+
+      _Storage<_Stored_type> _M_payload;
+
+      bool _M_engaged = false;
+
+      template<typename... _Args>
+ constexpr void
+ _M_construct(_Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Stored_type, _Args...>)
+ {
+   std::_Construct(std::__addressof(this->_M_payload._M_value),
+     std::forward<_Args>(__args)...);
+   this->_M_engaged = true;
+ }
+
+      constexpr void
+      _M_destroy() noexcept
+      {
+ _M_engaged = false;
+ _M_payload._M_value.~_Stored_type();
+      }
+
+
+      template<typename _Fn, typename _Up>
+ constexpr void
+ _M_apply(_Optional_func<_Fn> __f, _Up&& __x)
+ {
+   std::construct_at(std::__addressof(this->_M_payload),
+       __f, std::forward<_Up>(__x));
+   _M_engaged = true;
+ }
+
+
+
+
+
+
+      constexpr _Tp&
+      _M_get() noexcept
+      { return this->_M_payload._M_value; }
+
+      constexpr const _Tp&
+      _M_get() const noexcept
+      { return this->_M_payload._M_value; }
+
+
+      constexpr void
+      _M_reset() noexcept
+      {
+ if (this->_M_engaged)
+   _M_destroy();
+ else
+   this->_M_engaged = false;
+      }
+    };
+
+
+  template <typename _Tp,
+     bool =
+       is_trivially_destructible_v<_Tp>,
+     bool =
+       is_trivially_copy_assignable_v<_Tp>
+       && is_trivially_copy_constructible_v<_Tp>,
+     bool =
+       is_trivially_move_assignable_v<_Tp>
+       && is_trivially_move_constructible_v<_Tp>>
+    struct _Optional_payload;
+
+
+  template <typename _Tp>
+    struct _Optional_payload<_Tp, true, true, true>
+    : _Optional_payload_base<_Tp>
+    {
+      using _Optional_payload_base<_Tp>::_Optional_payload_base;
+
+      _Optional_payload() = default;
+    };
+
+
+  template <typename _Tp>
+    struct _Optional_payload<_Tp, true, false, true>
+    : _Optional_payload_base<_Tp>
+    {
+      using _Optional_payload_base<_Tp>::_Optional_payload_base;
+
+      _Optional_payload() = default;
+      ~_Optional_payload() = default;
+      _Optional_payload(const _Optional_payload&) = default;
+      _Optional_payload(_Optional_payload&&) = default;
+      _Optional_payload& operator=(_Optional_payload&&) = default;
+
+
+      constexpr
+      _Optional_payload&
+      operator=(const _Optional_payload& __other)
+      {
+ this->_M_copy_assign(__other);
+ return *this;
+      }
+    };
+
+
+  template <typename _Tp>
+    struct _Optional_payload<_Tp, true, true, false>
+    : _Optional_payload_base<_Tp>
+    {
+      using _Optional_payload_base<_Tp>::_Optional_payload_base;
+
+      _Optional_payload() = default;
+      ~_Optional_payload() = default;
+      _Optional_payload(const _Optional_payload&) = default;
+      _Optional_payload(_Optional_payload&&) = default;
+      _Optional_payload& operator=(const _Optional_payload&) = default;
+
+
+      constexpr
+      _Optional_payload&
+      operator=(_Optional_payload&& __other)
+      noexcept(__and_v<is_nothrow_move_constructible<_Tp>,
+         is_nothrow_move_assignable<_Tp>>)
+      {
+ this->_M_move_assign(std::move(__other));
+ return *this;
+      }
+    };
+
+
+  template <typename _Tp>
+    struct _Optional_payload<_Tp, true, false, false>
+    : _Optional_payload_base<_Tp>
+    {
+      using _Optional_payload_base<_Tp>::_Optional_payload_base;
+
+      _Optional_payload() = default;
+      ~_Optional_payload() = default;
+      _Optional_payload(const _Optional_payload&) = default;
+      _Optional_payload(_Optional_payload&&) = default;
+
+
+      constexpr
+      _Optional_payload&
+      operator=(const _Optional_payload& __other)
+      {
+ this->_M_copy_assign(__other);
+ return *this;
+      }
+
+
+      constexpr
+      _Optional_payload&
+      operator=(_Optional_payload&& __other)
+      noexcept(__and_v<is_nothrow_move_constructible<_Tp>,
+         is_nothrow_move_assignable<_Tp>>)
+      {
+ this->_M_move_assign(std::move(__other));
+ return *this;
+      }
+    };
+
+
+  template <typename _Tp, bool _Copy, bool _Move>
+    struct _Optional_payload<_Tp, false, _Copy, _Move>
+    : _Optional_payload<_Tp, true, false, false>
+    {
+
+      using _Optional_payload<_Tp, true, false, false>::_Optional_payload;
+      _Optional_payload() = default;
+      _Optional_payload(const _Optional_payload&) = default;
+      _Optional_payload(_Optional_payload&&) = default;
+      _Optional_payload& operator=(const _Optional_payload&) = default;
+      _Optional_payload& operator=(_Optional_payload&&) = default;
+
+
+      constexpr ~_Optional_payload() { this->_M_reset(); }
+    };
+
+
+
+  template<typename _Tp, typename _Dp>
+    class _Optional_base_impl
+    {
+    protected:
+      using _Stored_type = remove_const_t<_Tp>;
+
+
+
+      template<typename... _Args>
+ constexpr void
+ _M_construct(_Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Stored_type, _Args...>)
+ {
+   static_cast<_Dp*>(this)->_M_payload._M_construct(
+     std::forward<_Args>(__args)...);
+ }
+
+      constexpr void
+      _M_destruct() noexcept
+      { static_cast<_Dp*>(this)->_M_payload._M_destroy(); }
+
+
+      constexpr void
+      _M_reset() noexcept
+      { static_cast<_Dp*>(this)->_M_payload._M_reset(); }
+
+      constexpr bool _M_is_engaged() const noexcept
+      { return static_cast<const _Dp*>(this)->_M_payload._M_engaged; }
+
+
+      constexpr _Tp&
+      _M_get() noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(this->_M_is_engaged()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return static_cast<_Dp*>(this)->_M_payload._M_get();
+      }
+
+      constexpr const _Tp&
+      _M_get() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(this->_M_is_engaged()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return static_cast<const _Dp*>(this)->_M_payload._M_get();
+      }
+    };
+# 505 "/usr/include/c++/14.2.0/optional" 3
+  template<typename _Tp,
+    bool = is_trivially_copy_constructible_v<_Tp>,
+    bool = is_trivially_move_constructible_v<_Tp>>
+    struct _Optional_base
+    : _Optional_base_impl<_Tp, _Optional_base<_Tp>>
+    {
+
+      constexpr _Optional_base() = default;
+
+
+      template<typename... _Args,
+        enable_if_t<is_constructible_v<_Tp, _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t, _Args&&... __args)
+ : _M_payload(in_place, std::forward<_Args>(__args)...)
+ { }
+
+      template<typename _Up, typename... _Args,
+        enable_if_t<is_constructible_v<_Tp,
+           initializer_list<_Up>&,
+           _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t,
+         initializer_list<_Up> __il,
+         _Args&&... __args)
+ : _M_payload(in_place, __il, std::forward<_Args>(__args)...)
+ { }
+
+
+      constexpr
+      _Optional_base(const _Optional_base& __other)
+      : _M_payload(__other._M_payload._M_engaged, __other._M_payload)
+      { }
+
+      constexpr
+      _Optional_base(_Optional_base&& __other)
+      noexcept(is_nothrow_move_constructible_v<_Tp>)
+      : _M_payload(__other._M_payload._M_engaged,
+     std::move(__other._M_payload))
+      { }
+
+
+      _Optional_base& operator=(const _Optional_base&) = default;
+      _Optional_base& operator=(_Optional_base&&) = default;
+
+      _Optional_payload<_Tp> _M_payload;
+    };
+
+  template<typename _Tp>
+    struct _Optional_base<_Tp, false, true>
+    : _Optional_base_impl<_Tp, _Optional_base<_Tp>>
+    {
+
+      constexpr _Optional_base() = default;
+
+
+      template<typename... _Args,
+        enable_if_t<is_constructible_v<_Tp, _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t, _Args&&... __args)
+ : _M_payload(in_place, std::forward<_Args>(__args)...)
+ { }
+
+      template<typename _Up, typename... _Args,
+        enable_if_t<is_constructible_v<_Tp,
+           initializer_list<_Up>&,
+           _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t,
+         initializer_list<_Up> __il,
+         _Args... __args)
+ : _M_payload(in_place, __il, std::forward<_Args>(__args)...)
+ { }
+
+
+      constexpr _Optional_base(const _Optional_base& __other)
+      : _M_payload(__other._M_payload._M_engaged, __other._M_payload)
+      { }
+
+      constexpr _Optional_base(_Optional_base&& __other) = default;
+
+
+      _Optional_base& operator=(const _Optional_base&) = default;
+      _Optional_base& operator=(_Optional_base&&) = default;
+
+      _Optional_payload<_Tp> _M_payload;
+    };
+
+  template<typename _Tp>
+    struct _Optional_base<_Tp, true, false>
+    : _Optional_base_impl<_Tp, _Optional_base<_Tp>>
+    {
+
+      constexpr _Optional_base() = default;
+
+
+      template<typename... _Args,
+        enable_if_t<is_constructible_v<_Tp, _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t, _Args&&... __args)
+ : _M_payload(in_place, std::forward<_Args>(__args)...)
+ { }
+
+      template<typename _Up, typename... _Args,
+        enable_if_t<is_constructible_v<_Tp,
+           initializer_list<_Up>&,
+           _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t,
+         initializer_list<_Up> __il,
+         _Args&&... __args)
+ : _M_payload(in_place, __il, std::forward<_Args>(__args)...)
+ { }
+
+
+      constexpr _Optional_base(const _Optional_base& __other) = default;
+
+      constexpr
+      _Optional_base(_Optional_base&& __other)
+      noexcept(is_nothrow_move_constructible_v<_Tp>)
+      : _M_payload(__other._M_payload._M_engaged,
+     std::move(__other._M_payload))
+      { }
+
+
+      _Optional_base& operator=(const _Optional_base&) = default;
+      _Optional_base& operator=(_Optional_base&&) = default;
+
+      _Optional_payload<_Tp> _M_payload;
+    };
+
+  template<typename _Tp>
+    struct _Optional_base<_Tp, true, true>
+    : _Optional_base_impl<_Tp, _Optional_base<_Tp>>
+    {
+
+      constexpr _Optional_base() = default;
+
+
+      template<typename... _Args,
+        enable_if_t<is_constructible_v<_Tp, _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t, _Args&&... __args)
+ : _M_payload(in_place, std::forward<_Args>(__args)...)
+ { }
+
+      template<typename _Up, typename... _Args,
+        enable_if_t<is_constructible_v<_Tp,
+           initializer_list<_Up>&,
+           _Args...>, bool> = false>
+ constexpr explicit
+ _Optional_base(in_place_t,
+         initializer_list<_Up> __il,
+         _Args&&... __args)
+ : _M_payload(in_place, __il, std::forward<_Args>(__args)...)
+ { }
+
+
+      constexpr _Optional_base(const _Optional_base& __other) = default;
+      constexpr _Optional_base(_Optional_base&& __other) = default;
+
+
+      _Optional_base& operator=(const _Optional_base&) = default;
+      _Optional_base& operator=(_Optional_base&&) = default;
+
+      _Optional_payload<_Tp> _M_payload;
+    };
+
+  template<typename _Tp>
+  class optional;
+
+  template<typename _Tp>
+    inline constexpr bool __is_optional_v = false;
+  template<typename _Tp>
+    inline constexpr bool __is_optional_v<optional<_Tp>> = true;
+
+  template<typename _Tp, typename _Up>
+    using __converts_from_optional =
+      __or_<is_constructible<_Tp, const optional<_Up>&>,
+     is_constructible<_Tp, optional<_Up>&>,
+     is_constructible<_Tp, const optional<_Up>&&>,
+     is_constructible<_Tp, optional<_Up>&&>,
+     is_convertible<const optional<_Up>&, _Tp>,
+     is_convertible<optional<_Up>&, _Tp>,
+     is_convertible<const optional<_Up>&&, _Tp>,
+     is_convertible<optional<_Up>&&, _Tp>>;
+
+  template<typename _Tp, typename _Up>
+    using __assigns_from_optional =
+      __or_<is_assignable<_Tp&, const optional<_Up>&>,
+     is_assignable<_Tp&, optional<_Up>&>,
+     is_assignable<_Tp&, const optional<_Up>&&>,
+     is_assignable<_Tp&, optional<_Up>&&>>;
+
+
+
+
+  template<typename _Tp>
+    class optional
+    : private _Optional_base<_Tp>,
+      private _Enable_copy_move<
+
+ is_copy_constructible_v<_Tp>,
+
+ __and_v<is_copy_constructible<_Tp>, is_copy_assignable<_Tp>>,
+
+ is_move_constructible_v<_Tp>,
+
+ __and_v<is_move_constructible<_Tp>, is_move_assignable<_Tp>>,
+
+ optional<_Tp>>
+    {
+      static_assert(!is_same_v<remove_cv_t<_Tp>, nullopt_t>);
+      static_assert(!is_same_v<remove_cv_t<_Tp>, in_place_t>);
+      static_assert(is_object_v<_Tp> && !is_array_v<_Tp>);
+
+    private:
+      using _Base = _Optional_base<_Tp>;
+
+
+      template<typename _Up>
+ using __not_self = __not_<is_same<optional, __remove_cvref_t<_Up>>>;
+      template<typename _Up>
+ using __not_tag = __not_<is_same<in_place_t, __remove_cvref_t<_Up>>>;
+      template<typename... _Cond>
+ using _Requires = enable_if_t<__and_v<_Cond...>, bool>;
+
+    public:
+      using value_type = _Tp;
+
+      constexpr optional() noexcept { }
+
+      constexpr optional(nullopt_t) noexcept { }
+
+
+      template<typename _Up = _Tp,
+        _Requires<__not_self<_Up>, __not_tag<_Up>,
+    is_constructible<_Tp, _Up>,
+    is_convertible<_Up, _Tp>> = true>
+ constexpr
+ optional(_Up&& __t)
+ noexcept(is_nothrow_constructible_v<_Tp, _Up>)
+ : _Base(std::in_place, std::forward<_Up>(__t)) { }
+
+      template<typename _Up = _Tp,
+        _Requires<__not_self<_Up>, __not_tag<_Up>,
+    is_constructible<_Tp, _Up>,
+    __not_<is_convertible<_Up, _Tp>>> = false>
+ explicit constexpr
+ optional(_Up&& __t)
+ noexcept(is_nothrow_constructible_v<_Tp, _Up>)
+ : _Base(std::in_place, std::forward<_Up>(__t)) { }
+
+      template<typename _Up,
+        _Requires<__not_<is_same<_Tp, _Up>>,
+    is_constructible<_Tp, const _Up&>,
+    is_convertible<const _Up&, _Tp>,
+    __not_<__converts_from_optional<_Tp, _Up>>> = true>
+ constexpr
+ optional(const optional<_Up>& __t)
+ noexcept(is_nothrow_constructible_v<_Tp, const _Up&>)
+ {
+   if (__t)
+     emplace(*__t);
+ }
+
+      template<typename _Up,
+        _Requires<__not_<is_same<_Tp, _Up>>,
+    is_constructible<_Tp, const _Up&>,
+    __not_<is_convertible<const _Up&, _Tp>>,
+    __not_<__converts_from_optional<_Tp, _Up>>> = false>
+ explicit constexpr
+ optional(const optional<_Up>& __t)
+ noexcept(is_nothrow_constructible_v<_Tp, const _Up&>)
+ {
+   if (__t)
+     emplace(*__t);
+ }
+
+      template<typename _Up,
+        _Requires<__not_<is_same<_Tp, _Up>>,
+    is_constructible<_Tp, _Up>,
+    is_convertible<_Up, _Tp>,
+    __not_<__converts_from_optional<_Tp, _Up>>> = true>
+ constexpr
+ optional(optional<_Up>&& __t)
+ noexcept(is_nothrow_constructible_v<_Tp, _Up>)
+ {
+   if (__t)
+     emplace(std::move(*__t));
+ }
+
+      template<typename _Up,
+        _Requires<__not_<is_same<_Tp, _Up>>,
+    is_constructible<_Tp, _Up>,
+    __not_<is_convertible<_Up, _Tp>>,
+    __not_<__converts_from_optional<_Tp, _Up>>> = false>
+ explicit constexpr
+ optional(optional<_Up>&& __t)
+ noexcept(is_nothrow_constructible_v<_Tp, _Up>)
+ {
+   if (__t)
+     emplace(std::move(*__t));
+ }
+
+      template<typename... _Args,
+        _Requires<is_constructible<_Tp, _Args...>> = false>
+ explicit constexpr
+ optional(in_place_t, _Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Tp, _Args...>)
+ : _Base(std::in_place, std::forward<_Args>(__args)...) { }
+
+      template<typename _Up, typename... _Args,
+        _Requires<is_constructible<_Tp,
+       initializer_list<_Up>&,
+       _Args...>> = false>
+ explicit constexpr
+ optional(in_place_t, initializer_list<_Up> __il, _Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Tp, initializer_list<_Up>&,
+         _Args...>)
+ : _Base(std::in_place, __il, std::forward<_Args>(__args)...) { }
+
+
+
+      constexpr optional&
+      operator=(nullopt_t) noexcept
+      {
+ this->_M_reset();
+ return *this;
+      }
+
+      template<typename _Up = _Tp>
+ constexpr
+ enable_if_t<__and_v<__not_self<_Up>,
+       __not_<__and_<is_scalar<_Tp>,
+       is_same<_Tp, decay_t<_Up>>>>,
+       is_constructible<_Tp, _Up>,
+       is_assignable<_Tp&, _Up>>,
+      optional&>
+ operator=(_Up&& __u)
+ noexcept(__and_v<is_nothrow_constructible<_Tp, _Up>,
+    is_nothrow_assignable<_Tp&, _Up>>)
+ {
+   if (this->_M_is_engaged())
+     this->_M_get() = std::forward<_Up>(__u);
+   else
+     this->_M_construct(std::forward<_Up>(__u));
+
+   return *this;
+ }
+
+      template<typename _Up>
+ constexpr
+ enable_if_t<__and_v<__not_<is_same<_Tp, _Up>>,
+       is_constructible<_Tp, const _Up&>,
+       is_assignable<_Tp&, const _Up&>,
+       __not_<__converts_from_optional<_Tp, _Up>>,
+       __not_<__assigns_from_optional<_Tp, _Up>>>,
+      optional&>
+ operator=(const optional<_Up>& __u)
+ noexcept(__and_v<is_nothrow_constructible<_Tp, const _Up&>,
+    is_nothrow_assignable<_Tp&, const _Up&>>)
+ {
+   if (__u)
+     {
+       if (this->_M_is_engaged())
+  this->_M_get() = *__u;
+       else
+  this->_M_construct(*__u);
+     }
+   else
+     {
+       this->_M_reset();
+     }
+   return *this;
+ }
+
+      template<typename _Up>
+ constexpr
+ enable_if_t<__and_v<__not_<is_same<_Tp, _Up>>,
+       is_constructible<_Tp, _Up>,
+       is_assignable<_Tp&, _Up>,
+       __not_<__converts_from_optional<_Tp, _Up>>,
+       __not_<__assigns_from_optional<_Tp, _Up>>>,
+      optional&>
+ operator=(optional<_Up>&& __u)
+ noexcept(__and_v<is_nothrow_constructible<_Tp, _Up>,
+    is_nothrow_assignable<_Tp&, _Up>>)
+ {
+   if (__u)
+     {
+       if (this->_M_is_engaged())
+  this->_M_get() = std::move(*__u);
+       else
+  this->_M_construct(std::move(*__u));
+     }
+   else
+     {
+       this->_M_reset();
+     }
+
+   return *this;
+ }
+
+      template<typename... _Args>
+ constexpr
+ enable_if_t<is_constructible_v<_Tp, _Args...>, _Tp&>
+ emplace(_Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Tp, _Args...>)
+ {
+   this->_M_reset();
+   this->_M_construct(std::forward<_Args>(__args)...);
+   return this->_M_get();
+ }
+
+      template<typename _Up, typename... _Args>
+ constexpr
+ enable_if_t<is_constructible_v<_Tp, initializer_list<_Up>&, _Args...>,
+      _Tp&>
+ emplace(initializer_list<_Up> __il, _Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Tp, initializer_list<_Up>&,
+         _Args...>)
+ {
+   this->_M_reset();
+   this->_M_construct(__il, std::forward<_Args>(__args)...);
+   return this->_M_get();
+ }
+
+
+
+
+      constexpr void
+      swap(optional& __other)
+      noexcept(is_nothrow_move_constructible_v<_Tp>
+        && is_nothrow_swappable_v<_Tp>)
+      {
+ using std::swap;
+
+ if (this->_M_is_engaged() && __other._M_is_engaged())
+   swap(this->_M_get(), __other._M_get());
+ else if (this->_M_is_engaged())
+   {
+     __other._M_construct(std::move(this->_M_get()));
+     this->_M_destruct();
+   }
+ else if (__other._M_is_engaged())
+   {
+     this->_M_construct(std::move(__other._M_get()));
+     __other._M_destruct();
+   }
+      }
+
+
+      constexpr const _Tp*
+      operator->() const noexcept
+      { return std::__addressof(this->_M_get()); }
+
+      constexpr _Tp*
+      operator->() noexcept
+      { return std::__addressof(this->_M_get()); }
+
+      constexpr const _Tp&
+      operator*() const& noexcept
+      { return this->_M_get(); }
+
+      constexpr _Tp&
+      operator*()& noexcept
+      { return this->_M_get(); }
+
+      constexpr _Tp&&
+      operator*()&& noexcept
+      { return std::move(this->_M_get()); }
+
+      constexpr const _Tp&&
+      operator*() const&& noexcept
+      { return std::move(this->_M_get()); }
+
+      constexpr explicit operator bool() const noexcept
+      { return this->_M_is_engaged(); }
+
+      constexpr bool has_value() const noexcept
+      { return this->_M_is_engaged(); }
+
+      constexpr const _Tp&
+      value() const&
+      {
+ if (this->_M_is_engaged())
+   return this->_M_get();
+ __throw_bad_optional_access();
+      }
+
+      constexpr _Tp&
+      value()&
+      {
+ if (this->_M_is_engaged())
+   return this->_M_get();
+ __throw_bad_optional_access();
+      }
+
+      constexpr _Tp&&
+      value()&&
+      {
+ if (this->_M_is_engaged())
+   return std::move(this->_M_get());
+ __throw_bad_optional_access();
+      }
+
+      constexpr const _Tp&&
+      value() const&&
+      {
+ if (this->_M_is_engaged())
+   return std::move(this->_M_get());
+ __throw_bad_optional_access();
+      }
+
+      template<typename _Up>
+ constexpr _Tp
+ value_or(_Up&& __u) const&
+ {
+   static_assert(is_copy_constructible_v<_Tp>);
+   static_assert(is_convertible_v<_Up&&, _Tp>);
+
+   if (this->_M_is_engaged())
+     return this->_M_get();
+   else
+     return static_cast<_Tp>(std::forward<_Up>(__u));
+ }
+
+      template<typename _Up>
+ constexpr _Tp
+ value_or(_Up&& __u) &&
+ {
+   static_assert(is_move_constructible_v<_Tp>);
+   static_assert(is_convertible_v<_Up&&, _Tp>);
+
+   if (this->_M_is_engaged())
+     return std::move(this->_M_get());
+   else
+     return static_cast<_Tp>(std::forward<_Up>(__u));
+ }
+# 1180 "/usr/include/c++/14.2.0/optional" 3
+      constexpr void reset() noexcept { this->_M_reset(); }
+
+    private:
+
+      template<typename _Up> friend class optional;
+
+      template<typename _Fn, typename _Value>
+ explicit constexpr
+ optional(_Optional_func<_Fn> __f, _Value&& __v)
+ {
+   this->_M_payload._M_apply(__f, std::forward<_Value>(__v));
+ }
+
+    };
+
+  template<typename _Tp>
+    using __optional_relop_t =
+      enable_if_t<is_convertible<_Tp, bool>::value, bool>;
+
+  template<typename _Tp, typename _Up>
+    using __optional_eq_t = __optional_relop_t<
+      decltype(std::declval<const _Tp&>() == std::declval<const _Up&>())
+      >;
+
+  template<typename _Tp, typename _Up>
+    using __optional_ne_t = __optional_relop_t<
+      decltype(std::declval<const _Tp&>() != std::declval<const _Up&>())
+      >;
+
+  template<typename _Tp, typename _Up>
+    using __optional_lt_t = __optional_relop_t<
+      decltype(std::declval<const _Tp&>() < std::declval<const _Up&>())
+      >;
+
+  template<typename _Tp, typename _Up>
+    using __optional_gt_t = __optional_relop_t<
+      decltype(std::declval<const _Tp&>() > std::declval<const _Up&>())
+      >;
+
+  template<typename _Tp, typename _Up>
+    using __optional_le_t = __optional_relop_t<
+      decltype(std::declval<const _Tp&>() <= std::declval<const _Up&>())
+      >;
+
+  template<typename _Tp, typename _Up>
+    using __optional_ge_t = __optional_relop_t<
+      decltype(std::declval<const _Tp&>() >= std::declval<const _Up&>())
+      >;
+
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator==(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+    -> __optional_eq_t<_Tp, _Up>
+    {
+      return static_cast<bool>(__lhs) == static_cast<bool>(__rhs)
+      && (!__lhs || *__lhs == *__rhs);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator!=(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+    -> __optional_ne_t<_Tp, _Up>
+    {
+      return static_cast<bool>(__lhs) != static_cast<bool>(__rhs)
+ || (static_cast<bool>(__lhs) && *__lhs != *__rhs);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator<(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+    -> __optional_lt_t<_Tp, _Up>
+    {
+      return static_cast<bool>(__rhs) && (!__lhs || *__lhs < *__rhs);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator>(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+    -> __optional_gt_t<_Tp, _Up>
+    {
+      return static_cast<bool>(__lhs) && (!__rhs || *__lhs > *__rhs);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator<=(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+    -> __optional_le_t<_Tp, _Up>
+    {
+      return !__lhs || (static_cast<bool>(__rhs) && *__lhs <= *__rhs);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator>=(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+    -> __optional_ge_t<_Tp, _Up>
+    {
+      return !__rhs || (static_cast<bool>(__lhs) && *__lhs >= *__rhs);
+    }
+
+
+  template<typename _Tp, three_way_comparable_with<_Tp> _Up>
+    constexpr compare_three_way_result_t<_Tp, _Up>
+    operator<=>(const optional<_Tp>& __x, const optional<_Up>& __y)
+    {
+      return __x && __y ? *__x <=> *__y : bool(__x) <=> bool(__y);
+    }
+
+
+
+  template<typename _Tp>
+    constexpr bool
+    operator==(const optional<_Tp>& __lhs, nullopt_t) noexcept
+    { return !__lhs; }
+
+
+  template<typename _Tp>
+    constexpr strong_ordering
+    operator<=>(const optional<_Tp>& __x, nullopt_t) noexcept
+    { return bool(__x) <=> false; }
+# 1358 "/usr/include/c++/14.2.0/optional" 3
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator==(const optional<_Tp>& __lhs, const _Up& __rhs)
+    -> __optional_eq_t<_Tp, _Up>
+    { return __lhs && *__lhs == __rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator==(const _Up& __lhs, const optional<_Tp>& __rhs)
+    -> __optional_eq_t<_Up, _Tp>
+    { return __rhs && __lhs == *__rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator!=(const optional<_Tp>& __lhs, const _Up& __rhs)
+    -> __optional_ne_t<_Tp, _Up>
+    { return !__lhs || *__lhs != __rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator!=(const _Up& __lhs, const optional<_Tp>& __rhs)
+    -> __optional_ne_t<_Up, _Tp>
+    { return !__rhs || __lhs != *__rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator<(const optional<_Tp>& __lhs, const _Up& __rhs)
+    -> __optional_lt_t<_Tp, _Up>
+    { return !__lhs || *__lhs < __rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator<(const _Up& __lhs, const optional<_Tp>& __rhs)
+    -> __optional_lt_t<_Up, _Tp>
+    { return __rhs && __lhs < *__rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator>(const optional<_Tp>& __lhs, const _Up& __rhs)
+    -> __optional_gt_t<_Tp, _Up>
+    { return __lhs && *__lhs > __rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator>(const _Up& __lhs, const optional<_Tp>& __rhs)
+    -> __optional_gt_t<_Up, _Tp>
+    { return !__rhs || __lhs > *__rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator<=(const optional<_Tp>& __lhs, const _Up& __rhs)
+    -> __optional_le_t<_Tp, _Up>
+    { return !__lhs || *__lhs <= __rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator<=(const _Up& __lhs, const optional<_Tp>& __rhs)
+    -> __optional_le_t<_Up, _Tp>
+    { return __rhs && __lhs <= *__rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator>=(const optional<_Tp>& __lhs, const _Up& __rhs)
+    -> __optional_ge_t<_Tp, _Up>
+    { return __lhs && *__lhs >= __rhs; }
+
+  template<typename _Tp, typename _Up>
+    constexpr auto
+    operator>=(const _Up& __lhs, const optional<_Tp>& __rhs)
+    -> __optional_ge_t<_Up, _Tp>
+    { return !__rhs || __lhs >= *__rhs; }
+
+
+  template<typename _Tp, typename _Up>
+    requires (!__is_optional_v<_Up>)
+      && three_way_comparable_with<_Up, _Tp>
+    constexpr compare_three_way_result_t<_Tp, _Up>
+    operator<=>(const optional<_Tp>& __x, const _Up& __v)
+    { return bool(__x) ? *__x <=> __v : strong_ordering::less; }
+
+
+
+
+
+
+  template<typename _Tp>
+    constexpr
+    inline enable_if_t<is_move_constructible_v<_Tp> && is_swappable_v<_Tp>>
+    swap(optional<_Tp>& __lhs, optional<_Tp>& __rhs)
+    noexcept(noexcept(__lhs.swap(__rhs)))
+    { __lhs.swap(__rhs); }
+
+  template<typename _Tp>
+    enable_if_t<!(is_move_constructible_v<_Tp> && is_swappable_v<_Tp>)>
+    swap(optional<_Tp>&, optional<_Tp>&) = delete;
+
+  template<typename _Tp>
+    constexpr
+    enable_if_t<is_constructible_v<decay_t<_Tp>, _Tp>,
+  optional<decay_t<_Tp>>>
+    make_optional(_Tp&& __t)
+    noexcept(is_nothrow_constructible_v<optional<decay_t<_Tp>>, _Tp>)
+    { return optional<decay_t<_Tp>>{ std::forward<_Tp>(__t) }; }
+
+  template<typename _Tp, typename... _Args>
+    constexpr
+    enable_if_t<is_constructible_v<_Tp, _Args...>,
+  optional<_Tp>>
+    make_optional(_Args&&... __args)
+    noexcept(is_nothrow_constructible_v<_Tp, _Args...>)
+    { return optional<_Tp>{ in_place, std::forward<_Args>(__args)... }; }
+
+  template<typename _Tp, typename _Up, typename... _Args>
+    constexpr
+    enable_if_t<is_constructible_v<_Tp, initializer_list<_Up>&, _Args...>,
+  optional<_Tp>>
+    make_optional(initializer_list<_Up> __il, _Args&&... __args)
+    noexcept(is_nothrow_constructible_v<_Tp, initializer_list<_Up>&, _Args...>)
+    { return optional<_Tp>{ in_place, __il, std::forward<_Args>(__args)... }; }
+
+
+
+  template<typename _Tp, typename _Up = remove_const_t<_Tp>,
+    bool = __poison_hash<_Up>::__enable_hash_call>
+    struct __optional_hash_call_base
+    {
+      size_t
+      operator()(const optional<_Tp>& __t) const
+      noexcept(noexcept(hash<_Up>{}(*__t)))
+      {
+
+
+ constexpr size_t __magic_disengaged_hash = static_cast<size_t>(-3333);
+ return __t ? hash<_Up>{}(*__t) : __magic_disengaged_hash;
+      }
+    };
+
+  template<typename _Tp, typename _Up>
+    struct __optional_hash_call_base<_Tp, _Up, false> {};
+
+  template<typename _Tp>
+    struct hash<optional<_Tp>>
+    : private __poison_hash<remove_const_t<_Tp>>,
+      public __optional_hash_call_base<_Tp>
+    {
+      using result_type [[__deprecated__]] = size_t;
+      using argument_type [[__deprecated__]] = optional<_Tp>;
+    };
+
+  template<typename _Tp>
+    struct __is_fast_hash<hash<optional<_Tp>>> : __is_fast_hash<hash<_Tp>>
+    { };
+
+
+
+
+  template <typename _Tp> optional(_Tp) -> optional<_Tp>;
+
+
+
+}
+# 45 "/usr/include/c++/14.2.0/ranges" 2 3
+# 1 "/usr/include/c++/14.2.0/span" 1 3
+# 37 "/usr/include/c++/14.2.0/span" 3
+       
+# 38 "/usr/include/c++/14.2.0/span" 3
+
+
+# 1 "/usr/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.0/bits/version.h" 3
+# 41 "/usr/include/c++/14.2.0/span" 2 3
+
+
+
+
+
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+  inline constexpr size_t dynamic_extent = static_cast<size_t>(-1);
+
+  template<typename _Type, size_t _Extent>
+    class span;
+
+  namespace __detail
+  {
+    template<typename _Tp>
+      inline constexpr bool __is_span = false;
+
+    template<typename _Tp, size_t _Num>
+      inline constexpr bool __is_span<span<_Tp, _Num>> = true;
+
+    template<typename _Tp>
+      inline constexpr bool __is_std_array = false;
+
+    template<typename _Tp, size_t _Num>
+      inline constexpr bool __is_std_array<std::array<_Tp, _Num>> = true;
+
+    template<size_t _Extent>
+      class __extent_storage
+      {
+      public:
+ constexpr
+ __extent_storage(size_t) noexcept
+ { }
+
+ static constexpr size_t
+ _M_extent() noexcept
+ { return _Extent; }
+      };
+
+    template<>
+      class __extent_storage<dynamic_extent>
+      {
+      public:
+ constexpr
+ __extent_storage(size_t __extent) noexcept
+ : _M_extent_value(__extent)
+ { }
+
+ constexpr size_t
+ _M_extent() const noexcept
+ { return this->_M_extent_value; }
+
+      private:
+ size_t _M_extent_value;
+      };
+  }
+
+  template<typename _Type, size_t _Extent = dynamic_extent>
+    class span
+    {
+      template<size_t _Offset, size_t _Count>
+ static constexpr size_t
+ _S_subspan_extent()
+ {
+   if constexpr (_Count != dynamic_extent)
+     return _Count;
+   else if constexpr (extent != dynamic_extent)
+     return _Extent - _Offset;
+   else
+     return dynamic_extent;
+ }
+
+
+
+      template<typename _Tp, size_t _ArrayExtent>
+ requires (_Extent == dynamic_extent || _ArrayExtent == _Extent)
+ using __is_compatible_array = __is_array_convertible<_Type, _Tp>;
+
+      template<typename _Ref>
+ using __is_compatible_ref
+   = __is_array_convertible<_Type, remove_reference_t<_Ref>>;
+
+    public:
+
+      using element_type = _Type;
+      using value_type = remove_cv_t<_Type>;
+      using size_type = size_t;
+      using difference_type = ptrdiff_t;
+      using pointer = _Type*;
+      using const_pointer = const _Type*;
+      using reference = element_type&;
+      using const_reference = const element_type&;
+      using iterator = __gnu_cxx::__normal_iterator<pointer, span>;
+      using reverse_iterator = std::reverse_iterator<iterator>;
+
+
+
+
+
+
+      static constexpr size_t extent = _Extent;
+
+
+
+      constexpr
+      span() noexcept
+      requires (_Extent == dynamic_extent || _Extent == 0)
+      : _M_ptr(nullptr), _M_extent(0)
+      { }
+
+      template<contiguous_iterator _It>
+ requires __is_compatible_ref<iter_reference_t<_It>>::value
+ constexpr explicit(extent != dynamic_extent)
+ span(_It __first, size_type __count)
+ noexcept
+ : _M_ptr(std::to_address(__first)), _M_extent(__count)
+ {
+   if constexpr (_Extent != dynamic_extent)
+     {
+       do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__count == _Extent), false)) std::__glibcxx_assert_fail(); } while (false);
+     }
+   ;
+ }
+
+      template<contiguous_iterator _It, sized_sentinel_for<_It> _End>
+ requires __is_compatible_ref<iter_reference_t<_It>>::value
+   && (!is_convertible_v<_End, size_type>)
+ constexpr explicit(extent != dynamic_extent)
+ span(_It __first, _End __last)
+ noexcept(noexcept(__last - __first))
+ : _M_ptr(std::to_address(__first)),
+   _M_extent(static_cast<size_type>(__last - __first))
+ {
+   if constexpr (_Extent != dynamic_extent)
+     {
+       do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool((__last - __first) == _Extent), false)) std::__glibcxx_assert_fail(); } while (false);
+     }
+   ;
+ }
+
+      template<size_t _ArrayExtent>
+ requires (_Extent == dynamic_extent || _ArrayExtent == _Extent)
+ constexpr
+ span(type_identity_t<element_type> (&__arr)[_ArrayExtent]) noexcept
+ : span(static_cast<pointer>(__arr), _ArrayExtent)
+ { }
+
+      template<typename _Tp, size_t _ArrayExtent>
+ requires __is_compatible_array<_Tp, _ArrayExtent>::value
+ constexpr
+ span(array<_Tp, _ArrayExtent>& __arr) noexcept
+ : span(static_cast<pointer>(__arr.data()), _ArrayExtent)
+ { }
+
+      template<typename _Tp, size_t _ArrayExtent>
+ requires __is_compatible_array<const _Tp, _ArrayExtent>::value
+ constexpr
+ span(const array<_Tp, _ArrayExtent>& __arr) noexcept
+ : span(static_cast<pointer>(__arr.data()), _ArrayExtent)
+ { }
+
+      template<typename _Range>
+ requires (!__detail::__is_span<remove_cvref_t<_Range>>)
+   && (!__detail::__is_std_array<remove_cvref_t<_Range>>)
+   && (!is_array_v<remove_cvref_t<_Range>>)
+   && ranges::contiguous_range<_Range> && ranges::sized_range<_Range>
+   && (ranges::borrowed_range<_Range> || is_const_v<element_type>)
+   && __is_compatible_ref<ranges::range_reference_t<_Range>>::value
+ constexpr explicit(extent != dynamic_extent)
+ span(_Range&& __range)
+ noexcept(noexcept(ranges::data(__range))
+    && noexcept(ranges::size(__range)))
+ : span(ranges::data(__range), ranges::size(__range))
+ {
+   if constexpr (extent != dynamic_extent)
+     {
+       do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(ranges::size(__range) == extent), false)) std::__glibcxx_assert_fail(); } while (false);
+     }
+ }
+
+      constexpr
+      span(const span&) noexcept = default;
+
+      template<typename _OType, size_t _OExtent>
+ requires (_Extent == dynamic_extent || _OExtent == dynamic_extent
+    || _Extent == _OExtent)
+   && (__is_array_convertible<_Type, _OType>::value)
+ constexpr
+ explicit(extent != dynamic_extent && _OExtent == dynamic_extent)
+ span(const span<_OType, _OExtent>& __s) noexcept
+ : _M_extent(__s.size()), _M_ptr(__s.data())
+ {
+   if constexpr (extent != dynamic_extent)
+     {
+       do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__s.size() == extent), false)) std::__glibcxx_assert_fail(); } while (false);
+     }
+ }
+
+      ~span() noexcept = default;
+
+      constexpr span&
+      operator=(const span&) noexcept = default;
+
+
+
+      [[nodiscard]]
+      constexpr size_type
+      size() const noexcept
+      { return this->_M_extent._M_extent(); }
+
+      [[nodiscard]]
+      constexpr size_type
+      size_bytes() const noexcept
+      { return this->_M_extent._M_extent() * sizeof(element_type); }
+
+      [[nodiscard]]
+      constexpr bool
+      empty() const noexcept
+      { return size() == 0; }
+
+
+
+      [[nodiscard]]
+      constexpr reference
+      front() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *this->_M_ptr;
+      }
+
+      [[nodiscard]]
+      constexpr reference
+      back() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *(this->_M_ptr + (size() - 1));
+      }
+
+      [[nodiscard]]
+      constexpr reference
+      operator[](size_type __idx) const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__idx < size()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *(this->_M_ptr + __idx);
+      }
+# 302 "/usr/include/c++/14.2.0/span" 3
+      [[nodiscard]]
+      constexpr pointer
+      data() const noexcept
+      { return this->_M_ptr; }
+
+
+
+      [[nodiscard]]
+      constexpr iterator
+      begin() const noexcept
+      { return iterator(this->_M_ptr); }
+
+      [[nodiscard]]
+      constexpr iterator
+      end() const noexcept
+      { return iterator(this->_M_ptr + this->size()); }
+
+      [[nodiscard]]
+      constexpr reverse_iterator
+      rbegin() const noexcept
+      { return reverse_iterator(this->end()); }
+
+      [[nodiscard]]
+      constexpr reverse_iterator
+      rend() const noexcept
+      { return reverse_iterator(this->begin()); }
+# 353 "/usr/include/c++/14.2.0/span" 3
+      template<size_t _Count>
+ [[nodiscard]]
+ constexpr span<element_type, _Count>
+ first() const noexcept
+ {
+   if constexpr (_Extent == dynamic_extent)
+     do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_Count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+   else
+     static_assert(_Count <= extent);
+   using _Sp = span<element_type, _Count>;
+   return _Sp{ this->data(), _Count };
+ }
+
+      [[nodiscard]]
+      constexpr span<element_type, dynamic_extent>
+      first(size_type __count) const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return { this->data(), __count };
+      }
+
+      template<size_t _Count>
+ [[nodiscard]]
+ constexpr span<element_type, _Count>
+ last() const noexcept
+ {
+   if constexpr (_Extent == dynamic_extent)
+     do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_Count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+   else
+     static_assert(_Count <= extent);
+   using _Sp = span<element_type, _Count>;
+   return _Sp{ this->data() + (this->size() - _Count), _Count };
+ }
+
+      [[nodiscard]]
+      constexpr span<element_type, dynamic_extent>
+      last(size_type __count) const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return { this->data() + (this->size() - __count), __count };
+      }
+
+      template<size_t _Offset, size_t _Count = dynamic_extent>
+ [[nodiscard]]
+ constexpr auto
+ subspan() const noexcept
+ -> span<element_type, _S_subspan_extent<_Offset, _Count>()>
+ {
+   if constexpr (_Extent == dynamic_extent)
+     {
+       do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_Offset <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+     }
+   else
+     static_assert(_Offset <= extent);
+
+   using _Sp = span<element_type, _S_subspan_extent<_Offset, _Count>()>;
+
+   if constexpr (_Count == dynamic_extent)
+     return _Sp{ this->data() + _Offset, this->size() - _Offset };
+   else
+     {
+       if constexpr (_Extent == dynamic_extent)
+  {
+    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_Count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_Count <= (size() - _Offset)), false)) std::__glibcxx_assert_fail(); } while (false);
+  }
+       else
+  {
+    static_assert(_Count <= extent);
+    static_assert(_Count <= (extent - _Offset));
+  }
+       return _Sp{ this->data() + _Offset, _Count };
+     }
+ }
+
+      [[nodiscard]]
+      constexpr span<element_type, dynamic_extent>
+      subspan(size_type __offset, size_type __count = dynamic_extent) const
+      noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__offset <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+ if (__count == dynamic_extent)
+   __count = this->size() - __offset;
+ else
+   {
+     do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+     do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__offset + __count <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+   }
+ return {this->data() + __offset, __count};
+      }
+
+    private:
+      pointer _M_ptr;
+      [[no_unique_address]] __detail::__extent_storage<extent> _M_extent;
+    };
+
+
+
+  template<typename _Type, size_t _ArrayExtent>
+    span(_Type(&)[_ArrayExtent]) -> span<_Type, _ArrayExtent>;
+
+  template<typename _Type, size_t _ArrayExtent>
+    span(array<_Type, _ArrayExtent>&) -> span<_Type, _ArrayExtent>;
+
+  template<typename _Type, size_t _ArrayExtent>
+    span(const array<_Type, _ArrayExtent>&)
+      -> span<const _Type, _ArrayExtent>;
+
+  template<contiguous_iterator _Iter, typename _End>
+    span(_Iter, _End)
+      -> span<remove_reference_t<iter_reference_t<_Iter>>>;
+
+  template<ranges::contiguous_range _Range>
+    span(_Range &&)
+      -> span<remove_reference_t<ranges::range_reference_t<_Range&>>>;
+
+  template<typename _Type, size_t _Extent>
+    [[nodiscard]]
+    inline
+    span<const byte, _Extent == dynamic_extent
+ ? dynamic_extent : _Extent * sizeof(_Type)>
+    as_bytes(span<_Type, _Extent> __sp) noexcept
+    {
+      auto data = reinterpret_cast<const byte*>(__sp.data());
+      auto size = __sp.size_bytes();
+      constexpr auto extent = _Extent == dynamic_extent
+ ? dynamic_extent : _Extent * sizeof(_Type);
+      return span<const byte, extent>{data, size};
+    }
+
+  template<typename _Type, size_t _Extent>
+    requires (!is_const_v<_Type>)
+    inline
+    span<byte, _Extent == dynamic_extent
+       ? dynamic_extent : _Extent * sizeof(_Type)>
+    as_writable_bytes [[nodiscard]] (span<_Type, _Extent> __sp) noexcept
+    {
+      auto data = reinterpret_cast<byte*>(__sp.data());
+      auto size = __sp.size_bytes();
+      constexpr auto extent = _Extent == dynamic_extent
+ ? dynamic_extent : _Extent * sizeof(_Type);
+      return span<byte, extent>{data, size};
+    }
+
+  namespace ranges
+  {
+
+    template<typename _ElementType, size_t _Extent>
+      inline constexpr bool
+ enable_borrowed_range<span<_ElementType, _Extent>> = true;
+
+
+    template<typename _ElementType, size_t _Extent>
+      inline constexpr bool
+ enable_view<span<_ElementType, _Extent>> = true;
+  }
+
+}
+# 46 "/usr/include/c++/14.2.0/ranges" 2 3
+# 68 "/usr/include/c++/14.2.0/ranges" 3
+# 1 "/usr/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.0/bits/version.h" 3
+# 69 "/usr/include/c++/14.2.0/ranges" 2 3
+# 80 "/usr/include/c++/14.2.0/ranges" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+namespace ranges
+{
+# 97 "/usr/include/c++/14.2.0/ranges" 3
+  template<typename _Tp> requires is_object_v<_Tp>
+    class empty_view
+    : public view_interface<empty_view<_Tp>>
+    {
+    public:
+      static constexpr _Tp* begin() noexcept { return nullptr; }
+      static constexpr _Tp* end() noexcept { return nullptr; }
+      static constexpr _Tp* data() noexcept { return nullptr; }
+      static constexpr size_t size() noexcept { return 0; }
+      static constexpr bool empty() noexcept { return true; }
+    };
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<empty_view<_Tp>> = true;
+
+  namespace __detail
+  {
+
+
+
+
+
+    template<typename _Tp>
+      concept __boxable = copy_constructible<_Tp> && is_object_v<_Tp>;
+
+
+    template<__boxable _Tp>
+      struct __box : std::optional<_Tp>
+      {
+ using std::optional<_Tp>::optional;
+
+ constexpr
+ __box()
+ noexcept(is_nothrow_default_constructible_v<_Tp>)
+ requires default_initializable<_Tp>
+ : std::optional<_Tp>{std::in_place}
+ { }
+
+ __box(const __box&) = default;
+ __box(__box&&) = default;
+
+ using std::optional<_Tp>::operator=;
+
+
+
+
+ constexpr __box&
+ operator=(const __box& __that)
+ noexcept(is_nothrow_copy_constructible_v<_Tp>)
+ requires (!copyable<_Tp>) && copy_constructible<_Tp>
+ {
+   if (this != std::__addressof(__that))
+     {
+       if ((bool)__that)
+  this->emplace(*__that);
+       else
+  this->reset();
+     }
+   return *this;
+ }
+
+ constexpr __box&
+ operator=(__box&& __that)
+ noexcept(is_nothrow_move_constructible_v<_Tp>)
+ requires (!movable<_Tp>)
+ {
+   if (this != std::__addressof(__that))
+     {
+       if ((bool)__that)
+  this->emplace(std::move(*__that));
+       else
+  this->reset();
+     }
+   return *this;
+ }
+      };
+
+    template<typename _Tp>
+      concept __boxable_copyable
+ = copy_constructible<_Tp>
+     && (copyable<_Tp> || (is_nothrow_move_constructible_v<_Tp>
+        && is_nothrow_copy_constructible_v<_Tp>));
+    template<typename _Tp>
+      concept __boxable_movable
+ = (!copy_constructible<_Tp>)
+     && (movable<_Tp> || is_nothrow_move_constructible_v<_Tp>);
+
+
+
+
+
+    template<__boxable _Tp>
+      requires __boxable_copyable<_Tp> || __boxable_movable<_Tp>
+      struct __box<_Tp>
+      {
+      private:
+ [[no_unique_address]] _Tp _M_value = _Tp();
+
+      public:
+ __box() requires default_initializable<_Tp> = default;
+
+ constexpr explicit
+ __box(const _Tp& __t)
+ noexcept(is_nothrow_copy_constructible_v<_Tp>)
+ requires copy_constructible<_Tp>
+ : _M_value(__t)
+ { }
+
+ constexpr explicit
+ __box(_Tp&& __t)
+ noexcept(is_nothrow_move_constructible_v<_Tp>)
+ : _M_value(std::move(__t))
+ { }
+
+ template<typename... _Args>
+   requires constructible_from<_Tp, _Args...>
+   constexpr explicit
+   __box(in_place_t, _Args&&... __args)
+   noexcept(is_nothrow_constructible_v<_Tp, _Args...>)
+   : _M_value(std::forward<_Args>(__args)...)
+   { }
+
+ __box(const __box&) = default;
+ __box(__box&&) = default;
+ __box& operator=(const __box&) requires copyable<_Tp> = default;
+ __box& operator=(__box&&) requires movable<_Tp> = default;
+
+
+
+ constexpr __box&
+ operator=(const __box& __that) noexcept
+ requires (!copyable<_Tp>) && copy_constructible<_Tp>
+ {
+   static_assert(is_nothrow_copy_constructible_v<_Tp>);
+   if (this != std::__addressof(__that))
+     {
+       _M_value.~_Tp();
+       std::construct_at(std::__addressof(_M_value), *__that);
+     }
+   return *this;
+ }
+
+
+ constexpr __box&
+ operator=(__box&& __that) noexcept
+ requires (!movable<_Tp>)
+ {
+   static_assert(is_nothrow_move_constructible_v<_Tp>);
+   if (this != std::__addressof(__that))
+     {
+       _M_value.~_Tp();
+       std::construct_at(std::__addressof(_M_value), std::move(*__that));
+     }
+   return *this;
+ }
+
+ constexpr bool
+ has_value() const noexcept
+ { return true; };
+
+ constexpr _Tp&
+ operator*() & noexcept
+ { return _M_value; }
+
+ constexpr const _Tp&
+ operator*() const & noexcept
+ { return _M_value; }
+
+ constexpr _Tp&&
+ operator*() && noexcept
+ { return std::move(_M_value); }
+
+ constexpr const _Tp&&
+ operator*() const && noexcept
+ { return std::move(_M_value); }
+
+ constexpr _Tp*
+ operator->() noexcept
+ { return std::__addressof(_M_value); }
+
+ constexpr const _Tp*
+ operator->() const noexcept
+ { return std::__addressof(_M_value); }
+      };
+  }
+
+
+
+
+
+  template<copy_constructible _Tp>
+
+    requires is_object_v<_Tp>
+    class single_view : public view_interface<single_view<_Tp>>
+    {
+    public:
+      single_view() requires default_initializable<_Tp> = default;
+
+      constexpr explicit
+      single_view(const _Tp& __t)
+      noexcept(is_nothrow_copy_constructible_v<_Tp>)
+      requires copy_constructible<_Tp>
+      : _M_value(__t)
+      { }
+
+      constexpr explicit
+      single_view(_Tp&& __t)
+      noexcept(is_nothrow_move_constructible_v<_Tp>)
+      : _M_value(std::move(__t))
+      { }
+
+
+
+      template<typename... _Args>
+ requires constructible_from<_Tp, _Args...>
+ constexpr explicit
+ single_view(in_place_t, _Args&&... __args)
+ noexcept(is_nothrow_constructible_v<_Tp, _Args...>)
+ : _M_value{in_place, std::forward<_Args>(__args)...}
+ { }
+
+      constexpr _Tp*
+      begin() noexcept
+      { return data(); }
+
+      constexpr const _Tp*
+      begin() const noexcept
+      { return data(); }
+
+      constexpr _Tp*
+      end() noexcept
+      { return data() + 1; }
+
+      constexpr const _Tp*
+      end() const noexcept
+      { return data() + 1; }
+
+      static constexpr size_t
+      size() noexcept
+      { return 1; }
+
+      constexpr _Tp*
+      data() noexcept
+      { return _M_value.operator->(); }
+
+      constexpr const _Tp*
+      data() const noexcept
+      { return _M_value.operator->(); }
+
+    private:
+      [[no_unique_address]] __detail::__box<_Tp> _M_value;
+    };
+
+  template<typename _Tp>
+    single_view(_Tp) -> single_view<_Tp>;
+
+  namespace __detail
+  {
+    template<typename _Wp>
+      constexpr auto __to_signed_like(_Wp __w) noexcept
+      {
+ if constexpr (!integral<_Wp>)
+   return iter_difference_t<_Wp>();
+ else if constexpr (sizeof(iter_difference_t<_Wp>) > sizeof(_Wp))
+   return iter_difference_t<_Wp>(__w);
+ else if constexpr (sizeof(ptrdiff_t) > sizeof(_Wp))
+   return ptrdiff_t(__w);
+ else if constexpr (sizeof(long long) > sizeof(_Wp))
+   return (long long)(__w);
+
+ else if constexpr (16 > sizeof(_Wp))
+   return __int128(__w);
+
+ else
+   return __max_diff_type(__w);
+      }
+
+    template<typename _Wp>
+      using __iota_diff_t = decltype(__to_signed_like(std::declval<_Wp>()));
+
+    template<typename _It>
+      concept __decrementable = incrementable<_It>
+ && requires(_It __i)
+ {
+     { --__i } -> same_as<_It&>;
+     { __i-- } -> same_as<_It>;
+ };
+
+    template<typename _It>
+      concept __advanceable = __decrementable<_It> && totally_ordered<_It>
+ && requires( _It __i, const _It __j, const __iota_diff_t<_It> __n)
+ {
+   { __i += __n } -> same_as<_It&>;
+   { __i -= __n } -> same_as<_It&>;
+   _It(__j + __n);
+   _It(__n + __j);
+   _It(__j - __n);
+   { __j - __j } -> convertible_to<__iota_diff_t<_It>>;
+ };
+
+    template<typename _Winc>
+      struct __iota_view_iter_cat
+      { };
+
+    template<incrementable _Winc>
+      struct __iota_view_iter_cat<_Winc>
+      { using iterator_category = input_iterator_tag; };
+  }
+
+  template<weakly_incrementable _Winc,
+    semiregular _Bound = unreachable_sentinel_t>
+    requires std::__detail::__weakly_eq_cmp_with<_Winc, _Bound>
+      && copyable<_Winc>
+    class iota_view : public view_interface<iota_view<_Winc, _Bound>>
+    {
+    private:
+      struct _Sentinel;
+
+      struct _Iterator : __detail::__iota_view_iter_cat<_Winc>
+      {
+      private:
+ static auto
+ _S_iter_concept()
+ {
+   using namespace __detail;
+   if constexpr (__advanceable<_Winc>)
+     return random_access_iterator_tag{};
+   else if constexpr (__decrementable<_Winc>)
+     return bidirectional_iterator_tag{};
+   else if constexpr (incrementable<_Winc>)
+     return forward_iterator_tag{};
+   else
+     return input_iterator_tag{};
+ }
+
+      public:
+ using iterator_concept = decltype(_S_iter_concept());
+
+ using value_type = _Winc;
+ using difference_type = __detail::__iota_diff_t<_Winc>;
+
+ _Iterator() requires default_initializable<_Winc> = default;
+
+ constexpr explicit
+ _Iterator(_Winc __value)
+ : _M_value(__value) { }
+
+ constexpr _Winc
+ operator*() const noexcept(is_nothrow_copy_constructible_v<_Winc>)
+ { return _M_value; }
+
+ constexpr _Iterator&
+ operator++()
+ {
+   ++_M_value;
+   return *this;
+ }
+
+ constexpr void
+ operator++(int)
+ { ++*this; }
+
+ constexpr _Iterator
+ operator++(int) requires incrementable<_Winc>
+ {
+   auto __tmp = *this;
+   ++*this;
+   return __tmp;
+ }
+
+ constexpr _Iterator&
+ operator--() requires __detail::__decrementable<_Winc>
+ {
+   --_M_value;
+   return *this;
+ }
+
+ constexpr _Iterator
+ operator--(int) requires __detail::__decrementable<_Winc>
+ {
+   auto __tmp = *this;
+   --*this;
+   return __tmp;
+ }
+
+ constexpr _Iterator&
+ operator+=(difference_type __n) requires __detail::__advanceable<_Winc>
+ {
+   using __detail::__is_integer_like;
+   using __detail::__is_signed_integer_like;
+   if constexpr (__is_integer_like<_Winc>
+       && !__is_signed_integer_like<_Winc>)
+     {
+       if (__n >= difference_type(0))
+  _M_value += static_cast<_Winc>(__n);
+       else
+  _M_value -= static_cast<_Winc>(-__n);
+     }
+   else
+     _M_value += __n;
+   return *this;
+ }
+
+ constexpr _Iterator&
+ operator-=(difference_type __n) requires __detail::__advanceable<_Winc>
+ {
+   using __detail::__is_integer_like;
+   using __detail::__is_signed_integer_like;
+   if constexpr (__is_integer_like<_Winc>
+       && !__is_signed_integer_like<_Winc>)
+     {
+       if (__n >= difference_type(0))
+  _M_value -= static_cast<_Winc>(__n);
+       else
+  _M_value += static_cast<_Winc>(-__n);
+     }
+   else
+     _M_value -= __n;
+   return *this;
+ }
+
+ constexpr _Winc
+ operator[](difference_type __n) const
+ requires __detail::__advanceable<_Winc>
+ { return _Winc(_M_value + __n); }
+
+ friend constexpr bool
+ operator==(const _Iterator& __x, const _Iterator& __y)
+ requires equality_comparable<_Winc>
+ { return __x._M_value == __y._M_value; }
+
+ friend constexpr bool
+ operator<(const _Iterator& __x, const _Iterator& __y)
+ requires totally_ordered<_Winc>
+ { return __x._M_value < __y._M_value; }
+
+ friend constexpr bool
+ operator>(const _Iterator& __x, const _Iterator& __y)
+   requires totally_ordered<_Winc>
+ { return __y < __x; }
+
+ friend constexpr bool
+ operator<=(const _Iterator& __x, const _Iterator& __y)
+   requires totally_ordered<_Winc>
+ { return !(__y < __x); }
+
+ friend constexpr bool
+ operator>=(const _Iterator& __x, const _Iterator& __y)
+   requires totally_ordered<_Winc>
+ { return !(__x < __y); }
+
+
+ friend constexpr auto
+ operator<=>(const _Iterator& __x, const _Iterator& __y)
+   requires totally_ordered<_Winc> && three_way_comparable<_Winc>
+ { return __x._M_value <=> __y._M_value; }
+
+
+ friend constexpr _Iterator
+ operator+(_Iterator __i, difference_type __n)
+   requires __detail::__advanceable<_Winc>
+ {
+   __i += __n;
+   return __i;
+ }
+
+ friend constexpr _Iterator
+ operator+(difference_type __n, _Iterator __i)
+   requires __detail::__advanceable<_Winc>
+ { return __i += __n; }
+
+ friend constexpr _Iterator
+ operator-(_Iterator __i, difference_type __n)
+   requires __detail::__advanceable<_Winc>
+ {
+   __i -= __n;
+   return __i;
+ }
+
+ friend constexpr difference_type
+ operator-(const _Iterator& __x, const _Iterator& __y)
+   requires __detail::__advanceable<_Winc>
+ {
+   using __detail::__is_integer_like;
+   using __detail::__is_signed_integer_like;
+   using _Dt = difference_type;
+   if constexpr (__is_integer_like<_Winc>)
+     {
+       if constexpr (__is_signed_integer_like<_Winc>)
+  return _Dt(_Dt(__x._M_value) - _Dt(__y._M_value));
+       else
+  return (__y._M_value > __x._M_value)
+    ? _Dt(-_Dt(__y._M_value - __x._M_value))
+    : _Dt(__x._M_value - __y._M_value);
+     }
+   else
+     return __x._M_value - __y._M_value;
+ }
+
+      private:
+ _Winc _M_value = _Winc();
+
+ friend iota_view;
+        friend _Sentinel;
+      };
+
+      struct _Sentinel
+      {
+      private:
+ constexpr bool
+ _M_equal(const _Iterator& __x) const
+ { return __x._M_value == _M_bound; }
+
+ constexpr auto
+ _M_distance_from(const _Iterator& __x) const
+ { return _M_bound - __x._M_value; }
+
+ _Bound _M_bound = _Bound();
+
+      public:
+ _Sentinel() = default;
+
+ constexpr explicit
+ _Sentinel(_Bound __bound)
+ : _M_bound(__bound) { }
+
+ friend constexpr bool
+ operator==(const _Iterator& __x, const _Sentinel& __y)
+ { return __y._M_equal(__x); }
+
+ friend constexpr iter_difference_t<_Winc>
+ operator-(const _Iterator& __x, const _Sentinel& __y)
+   requires sized_sentinel_for<_Bound, _Winc>
+ { return -__y._M_distance_from(__x); }
+
+ friend constexpr iter_difference_t<_Winc>
+ operator-(const _Sentinel& __x, const _Iterator& __y)
+   requires sized_sentinel_for<_Bound, _Winc>
+ { return __x._M_distance_from(__y); }
+
+ friend iota_view;
+      };
+
+      _Winc _M_value = _Winc();
+      [[no_unique_address]] _Bound _M_bound = _Bound();
+
+    public:
+      iota_view() requires default_initializable<_Winc> = default;
+
+      constexpr explicit
+      iota_view(_Winc __value)
+      : _M_value(__value)
+      { }
+
+      constexpr
+      iota_view(type_identity_t<_Winc> __value,
+  type_identity_t<_Bound> __bound)
+      : _M_value(__value), _M_bound(__bound)
+      {
+ if constexpr (totally_ordered_with<_Winc, _Bound>)
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(bool(__value <= __bound)), false)) std::__glibcxx_assert_fail(); } while (false);
+      }
+
+      constexpr
+      iota_view(_Iterator __first, _Iterator __last)
+ requires same_as<_Winc, _Bound>
+ : iota_view(__first._M_value, __last._M_value)
+      { }
+
+      constexpr
+      iota_view(_Iterator __first, unreachable_sentinel_t __last)
+ requires same_as<_Bound, unreachable_sentinel_t>
+ : iota_view(__first._M_value, __last)
+      { }
+
+      constexpr
+      iota_view(_Iterator __first, _Sentinel __last)
+ requires (!same_as<_Winc, _Bound>) && (!same_as<_Bound, unreachable_sentinel_t>)
+ : iota_view(__first._M_value, __last._M_bound)
+      { }
+
+      constexpr _Iterator
+      begin() const { return _Iterator{_M_value}; }
+
+      constexpr auto
+      end() const
+      {
+ if constexpr (same_as<_Bound, unreachable_sentinel_t>)
+   return unreachable_sentinel;
+ else
+   return _Sentinel{_M_bound};
+      }
+
+      constexpr _Iterator
+      end() const requires same_as<_Winc, _Bound>
+      { return _Iterator{_M_bound}; }
+
+      constexpr auto
+      size() const
+      requires (same_as<_Winc, _Bound> && __detail::__advanceable<_Winc>)
+      || (integral<_Winc> && integral<_Bound>)
+      || sized_sentinel_for<_Bound, _Winc>
+      {
+ using __detail::__is_integer_like;
+ using __detail::__to_unsigned_like;
+ if constexpr (integral<_Winc> && integral<_Bound>)
+   {
+     using _Up = make_unsigned_t<decltype(_M_bound - _M_value)>;
+     return _Up(_M_bound) - _Up(_M_value);
+   }
+ else if constexpr (__is_integer_like<_Winc>)
+   return __to_unsigned_like(_M_bound) - __to_unsigned_like(_M_value);
+ else
+   return __to_unsigned_like(_M_bound - _M_value);
+      }
+    };
+
+  template<typename _Winc, typename _Bound>
+    requires (!__detail::__is_integer_like<_Winc>
+ || !__detail::__is_integer_like<_Bound>
+ || (__detail::__is_signed_integer_like<_Winc>
+     == __detail::__is_signed_integer_like<_Bound>))
+    iota_view(_Winc, _Bound) -> iota_view<_Winc, _Bound>;
+
+  template<typename _Winc, typename _Bound>
+    inline constexpr bool
+      enable_borrowed_range<iota_view<_Winc, _Bound>> = true;
+
+namespace views
+{
+  template<typename _Tp>
+    inline constexpr empty_view<_Tp> empty{};
+
+  namespace __detail
+  {
+    template<typename _Tp>
+      concept __can_single_view
+ = requires { single_view<decay_t<_Tp>>(std::declval<_Tp>()); };
+  }
+
+  struct _Single
+  {
+    template<__detail::__can_single_view _Tp>
+      constexpr auto
+      operator() [[nodiscard]] (_Tp&& __e) const
+      noexcept(noexcept(single_view<decay_t<_Tp>>(std::forward<_Tp>(__e))))
+      { return single_view<decay_t<_Tp>>(std::forward<_Tp>(__e)); }
+  };
+
+  inline constexpr _Single single{};
+
+  namespace __detail
+  {
+    template<typename... _Args>
+      concept __can_iota_view = requires { iota_view(std::declval<_Args>()...); };
+  }
+
+  struct _Iota
+  {
+    template<__detail::__can_iota_view _Tp>
+      constexpr auto
+      operator() [[nodiscard]] (_Tp&& __e) const
+      { return iota_view(std::forward<_Tp>(__e)); }
+
+    template<typename _Tp, typename _Up>
+      requires __detail::__can_iota_view<_Tp, _Up>
+      constexpr auto
+      operator() [[nodiscard]] (_Tp&& __e, _Up&& __f) const
+      { return iota_view(std::forward<_Tp>(__e), std::forward<_Up>(__f)); }
+  };
+
+  inline constexpr _Iota iota{};
+}
+
+
+  namespace __detail
+  {
+    template<typename _Val, typename _CharT, typename _Traits>
+      concept __stream_extractable
+ = requires(basic_istream<_CharT, _Traits>& is, _Val& t) { is >> t; };
+  }
+
+  template<movable _Val, typename _CharT,
+    typename _Traits = char_traits<_CharT>>
+    requires default_initializable<_Val>
+      && __detail::__stream_extractable<_Val, _CharT, _Traits>
+    class basic_istream_view
+    : public view_interface<basic_istream_view<_Val, _CharT, _Traits>>
+    {
+    public:
+      constexpr explicit
+      basic_istream_view(basic_istream<_CharT, _Traits>& __stream)
+ : _M_stream(std::__addressof(__stream))
+      { }
+
+      constexpr auto
+      begin()
+      {
+ *_M_stream >> _M_object;
+ return _Iterator{this};
+      }
+
+      constexpr default_sentinel_t
+      end() const noexcept
+      { return default_sentinel; }
+
+    private:
+      basic_istream<_CharT, _Traits>* _M_stream;
+      _Val _M_object = _Val();
+
+      struct _Iterator
+      {
+      public:
+ using iterator_concept = input_iterator_tag;
+ using difference_type = ptrdiff_t;
+ using value_type = _Val;
+
+ constexpr explicit
+ _Iterator(basic_istream_view* __parent) noexcept
+   : _M_parent(__parent)
+ { }
+
+ _Iterator(const _Iterator&) = delete;
+ _Iterator(_Iterator&&) = default;
+ _Iterator& operator=(const _Iterator&) = delete;
+ _Iterator& operator=(_Iterator&&) = default;
+
+ _Iterator&
+ operator++()
+ {
+   *_M_parent->_M_stream >> _M_parent->_M_object;
+   return *this;
+ }
+
+ void
+ operator++(int)
+ { ++*this; }
+
+ _Val&
+ operator*() const
+ { return _M_parent->_M_object; }
+
+ friend bool
+ operator==(const _Iterator& __x, default_sentinel_t)
+ { return __x._M_at_end(); }
+
+      private:
+ basic_istream_view* _M_parent;
+
+ bool
+ _M_at_end() const
+ { return !*_M_parent->_M_stream; }
+      };
+
+      friend _Iterator;
+    };
+
+  template<typename _Val>
+    using istream_view = basic_istream_view<_Val, char>;
+
+  template<typename _Val>
+    using wistream_view = basic_istream_view<_Val, wchar_t>;
+
+namespace views
+{
+  namespace __detail
+  {
+    template<typename _Tp, typename _Up>
+    concept __can_istream_view = requires (_Up __e) {
+      basic_istream_view<_Tp, typename _Up::char_type, typename _Up::traits_type>(__e);
+    };
+  }
+
+  template<typename _Tp>
+    struct _Istream
+    {
+      template<typename _CharT, typename _Traits>
+ constexpr auto
+ operator() [[nodiscard]] (basic_istream<_CharT, _Traits>& __e) const
+ requires __detail::__can_istream_view<_Tp, remove_reference_t<decltype(__e)>>
+ { return basic_istream_view<_Tp, _CharT, _Traits>(__e); }
+    };
+
+  template<typename _Tp>
+    inline constexpr _Istream<_Tp> istream;
+}
+
+
+
+
+namespace __detail
+{
+  template<typename _Tp, int _Disc>
+    struct _Absent { };
+
+
+
+
+
+
+
+  template<bool _Present, typename _Tp, int _Disc = 0>
+    using __maybe_present_t = __conditional_t<_Present, _Tp, _Absent<_Tp, _Disc>>;
+
+
+  template<bool _Const, typename _Tp>
+    using __maybe_const_t = __conditional_t<_Const, const _Tp, _Tp>;
+
+}
+
+
+using __detail::__maybe_const_t;
+
+namespace views::__adaptor
+{
+
+  template<typename _Adaptor, typename... _Args>
+    concept __adaptor_invocable
+      = requires { std::declval<_Adaptor>()(declval<_Args>()...); };
+
+
+
+  template<typename _Adaptor, typename... _Args>
+    concept __adaptor_partial_app_viable = (_Adaptor::_S_arity > 1)
+      && (sizeof...(_Args) == _Adaptor::_S_arity - 1)
+      && (constructible_from<decay_t<_Args>, _Args> && ...);
+
+  template<typename _Adaptor, typename... _Args>
+    struct _Partial;
+
+  template<typename _Lhs, typename _Rhs>
+    struct _Pipe;
+
+
+
+
+
+
+  template<typename _Derived>
+    struct _RangeAdaptorClosure
+    { };
+
+  template<typename _Tp, typename _Up>
+    requires (!same_as<_Tp, _RangeAdaptorClosure<_Up>>)
+    void __is_range_adaptor_closure_fn
+      (const _Tp&, const _RangeAdaptorClosure<_Up>&);
+
+  template<typename _Tp>
+    concept __is_range_adaptor_closure
+      = requires (_Tp __t) { __adaptor::__is_range_adaptor_closure_fn(__t, __t); };
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdangling-reference"
+
+  template<typename _Self, typename _Range>
+    requires __is_range_adaptor_closure<_Self>
+      && __adaptor_invocable<_Self, _Range>
+    constexpr auto
+    operator|(_Range&& __r, _Self&& __self)
+    { return std::forward<_Self>(__self)(std::forward<_Range>(__r)); }
+
+
+
+  template<typename _Lhs, typename _Rhs>
+    requires __is_range_adaptor_closure<_Lhs>
+      && __is_range_adaptor_closure<_Rhs>
+    constexpr auto
+    operator|(_Lhs&& __lhs, _Rhs&& __rhs)
+    {
+      return _Pipe<decay_t<_Lhs>, decay_t<_Rhs>>{std::forward<_Lhs>(__lhs),
+       std::forward<_Rhs>(__rhs)};
+    }
+#pragma GCC diagnostic pop
+# 982 "/usr/include/c++/14.2.0/ranges" 3
+  template<typename _Derived>
+    struct _RangeAdaptor
+    {
+
+
+      template<typename... _Args>
+ requires __adaptor_partial_app_viable<_Derived, _Args...>
+ constexpr auto
+ operator()(_Args&&... __args) const
+ {
+   return _Partial<_Derived, decay_t<_Args>...>{0, std::forward<_Args>(__args)...};
+ }
+    };
+
+
+
+
+  template<typename _Adaptor>
+    concept __closure_has_simple_call_op = _Adaptor::_S_has_simple_call_op;
+
+
+
+  template<typename _Adaptor, typename... _Args>
+    concept __adaptor_has_simple_extra_args = _Adaptor::_S_has_simple_extra_args
+      || _Adaptor::template _S_has_simple_extra_args<_Args...>;
+
+
+
+  template<typename _Adaptor, typename... _Args>
+    struct _Partial : _RangeAdaptorClosure<_Partial<_Adaptor, _Args...>>
+    {
+      tuple<_Args...> _M_args;
+
+
+
+      template<typename... _Ts>
+ constexpr
+ _Partial(int, _Ts&&... __args)
+   : _M_args(std::forward<_Ts>(__args)...)
+ { }
+# 1038 "/usr/include/c++/14.2.0/ranges" 3
+      template<typename _Range>
+ requires __adaptor_invocable<_Adaptor, _Range, const _Args&...>
+ constexpr auto
+ operator()(_Range&& __r) const &
+ {
+   auto __forwarder = [&__r] (const auto&... __args) {
+     return _Adaptor{}(std::forward<_Range>(__r), __args...);
+   };
+   return std::apply(__forwarder, _M_args);
+ }
+
+      template<typename _Range>
+ requires __adaptor_invocable<_Adaptor, _Range, _Args...>
+ constexpr auto
+ operator()(_Range&& __r) &&
+ {
+   auto __forwarder = [&__r] (auto&... __args) {
+     return _Adaptor{}(std::forward<_Range>(__r), std::move(__args)...);
+   };
+   return std::apply(__forwarder, _M_args);
+ }
+
+      template<typename _Range>
+ constexpr auto
+ operator()(_Range&& __r) const && = delete;
+
+    };
+
+
+
+  template<typename _Adaptor, typename _Arg>
+    struct _Partial<_Adaptor, _Arg> : _RangeAdaptorClosure<_Partial<_Adaptor, _Arg>>
+    {
+      _Arg _M_arg;
+
+      template<typename _Tp>
+ constexpr
+ _Partial(int, _Tp&& __arg)
+   : _M_arg(std::forward<_Tp>(__arg))
+ { }
+# 1086 "/usr/include/c++/14.2.0/ranges" 3
+      template<typename _Range>
+ requires __adaptor_invocable<_Adaptor, _Range, const _Arg&>
+ constexpr auto
+ operator()(_Range&& __r) const &
+ { return _Adaptor{}(std::forward<_Range>(__r), _M_arg); }
+
+      template<typename _Range>
+ requires __adaptor_invocable<_Adaptor, _Range, _Arg>
+ constexpr auto
+ operator()(_Range&& __r) &&
+ { return _Adaptor{}(std::forward<_Range>(__r), std::move(_M_arg)); }
+
+      template<typename _Range>
+ constexpr auto
+ operator()(_Range&& __r) const && = delete;
+
+    };
+
+
+
+
+
+  template<typename _Adaptor, typename... _Args>
+    requires __adaptor_has_simple_extra_args<_Adaptor, _Args...>
+      && (is_trivially_copyable_v<_Args> && ...)
+    struct _Partial<_Adaptor, _Args...> : _RangeAdaptorClosure<_Partial<_Adaptor, _Args...>>
+    {
+      tuple<_Args...> _M_args;
+
+      template<typename... _Ts>
+ constexpr
+ _Partial(int, _Ts&&... __args)
+   : _M_args(std::forward<_Ts>(__args)...)
+ { }
+
+
+
+      template<typename _Range>
+ requires __adaptor_invocable<_Adaptor, _Range, const _Args&...>
+ constexpr auto
+ operator()(_Range&& __r) const
+ {
+   auto __forwarder = [&__r] (const auto&... __args) {
+     return _Adaptor{}(std::forward<_Range>(__r), __args...);
+   };
+   return std::apply(__forwarder, _M_args);
+ }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+
+
+
+  template<typename _Adaptor, typename _Arg>
+    requires __adaptor_has_simple_extra_args<_Adaptor, _Arg>
+      && is_trivially_copyable_v<_Arg>
+    struct _Partial<_Adaptor, _Arg> : _RangeAdaptorClosure<_Partial<_Adaptor, _Arg>>
+    {
+      _Arg _M_arg;
+
+      template<typename _Tp>
+ constexpr
+ _Partial(int, _Tp&& __arg)
+   : _M_arg(std::forward<_Tp>(__arg))
+ { }
+
+      template<typename _Range>
+ requires __adaptor_invocable<_Adaptor, _Range, const _Arg&>
+ constexpr auto
+ operator()(_Range&& __r) const
+ { return _Adaptor{}(std::forward<_Range>(__r), _M_arg); }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+
+  template<typename _Lhs, typename _Rhs, typename _Range>
+    concept __pipe_invocable
+      = requires { std::declval<_Rhs>()(std::declval<_Lhs>()(std::declval<_Range>())); };
+
+
+
+  template<typename _Lhs, typename _Rhs>
+    struct _Pipe : _RangeAdaptorClosure<_Pipe<_Lhs, _Rhs>>
+    {
+      [[no_unique_address]] _Lhs _M_lhs;
+      [[no_unique_address]] _Rhs _M_rhs;
+
+      template<typename _Tp, typename _Up>
+ constexpr
+ _Pipe(_Tp&& __lhs, _Up&& __rhs)
+   : _M_lhs(std::forward<_Tp>(__lhs)), _M_rhs(std::forward<_Up>(__rhs))
+ { }
+# 1192 "/usr/include/c++/14.2.0/ranges" 3
+      template<typename _Range>
+ requires __pipe_invocable<const _Lhs&, const _Rhs&, _Range>
+ constexpr auto
+ operator()(_Range&& __r) const &
+ { return _M_rhs(_M_lhs(std::forward<_Range>(__r))); }
+
+      template<typename _Range>
+ requires __pipe_invocable<_Lhs, _Rhs, _Range>
+ constexpr auto
+ operator()(_Range&& __r) &&
+ { return std::move(_M_rhs)(std::move(_M_lhs)(std::forward<_Range>(__r))); }
+
+      template<typename _Range>
+ constexpr auto
+ operator()(_Range&& __r) const && = delete;
+
+    };
+
+
+
+
+
+  template<typename _Lhs, typename _Rhs>
+    requires __closure_has_simple_call_op<_Lhs>
+      && __closure_has_simple_call_op<_Rhs>
+    struct _Pipe<_Lhs, _Rhs> : _RangeAdaptorClosure<_Pipe<_Lhs, _Rhs>>
+    {
+      [[no_unique_address]] _Lhs _M_lhs;
+      [[no_unique_address]] _Rhs _M_rhs;
+
+      template<typename _Tp, typename _Up>
+ constexpr
+ _Pipe(_Tp&& __lhs, _Up&& __rhs)
+   : _M_lhs(std::forward<_Tp>(__lhs)), _M_rhs(std::forward<_Up>(__rhs))
+ { }
+
+      template<typename _Range>
+ requires __pipe_invocable<const _Lhs&, const _Rhs&, _Range>
+ constexpr auto
+ operator()(_Range&& __r) const
+ { return _M_rhs(_M_lhs(std::forward<_Range>(__r))); }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+}
+# 1247 "/usr/include/c++/14.2.0/ranges" 3
+  template<range _Range> requires is_object_v<_Range>
+    class ref_view : public view_interface<ref_view<_Range>>
+    {
+    private:
+      _Range* _M_r;
+
+      static void _S_fun(_Range&);
+      static void _S_fun(_Range&&) = delete;
+
+    public:
+      template<__detail::__different_from<ref_view> _Tp>
+ requires convertible_to<_Tp, _Range&>
+   && requires { _S_fun(declval<_Tp>()); }
+ constexpr
+ ref_view(_Tp&& __t)
+ noexcept(noexcept(static_cast<_Range&>(std::declval<_Tp>())))
+   : _M_r(std::__addressof(static_cast<_Range&>(std::forward<_Tp>(__t))))
+ { }
+
+      constexpr _Range&
+      base() const
+      { return *_M_r; }
+
+      constexpr iterator_t<_Range>
+      begin() const
+      { return ranges::begin(*_M_r); }
+
+      constexpr sentinel_t<_Range>
+      end() const
+      { return ranges::end(*_M_r); }
+
+      constexpr bool
+      empty() const requires requires { ranges::empty(*_M_r); }
+      { return ranges::empty(*_M_r); }
+
+      constexpr auto
+      size() const requires sized_range<_Range>
+      { return ranges::size(*_M_r); }
+
+      constexpr auto
+      data() const requires contiguous_range<_Range>
+      { return ranges::data(*_M_r); }
+    };
+
+  template<typename _Range>
+    ref_view(_Range&) -> ref_view<_Range>;
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<ref_view<_Tp>> = true;
+
+  template<range _Range>
+    requires movable<_Range>
+      && (!__detail::__is_initializer_list<remove_cv_t<_Range>>)
+    class owning_view : public view_interface<owning_view<_Range>>
+    {
+    private:
+      _Range _M_r = _Range();
+
+    public:
+      owning_view() requires default_initializable<_Range> = default;
+
+      constexpr
+      owning_view(_Range&& __t)
+      noexcept(is_nothrow_move_constructible_v<_Range>)
+ : _M_r(std::move(__t))
+      { }
+
+      owning_view(owning_view&&) = default;
+      owning_view& operator=(owning_view&&) = default;
+
+      constexpr _Range&
+      base() & noexcept
+      { return _M_r; }
+
+      constexpr const _Range&
+      base() const& noexcept
+      { return _M_r; }
+
+      constexpr _Range&&
+      base() && noexcept
+      { return std::move(_M_r); }
+
+      constexpr const _Range&&
+      base() const&& noexcept
+      { return std::move(_M_r); }
+
+      constexpr iterator_t<_Range>
+      begin()
+      { return ranges::begin(_M_r); }
+
+      constexpr sentinel_t<_Range>
+      end()
+      { return ranges::end(_M_r); }
+
+      constexpr auto
+      begin() const requires range<const _Range>
+      { return ranges::begin(_M_r); }
+
+      constexpr auto
+      end() const requires range<const _Range>
+      { return ranges::end(_M_r); }
+
+      constexpr bool
+      empty() requires requires { ranges::empty(_M_r); }
+      { return ranges::empty(_M_r); }
+
+      constexpr bool
+      empty() const requires requires { ranges::empty(_M_r); }
+      { return ranges::empty(_M_r); }
+
+      constexpr auto
+      size() requires sized_range<_Range>
+      { return ranges::size(_M_r); }
+
+      constexpr auto
+      size() const requires sized_range<const _Range>
+      { return ranges::size(_M_r); }
+
+      constexpr auto
+      data() requires contiguous_range<_Range>
+      { return ranges::data(_M_r); }
+
+      constexpr auto
+      data() const requires contiguous_range<const _Range>
+      { return ranges::data(_M_r); }
+    };
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<owning_view<_Tp>>
+      = enable_borrowed_range<_Tp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range>
+ concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+
+      template<typename _Range>
+ concept __can_owning_view = requires { owning_view{std::declval<_Range>()}; };
+    }
+
+    struct _All : __adaptor::_RangeAdaptorClosure<_All>
+    {
+      template<typename _Range>
+ static constexpr bool
+ _S_noexcept()
+ {
+   if constexpr (view<decay_t<_Range>>)
+     return is_nothrow_constructible_v<decay_t<_Range>, _Range>;
+   else if constexpr (__detail::__can_ref_view<_Range>)
+     return true;
+   else
+     return noexcept(owning_view{std::declval<_Range>()});
+ }
+
+      template<viewable_range _Range>
+ requires view<decay_t<_Range>>
+   || __detail::__can_ref_view<_Range>
+   || __detail::__can_owning_view<_Range>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r) const
+ noexcept(_S_noexcept<_Range>())
+ {
+   if constexpr (view<decay_t<_Range>>)
+     return std::forward<_Range>(__r);
+   else if constexpr (__detail::__can_ref_view<_Range>)
+     return ref_view{std::forward<_Range>(__r)};
+   else
+     return owning_view{std::forward<_Range>(__r)};
+ }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+
+    inline constexpr _All all;
+
+    template<viewable_range _Range>
+      using all_t = decltype(all(std::declval<_Range>()));
+  }
+
+  namespace __detail
+  {
+    template<typename _Tp>
+      struct __non_propagating_cache
+      {
+
+
+
+
+      };
+
+    template<typename _Tp>
+      requires is_object_v<_Tp>
+      struct __non_propagating_cache<_Tp>
+      : protected _Optional_base<_Tp>
+      {
+ __non_propagating_cache() = default;
+
+ constexpr
+ __non_propagating_cache(const __non_propagating_cache&) noexcept
+ { }
+
+ constexpr
+ __non_propagating_cache(__non_propagating_cache&& __other) noexcept
+ { __other._M_reset(); }
+
+ constexpr __non_propagating_cache&
+ operator=(const __non_propagating_cache& __other) noexcept
+ {
+   if (std::__addressof(__other) != this)
+     this->_M_reset();
+   return *this;
+ }
+
+ constexpr __non_propagating_cache&
+ operator=(__non_propagating_cache&& __other) noexcept
+ {
+   this->_M_reset();
+   __other._M_reset();
+   return *this;
+ }
+
+ constexpr __non_propagating_cache&
+ operator=(_Tp __val)
+ {
+   this->_M_reset();
+   this->_M_payload._M_construct(std::move(__val));
+   return *this;
+ }
+
+ constexpr explicit
+ operator bool() const noexcept
+ { return this->_M_is_engaged(); }
+
+ constexpr _Tp&
+ operator*() noexcept
+ { return this->_M_get(); }
+
+ constexpr const _Tp&
+ operator*() const noexcept
+ { return this->_M_get(); }
+
+ template<typename _Iter>
+   constexpr _Tp&
+   _M_emplace_deref(const _Iter& __i)
+   {
+     this->_M_reset();
+     auto __f = [] (auto& __x) { return *__x; };
+     this->_M_payload._M_apply(_Optional_func{__f}, __i);
+     return this->_M_get();
+   }
+      };
+
+    template<range _Range>
+      struct _CachedPosition
+      {
+ constexpr bool
+ _M_has_value() const
+ { return false; }
+
+ constexpr iterator_t<_Range>
+ _M_get(const _Range&) const
+ {
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(false), false)) std::__glibcxx_assert_fail(); } while (false);
+   __builtin_unreachable();
+ }
+
+ constexpr void
+ _M_set(const _Range&, const iterator_t<_Range>&) const
+ { }
+      };
+
+    template<forward_range _Range>
+      struct _CachedPosition<_Range>
+ : protected __non_propagating_cache<iterator_t<_Range>>
+      {
+ constexpr bool
+ _M_has_value() const
+ { return this->_M_is_engaged(); }
+
+ constexpr iterator_t<_Range>
+ _M_get(const _Range&) const
+ {
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_has_value()), false)) std::__glibcxx_assert_fail(); } while (false);
+   return **this;
+ }
+
+ constexpr void
+ _M_set(const _Range&, const iterator_t<_Range>& __it)
+ {
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!_M_has_value()), false)) std::__glibcxx_assert_fail(); } while (false);
+   std::construct_at(std::__addressof(this->_M_payload._M_payload),
+       in_place, __it);
+   this->_M_payload._M_engaged = true;
+ }
+      };
+
+    template<random_access_range _Range>
+      requires (sizeof(range_difference_t<_Range>)
+  <= sizeof(iterator_t<_Range>))
+      struct _CachedPosition<_Range>
+      {
+      private:
+ range_difference_t<_Range> _M_offset = -1;
+
+      public:
+ _CachedPosition() = default;
+
+ constexpr
+ _CachedPosition(const _CachedPosition&) = default;
+
+ constexpr
+ _CachedPosition(_CachedPosition&& __other) noexcept
+ { *this = std::move(__other); }
+
+ constexpr _CachedPosition&
+ operator=(const _CachedPosition&) = default;
+
+ constexpr _CachedPosition&
+ operator=(_CachedPosition&& __other) noexcept
+ {
+
+   _M_offset = __other._M_offset;
+   __other._M_offset = -1;
+   return *this;
+ }
+
+ constexpr bool
+ _M_has_value() const
+ { return _M_offset >= 0; }
+
+ constexpr iterator_t<_Range>
+ _M_get(_Range& __r) const
+ {
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_has_value()), false)) std::__glibcxx_assert_fail(); } while (false);
+   return ranges::begin(__r) + _M_offset;
+ }
+
+ constexpr void
+ _M_set(_Range& __r, const iterator_t<_Range>& __it)
+ {
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!_M_has_value()), false)) std::__glibcxx_assert_fail(); } while (false);
+   _M_offset = __it - ranges::begin(__r);
+ }
+      };
+  }
+
+  namespace __detail
+  {
+    template<typename _Base>
+      struct __filter_view_iter_cat
+      { };
+
+    template<forward_range _Base>
+      struct __filter_view_iter_cat<_Base>
+      {
+      private:
+ static auto
+ _S_iter_cat()
+ {
+   using _Cat = typename iterator_traits<iterator_t<_Base>>::iterator_category;
+   if constexpr (derived_from<_Cat, bidirectional_iterator_tag>)
+     return bidirectional_iterator_tag{};
+   else if constexpr (derived_from<_Cat, forward_iterator_tag>)
+     return forward_iterator_tag{};
+   else
+     return _Cat{};
+ }
+      public:
+ using iterator_category = decltype(_S_iter_cat());
+      };
+  }
+
+  template<input_range _Vp,
+    indirect_unary_predicate<iterator_t<_Vp>> _Pred>
+    requires view<_Vp> && is_object_v<_Pred>
+    class filter_view : public view_interface<filter_view<_Vp, _Pred>>
+    {
+    private:
+      struct _Sentinel;
+
+      struct _Iterator : __detail::__filter_view_iter_cat<_Vp>
+      {
+      private:
+ static constexpr auto
+ _S_iter_concept()
+ {
+   if constexpr (bidirectional_range<_Vp>)
+     return bidirectional_iterator_tag{};
+   else if constexpr (forward_range<_Vp>)
+     return forward_iterator_tag{};
+   else
+     return input_iterator_tag{};
+ }
+
+ friend filter_view;
+
+ using _Vp_iter = iterator_t<_Vp>;
+
+ _Vp_iter _M_current = _Vp_iter();
+ filter_view* _M_parent = nullptr;
+
+      public:
+ using iterator_concept = decltype(_S_iter_concept());
+
+ using value_type = range_value_t<_Vp>;
+ using difference_type = range_difference_t<_Vp>;
+
+ _Iterator() requires default_initializable<_Vp_iter> = default;
+
+ constexpr
+ _Iterator(filter_view* __parent, _Vp_iter __current)
+   : _M_current(std::move(__current)),
+     _M_parent(__parent)
+ { }
+
+ constexpr const _Vp_iter&
+ base() const & noexcept
+ { return _M_current; }
+
+ constexpr _Vp_iter
+ base() &&
+ { return std::move(_M_current); }
+
+ constexpr range_reference_t<_Vp>
+ operator*() const
+ { return *_M_current; }
+
+ constexpr _Vp_iter
+ operator->() const
+   requires __detail::__has_arrow<_Vp_iter>
+     && copyable<_Vp_iter>
+ { return _M_current; }
+
+ constexpr _Iterator&
+ operator++()
+ {
+   _M_current = ranges::find_if(std::move(++_M_current),
+           ranges::end(_M_parent->_M_base),
+           std::ref(*_M_parent->_M_pred));
+   return *this;
+ }
+
+ constexpr void
+ operator++(int)
+ { ++*this; }
+
+ constexpr _Iterator
+ operator++(int) requires forward_range<_Vp>
+ {
+   auto __tmp = *this;
+   ++*this;
+   return __tmp;
+ }
+
+ constexpr _Iterator&
+ operator--() requires bidirectional_range<_Vp>
+ {
+   do
+     --_M_current;
+   while (!std::__invoke(*_M_parent->_M_pred, *_M_current));
+   return *this;
+ }
+
+ constexpr _Iterator
+ operator--(int) requires bidirectional_range<_Vp>
+ {
+   auto __tmp = *this;
+   --*this;
+   return __tmp;
+ }
+
+ friend constexpr bool
+ operator==(const _Iterator& __x, const _Iterator& __y)
+   requires equality_comparable<_Vp_iter>
+ { return __x._M_current == __y._M_current; }
+
+ friend constexpr range_rvalue_reference_t<_Vp>
+ iter_move(const _Iterator& __i)
+   noexcept(noexcept(ranges::iter_move(__i._M_current)))
+ { return ranges::iter_move(__i._M_current); }
+
+ friend constexpr void
+ iter_swap(const _Iterator& __x, const _Iterator& __y)
+   noexcept(noexcept(ranges::iter_swap(__x._M_current, __y._M_current)))
+   requires indirectly_swappable<_Vp_iter>
+ { ranges::iter_swap(__x._M_current, __y._M_current); }
+      };
+
+      struct _Sentinel
+      {
+      private:
+ sentinel_t<_Vp> _M_end = sentinel_t<_Vp>();
+
+ constexpr bool
+ __equal(const _Iterator& __i) const
+ { return __i._M_current == _M_end; }
+
+      public:
+ _Sentinel() = default;
+
+ constexpr explicit
+ _Sentinel(filter_view* __parent)
+   : _M_end(ranges::end(__parent->_M_base))
+ { }
+
+ constexpr sentinel_t<_Vp>
+ base() const
+ { return _M_end; }
+
+ friend constexpr bool
+ operator==(const _Iterator& __x, const _Sentinel& __y)
+ { return __y.__equal(__x); }
+      };
+
+      _Vp _M_base = _Vp();
+      [[no_unique_address]] __detail::__box<_Pred> _M_pred;
+      [[no_unique_address]] __detail::_CachedPosition<_Vp> _M_cached_begin;
+
+    public:
+      filter_view() requires (default_initializable<_Vp>
+         && default_initializable<_Pred>)
+ = default;
+
+      constexpr
+      filter_view(_Vp __base, _Pred __pred)
+ : _M_base(std::move(__base)), _M_pred(std::move(__pred))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr const _Pred&
+      pred() const
+      { return *_M_pred; }
+
+      constexpr _Iterator
+      begin()
+      {
+ if (_M_cached_begin._M_has_value())
+   return {this, _M_cached_begin._M_get(_M_base)};
+
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_pred.has_value()), false)) std::__glibcxx_assert_fail(); } while (false);
+ auto __it = ranges::find_if(ranges::begin(_M_base),
+        ranges::end(_M_base),
+        std::ref(*_M_pred));
+ _M_cached_begin._M_set(_M_base, __it);
+ return {this, std::move(__it)};
+      }
+
+      constexpr auto
+      end()
+      {
+ if constexpr (common_range<_Vp>)
+   return _Iterator{this, ranges::end(_M_base)};
+ else
+   return _Sentinel{this};
+      }
+    };
+
+  template<typename _Range, typename _Pred>
+    filter_view(_Range&&, _Pred) -> filter_view<views::all_t<_Range>, _Pred>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range, typename _Pred>
+ concept __can_filter_view
+   = requires { filter_view(std::declval<_Range>(), std::declval<_Pred>()); };
+    }
+
+    struct _Filter : __adaptor::_RangeAdaptor<_Filter>
+    {
+      template<viewable_range _Range, typename _Pred>
+ requires __detail::__can_filter_view<_Range, _Pred>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, _Pred&& __p) const
+ {
+   return filter_view(std::forward<_Range>(__r), std::forward<_Pred>(__p));
+ }
+
+      using _RangeAdaptor<_Filter>::operator();
+      static constexpr int _S_arity = 2;
+      static constexpr bool _S_has_simple_extra_args = true;
+    };
+
+    inline constexpr _Filter filter;
+  }
+
+
+
+
+  template<input_range _Vp, copy_constructible _Fp>
+
+    requires view<_Vp> && is_object_v<_Fp>
+      && regular_invocable<_Fp&, range_reference_t<_Vp>>
+      && std::__detail::__can_reference<invoke_result_t<_Fp&,
+       range_reference_t<_Vp>>>
+    class transform_view : public view_interface<transform_view<_Vp, _Fp>>
+    {
+    private:
+      template<bool _Const>
+ using _Base = __detail::__maybe_const_t<_Const, _Vp>;
+
+      template<bool _Const>
+ struct __iter_cat
+ { };
+
+      template<bool _Const>
+ requires forward_range<_Base<_Const>>
+ struct __iter_cat<_Const>
+ {
+ private:
+   static auto
+   _S_iter_cat()
+   {
+     using _Base = transform_view::_Base<_Const>;
+     using _Res = invoke_result_t<_Fp&, range_reference_t<_Base>>;
+     if constexpr (is_lvalue_reference_v<_Res>)
+       {
+  using _Cat
+    = typename iterator_traits<iterator_t<_Base>>::iterator_category;
+  if constexpr (derived_from<_Cat, contiguous_iterator_tag>)
+    return random_access_iterator_tag{};
+  else
+    return _Cat{};
+       }
+     else
+       return input_iterator_tag{};
+   }
+ public:
+   using iterator_category = decltype(_S_iter_cat());
+ };
+
+      template<bool _Const>
+ struct _Sentinel;
+
+      template<bool _Const>
+ struct _Iterator : __iter_cat<_Const>
+ {
+ private:
+   using _Parent = __detail::__maybe_const_t<_Const, transform_view>;
+   using _Base = transform_view::_Base<_Const>;
+
+   static auto
+   _S_iter_concept()
+   {
+     if constexpr (random_access_range<_Base>)
+       return random_access_iterator_tag{};
+     else if constexpr (bidirectional_range<_Base>)
+       return bidirectional_iterator_tag{};
+     else if constexpr (forward_range<_Base>)
+       return forward_iterator_tag{};
+     else
+       return input_iterator_tag{};
+   }
+
+   using _Base_iter = iterator_t<_Base>;
+
+   _Base_iter _M_current = _Base_iter();
+   _Parent* _M_parent = nullptr;
+
+ public:
+   using iterator_concept = decltype(_S_iter_concept());
+
+   using value_type
+     = remove_cvref_t<invoke_result_t<_Fp&, range_reference_t<_Base>>>;
+   using difference_type = range_difference_t<_Base>;
+
+   _Iterator() requires default_initializable<_Base_iter> = default;
+
+   constexpr
+   _Iterator(_Parent* __parent, _Base_iter __current)
+     : _M_current(std::move(__current)),
+       _M_parent(__parent)
+   { }
+
+   constexpr
+   _Iterator(_Iterator<!_Const> __i)
+     requires _Const
+       && convertible_to<iterator_t<_Vp>, _Base_iter>
+     : _M_current(std::move(__i._M_current)), _M_parent(__i._M_parent)
+   { }
+
+   constexpr const _Base_iter&
+   base() const & noexcept
+   { return _M_current; }
+
+   constexpr _Base_iter
+   base() &&
+   { return std::move(_M_current); }
+
+   constexpr decltype(auto)
+   operator*() const
+     noexcept(noexcept(std::__invoke(*_M_parent->_M_fun, *_M_current)))
+   { return std::__invoke(*_M_parent->_M_fun, *_M_current); }
+
+   constexpr _Iterator&
+   operator++()
+   {
+     ++_M_current;
+     return *this;
+   }
+
+   constexpr void
+   operator++(int)
+   { ++_M_current; }
+
+   constexpr _Iterator
+   operator++(int) requires forward_range<_Base>
+   {
+     auto __tmp = *this;
+     ++*this;
+     return __tmp;
+   }
+
+   constexpr _Iterator&
+   operator--() requires bidirectional_range<_Base>
+   {
+     --_M_current;
+     return *this;
+   }
+
+   constexpr _Iterator
+   operator--(int) requires bidirectional_range<_Base>
+   {
+     auto __tmp = *this;
+     --*this;
+     return __tmp;
+   }
+
+   constexpr _Iterator&
+   operator+=(difference_type __n) requires random_access_range<_Base>
+   {
+     _M_current += __n;
+     return *this;
+   }
+
+   constexpr _Iterator&
+   operator-=(difference_type __n) requires random_access_range<_Base>
+   {
+     _M_current -= __n;
+     return *this;
+   }
+
+   constexpr decltype(auto)
+   operator[](difference_type __n) const
+     requires random_access_range<_Base>
+   { return std::__invoke(*_M_parent->_M_fun, _M_current[__n]); }
+
+   friend constexpr bool
+   operator==(const _Iterator& __x, const _Iterator& __y)
+     requires equality_comparable<_Base_iter>
+   { return __x._M_current == __y._M_current; }
+
+   friend constexpr bool
+   operator<(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return __x._M_current < __y._M_current; }
+
+   friend constexpr bool
+   operator>(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return __y < __x; }
+
+   friend constexpr bool
+   operator<=(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return !(__y < __x); }
+
+   friend constexpr bool
+   operator>=(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return !(__x < __y); }
+
+
+   friend constexpr auto
+   operator<=>(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+       && three_way_comparable<_Base_iter>
+   { return __x._M_current <=> __y._M_current; }
+
+
+   friend constexpr _Iterator
+   operator+(_Iterator __i, difference_type __n)
+     requires random_access_range<_Base>
+   { return {__i._M_parent, __i._M_current + __n}; }
+
+   friend constexpr _Iterator
+   operator+(difference_type __n, _Iterator __i)
+     requires random_access_range<_Base>
+   { return {__i._M_parent, __i._M_current + __n}; }
+
+   friend constexpr _Iterator
+   operator-(_Iterator __i, difference_type __n)
+     requires random_access_range<_Base>
+   { return {__i._M_parent, __i._M_current - __n}; }
+
+
+
+   friend constexpr difference_type
+   operator-(const _Iterator& __x, const _Iterator& __y)
+     requires sized_sentinel_for<iterator_t<_Base>, iterator_t<_Base>>
+   { return __x._M_current - __y._M_current; }
+
+   friend constexpr decltype(auto)
+   iter_move(const _Iterator& __i) noexcept(noexcept(*__i))
+   {
+     if constexpr (is_lvalue_reference_v<decltype(*__i)>)
+       return std::move(*__i);
+     else
+       return *__i;
+   }
+
+   friend _Iterator<!_Const>;
+   template<bool> friend struct _Sentinel;
+ };
+
+      template<bool _Const>
+ struct _Sentinel
+ {
+ private:
+   using _Parent = __detail::__maybe_const_t<_Const, transform_view>;
+   using _Base = transform_view::_Base<_Const>;
+
+   template<bool _Const2>
+     constexpr auto
+     __distance_from(const _Iterator<_Const2>& __i) const
+     { return _M_end - __i._M_current; }
+
+   template<bool _Const2>
+     constexpr bool
+     __equal(const _Iterator<_Const2>& __i) const
+     { return __i._M_current == _M_end; }
+
+   sentinel_t<_Base> _M_end = sentinel_t<_Base>();
+
+ public:
+   _Sentinel() = default;
+
+   constexpr explicit
+   _Sentinel(sentinel_t<_Base> __end)
+     : _M_end(__end)
+   { }
+
+   constexpr
+   _Sentinel(_Sentinel<!_Const> __i)
+     requires _Const
+       && convertible_to<sentinel_t<_Vp>, sentinel_t<_Base>>
+     : _M_end(std::move(__i._M_end))
+   { }
+
+   constexpr sentinel_t<_Base>
+   base() const
+   { return _M_end; }
+
+   template<bool _Const2>
+     requires sentinel_for<sentinel_t<_Base>,
+         iterator_t<__detail::__maybe_const_t<_Const2, _Vp>>>
+     friend constexpr bool
+     operator==(const _Iterator<_Const2>& __x, const _Sentinel& __y)
+     { return __y.__equal(__x); }
+
+   template<bool _Const2,
+     typename _Base2 = __detail::__maybe_const_t<_Const2, _Vp>>
+     requires sized_sentinel_for<sentinel_t<_Base>, iterator_t<_Base2>>
+     friend constexpr range_difference_t<_Base2>
+     operator-(const _Iterator<_Const2>& __x, const _Sentinel& __y)
+     { return -__y.__distance_from(__x); }
+
+   template<bool _Const2,
+     typename _Base2 = __detail::__maybe_const_t<_Const2, _Vp>>
+     requires sized_sentinel_for<sentinel_t<_Base>, iterator_t<_Base2>>
+     friend constexpr range_difference_t<_Base2>
+     operator-(const _Sentinel& __y, const _Iterator<_Const2>& __x)
+     { return __y.__distance_from(__x); }
+
+   friend _Sentinel<!_Const>;
+ };
+
+      _Vp _M_base = _Vp();
+      [[no_unique_address]] __detail::__box<_Fp> _M_fun;
+
+    public:
+      transform_view() requires (default_initializable<_Vp>
+     && default_initializable<_Fp>)
+ = default;
+
+      constexpr
+      transform_view(_Vp __base, _Fp __fun)
+ : _M_base(std::move(__base)), _M_fun(std::move(__fun))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base ; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr _Iterator<false>
+      begin()
+      { return _Iterator<false>{this, ranges::begin(_M_base)}; }
+
+      constexpr _Iterator<true>
+      begin() const
+ requires range<const _Vp>
+   && regular_invocable<const _Fp&, range_reference_t<const _Vp>>
+      { return _Iterator<true>{this, ranges::begin(_M_base)}; }
+
+      constexpr _Sentinel<false>
+      end()
+      { return _Sentinel<false>{ranges::end(_M_base)}; }
+
+      constexpr _Iterator<false>
+      end() requires common_range<_Vp>
+      { return _Iterator<false>{this, ranges::end(_M_base)}; }
+
+      constexpr _Sentinel<true>
+      end() const
+ requires range<const _Vp>
+   && regular_invocable<const _Fp&, range_reference_t<const _Vp>>
+      { return _Sentinel<true>{ranges::end(_M_base)}; }
+
+      constexpr _Iterator<true>
+      end() const
+ requires common_range<const _Vp>
+   && regular_invocable<const _Fp&, range_reference_t<const _Vp>>
+      { return _Iterator<true>{this, ranges::end(_M_base)}; }
+
+      constexpr auto
+      size() requires sized_range<_Vp>
+      { return ranges::size(_M_base); }
+
+      constexpr auto
+      size() const requires sized_range<const _Vp>
+      { return ranges::size(_M_base); }
+    };
+
+  template<typename _Range, typename _Fp>
+    transform_view(_Range&&, _Fp) -> transform_view<views::all_t<_Range>, _Fp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range, typename _Fp>
+ concept __can_transform_view
+   = requires { transform_view(std::declval<_Range>(), std::declval<_Fp>()); };
+    }
+
+    struct _Transform : __adaptor::_RangeAdaptor<_Transform>
+    {
+      template<viewable_range _Range, typename _Fp>
+ requires __detail::__can_transform_view<_Range, _Fp>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, _Fp&& __f) const
+ {
+   return transform_view(std::forward<_Range>(__r), std::forward<_Fp>(__f));
+ }
+
+      using _RangeAdaptor<_Transform>::operator();
+      static constexpr int _S_arity = 2;
+      static constexpr bool _S_has_simple_extra_args = true;
+    };
+
+    inline constexpr _Transform transform;
+  }
+
+  template<view _Vp>
+    class take_view : public view_interface<take_view<_Vp>>
+    {
+    private:
+      template<bool _Const>
+ using _CI = counted_iterator<
+   iterator_t<__detail::__maybe_const_t<_Const, _Vp>>>;
+
+      template<bool _Const>
+ struct _Sentinel
+ {
+ private:
+   using _Base = __detail::__maybe_const_t<_Const, _Vp>;
+   sentinel_t<_Base> _M_end = sentinel_t<_Base>();
+
+ public:
+   _Sentinel() = default;
+
+   constexpr explicit
+   _Sentinel(sentinel_t<_Base> __end)
+     : _M_end(__end)
+   { }
+
+   constexpr
+   _Sentinel(_Sentinel<!_Const> __s)
+     requires _Const && convertible_to<sentinel_t<_Vp>, sentinel_t<_Base>>
+     : _M_end(std::move(__s._M_end))
+   { }
+
+   constexpr sentinel_t<_Base>
+   base() const
+   { return _M_end; }
+
+   friend constexpr bool
+   operator==(const _CI<_Const>& __y, const _Sentinel& __x)
+   { return __y.count() == 0 || __y.base() == __x._M_end; }
+
+   template<bool _OtherConst = !_Const,
+     typename _Base2 = __detail::__maybe_const_t<_OtherConst, _Vp>>
+     requires sentinel_for<sentinel_t<_Base>, iterator_t<_Base2>>
+   friend constexpr bool
+   operator==(const _CI<_OtherConst>& __y, const _Sentinel& __x)
+   { return __y.count() == 0 || __y.base() == __x._M_end; }
+
+   friend _Sentinel<!_Const>;
+ };
+
+      _Vp _M_base = _Vp();
+      range_difference_t<_Vp> _M_count = 0;
+
+    public:
+      take_view() requires default_initializable<_Vp> = default;
+
+      constexpr
+      take_view(_Vp __base, range_difference_t<_Vp> __count)
+ : _M_base(std::move(__base)), _M_count(std::move(__count))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr auto
+      begin() requires (!__detail::__simple_view<_Vp>)
+      {
+ if constexpr (sized_range<_Vp>)
+   {
+     if constexpr (random_access_range<_Vp>)
+       return ranges::begin(_M_base);
+     else
+       {
+  auto __sz = size();
+  return counted_iterator(ranges::begin(_M_base), __sz);
+       }
+   }
+ else
+   return counted_iterator(ranges::begin(_M_base), _M_count);
+      }
+
+      constexpr auto
+      begin() const requires range<const _Vp>
+      {
+ if constexpr (sized_range<const _Vp>)
+   {
+     if constexpr (random_access_range<const _Vp>)
+       return ranges::begin(_M_base);
+     else
+       {
+  auto __sz = size();
+  return counted_iterator(ranges::begin(_M_base), __sz);
+       }
+   }
+ else
+   return counted_iterator(ranges::begin(_M_base), _M_count);
+      }
+
+      constexpr auto
+      end() requires (!__detail::__simple_view<_Vp>)
+      {
+ if constexpr (sized_range<_Vp>)
+   {
+     if constexpr (random_access_range<_Vp>)
+       return ranges::begin(_M_base) + size();
+     else
+       return default_sentinel;
+   }
+ else
+   return _Sentinel<false>{ranges::end(_M_base)};
+      }
+
+      constexpr auto
+      end() const requires range<const _Vp>
+      {
+ if constexpr (sized_range<const _Vp>)
+   {
+     if constexpr (random_access_range<const _Vp>)
+       return ranges::begin(_M_base) + size();
+     else
+       return default_sentinel;
+   }
+ else
+   return _Sentinel<true>{ranges::end(_M_base)};
+      }
+
+      constexpr auto
+      size() requires sized_range<_Vp>
+      {
+ auto __n = ranges::size(_M_base);
+ return std::min(__n, static_cast<decltype(__n)>(_M_count));
+      }
+
+      constexpr auto
+      size() const requires sized_range<const _Vp>
+      {
+ auto __n = ranges::size(_M_base);
+ return std::min(__n, static_cast<decltype(__n)>(_M_count));
+      }
+    };
+
+
+
+
+  template<typename _Range>
+    take_view(_Range&&, range_difference_t<_Range>)
+      -> take_view<views::all_t<_Range>>;
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<take_view<_Tp>>
+      = enable_borrowed_range<_Tp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range>
+ inline constexpr bool __is_empty_view = false;
+
+      template<typename _Tp>
+ inline constexpr bool __is_empty_view<empty_view<_Tp>> = true;
+
+      template<typename _Range>
+ inline constexpr bool __is_basic_string_view = false;
+
+      template<typename _CharT, typename _Traits>
+ inline constexpr bool __is_basic_string_view<basic_string_view<_CharT, _Traits>>
+   = true;
+
+      using ranges::__detail::__is_subrange;
+
+      template<typename _Range>
+ inline constexpr bool __is_iota_view = false;
+
+      template<typename _Winc, typename _Bound>
+ inline constexpr bool __is_iota_view<iota_view<_Winc, _Bound>> = true;
+
+      template<typename _Range>
+ inline constexpr bool __is_repeat_view = false;
+
+      template<typename _Range>
+ constexpr auto
+ __take_of_repeat_view(_Range&&, range_difference_t<_Range>);
+
+      template<typename _Range, typename _Dp>
+ concept __can_take_view
+   = requires { take_view(std::declval<_Range>(), std::declval<_Dp>()); };
+    }
+
+    struct _Take : __adaptor::_RangeAdaptor<_Take>
+    {
+      template<viewable_range _Range, typename _Dp = range_difference_t<_Range>>
+ requires __detail::__can_take_view<_Range, _Dp>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, type_identity_t<_Dp> __n) const
+ {
+   using _Tp = remove_cvref_t<_Range>;
+   if constexpr (__detail::__is_empty_view<_Tp>)
+     return _Tp();
+   else if constexpr (random_access_range<_Tp>
+        && sized_range<_Tp>
+        && (std::__detail::__is_span<_Tp>
+     || __detail::__is_basic_string_view<_Tp>
+     || __detail::__is_subrange<_Tp>
+     || __detail::__is_iota_view<_Tp>))
+     {
+       __n = std::min<_Dp>(ranges::distance(__r), __n);
+       auto __begin = ranges::begin(__r);
+       auto __end = __begin + __n;
+       if constexpr (std::__detail::__is_span<_Tp>)
+  return span<typename _Tp::element_type>(__begin, __end);
+       else if constexpr (__detail::__is_basic_string_view<_Tp>)
+  return _Tp(__begin, __end);
+       else if constexpr (__detail::__is_subrange<_Tp>)
+  return subrange<iterator_t<_Tp>>(__begin, __end);
+       else
+  return iota_view(*__begin, *__end);
+     }
+   else if constexpr (__detail::__is_repeat_view<_Tp>)
+     return __detail::__take_of_repeat_view(std::forward<_Range>(__r), __n);
+   else
+     return take_view(std::forward<_Range>(__r), __n);
+ }
+
+      using _RangeAdaptor<_Take>::operator();
+      static constexpr int _S_arity = 2;
+
+
+
+      template<typename _Tp>
+ static constexpr bool _S_has_simple_extra_args
+   = ranges::__detail::__is_integer_like<_Tp>;
+    };
+
+    inline constexpr _Take take;
+  }
+
+  template<view _Vp, typename _Pred>
+    requires input_range<_Vp> && is_object_v<_Pred>
+      && indirect_unary_predicate<const _Pred, iterator_t<_Vp>>
+    class take_while_view : public view_interface<take_while_view<_Vp, _Pred>>
+    {
+      template<bool _Const>
+ struct _Sentinel
+ {
+ private:
+   using _Base = __detail::__maybe_const_t<_Const, _Vp>;
+
+   sentinel_t<_Base> _M_end = sentinel_t<_Base>();
+   const _Pred* _M_pred = nullptr;
+
+ public:
+   _Sentinel() = default;
+
+   constexpr explicit
+   _Sentinel(sentinel_t<_Base> __end, const _Pred* __pred)
+     : _M_end(__end), _M_pred(__pred)
+   { }
+
+   constexpr
+   _Sentinel(_Sentinel<!_Const> __s)
+     requires _Const && convertible_to<sentinel_t<_Vp>, sentinel_t<_Base>>
+     : _M_end(__s._M_end), _M_pred(__s._M_pred)
+   { }
+
+   constexpr sentinel_t<_Base>
+   base() const { return _M_end; }
+
+   friend constexpr bool
+   operator==(const iterator_t<_Base>& __x, const _Sentinel& __y)
+   { return __y._M_end == __x || !std::__invoke(*__y._M_pred, *__x); }
+
+   template<bool _OtherConst = !_Const,
+     typename _Base2 = __detail::__maybe_const_t<_OtherConst, _Vp>>
+     requires sentinel_for<sentinel_t<_Base>, iterator_t<_Base2>>
+   friend constexpr bool
+   operator==(const iterator_t<_Base2>& __x, const _Sentinel& __y)
+   { return __y._M_end == __x || !std::__invoke(*__y._M_pred, *__x); }
+
+   friend _Sentinel<!_Const>;
+ };
+
+      _Vp _M_base = _Vp();
+      [[no_unique_address]] __detail::__box<_Pred> _M_pred;
+
+    public:
+      take_while_view() requires (default_initializable<_Vp>
+      && default_initializable<_Pred>)
+ = default;
+
+      constexpr
+      take_while_view(_Vp __base, _Pred __pred)
+ : _M_base(std::move(__base)), _M_pred(std::move(__pred))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr const _Pred&
+      pred() const
+      { return *_M_pred; }
+
+      constexpr auto
+      begin() requires (!__detail::__simple_view<_Vp>)
+      { return ranges::begin(_M_base); }
+
+      constexpr auto
+      begin() const requires range<const _Vp>
+ && indirect_unary_predicate<const _Pred, iterator_t<const _Vp>>
+      { return ranges::begin(_M_base); }
+
+      constexpr auto
+      end() requires (!__detail::__simple_view<_Vp>)
+      { return _Sentinel<false>(ranges::end(_M_base),
+    std::__addressof(*_M_pred)); }
+
+      constexpr auto
+      end() const requires range<const _Vp>
+ && indirect_unary_predicate<const _Pred, iterator_t<const _Vp>>
+      { return _Sentinel<true>(ranges::end(_M_base),
+          std::__addressof(*_M_pred)); }
+    };
+
+  template<typename _Range, typename _Pred>
+    take_while_view(_Range&&, _Pred)
+      -> take_while_view<views::all_t<_Range>, _Pred>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range, typename _Pred>
+ concept __can_take_while_view
+   = requires { take_while_view(std::declval<_Range>(), std::declval<_Pred>()); };
+    }
+
+    struct _TakeWhile : __adaptor::_RangeAdaptor<_TakeWhile>
+    {
+      template<viewable_range _Range, typename _Pred>
+ requires __detail::__can_take_while_view<_Range, _Pred>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, _Pred&& __p) const
+ {
+   return take_while_view(std::forward<_Range>(__r), std::forward<_Pred>(__p));
+ }
+
+      using _RangeAdaptor<_TakeWhile>::operator();
+      static constexpr int _S_arity = 2;
+      static constexpr bool _S_has_simple_extra_args = true;
+    };
+
+    inline constexpr _TakeWhile take_while;
+  }
+
+  template<view _Vp>
+    class drop_view : public view_interface<drop_view<_Vp>>
+    {
+    private:
+      _Vp _M_base = _Vp();
+      range_difference_t<_Vp> _M_count = 0;
+
+
+
+      static constexpr bool _S_needs_cached_begin
+ = !(random_access_range<const _Vp> && sized_range<const _Vp>);
+      [[no_unique_address]]
+ __detail::__maybe_present_t<_S_needs_cached_begin,
+        __detail::_CachedPosition<_Vp>>
+          _M_cached_begin;
+
+    public:
+      drop_view() requires default_initializable<_Vp> = default;
+
+      constexpr
+      drop_view(_Vp __base, range_difference_t<_Vp> __count)
+ : _M_base(std::move(__base)), _M_count(__count)
+      { do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__count >= 0), false)) std::__glibcxx_assert_fail(); } while (false); }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+
+      constexpr auto
+      begin()
+ requires (!(__detail::__simple_view<_Vp>
+      && random_access_range<const _Vp>
+      && sized_range<const _Vp>))
+      {
+ if constexpr (_S_needs_cached_begin)
+   if (_M_cached_begin._M_has_value())
+     return _M_cached_begin._M_get(_M_base);
+
+ auto __it = ranges::next(ranges::begin(_M_base),
+     _M_count, ranges::end(_M_base));
+ if constexpr (_S_needs_cached_begin)
+   _M_cached_begin._M_set(_M_base, __it);
+ return __it;
+      }
+
+
+
+      constexpr auto
+      begin() const
+ requires random_access_range<const _Vp> && sized_range<const _Vp>
+      {
+ return ranges::next(ranges::begin(_M_base), _M_count,
+       ranges::end(_M_base));
+      }
+
+      constexpr auto
+      end() requires (!__detail::__simple_view<_Vp>)
+      { return ranges::end(_M_base); }
+
+      constexpr auto
+      end() const requires range<const _Vp>
+      { return ranges::end(_M_base); }
+
+      constexpr auto
+      size() requires sized_range<_Vp>
+      {
+ const auto __s = ranges::size(_M_base);
+ const auto __c = static_cast<decltype(__s)>(_M_count);
+ return __s < __c ? 0 : __s - __c;
+      }
+
+      constexpr auto
+      size() const requires sized_range<const _Vp>
+      {
+ const auto __s = ranges::size(_M_base);
+ const auto __c = static_cast<decltype(__s)>(_M_count);
+ return __s < __c ? 0 : __s - __c;
+      }
+    };
+
+  template<typename _Range>
+    drop_view(_Range&&, range_difference_t<_Range>)
+      -> drop_view<views::all_t<_Range>>;
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<drop_view<_Tp>>
+      = enable_borrowed_range<_Tp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range>
+ constexpr auto
+ __drop_of_repeat_view(_Range&&, range_difference_t<_Range>);
+
+      template<typename _Range, typename _Dp>
+ concept __can_drop_view
+   = requires { drop_view(std::declval<_Range>(), std::declval<_Dp>()); };
+    }
+
+    struct _Drop : __adaptor::_RangeAdaptor<_Drop>
+    {
+      template<viewable_range _Range, typename _Dp = range_difference_t<_Range>>
+ requires __detail::__can_drop_view<_Range, _Dp>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, type_identity_t<_Dp> __n) const
+ {
+   using _Tp = remove_cvref_t<_Range>;
+   if constexpr (__detail::__is_empty_view<_Tp>)
+     return _Tp();
+   else if constexpr (random_access_range<_Tp>
+        && sized_range<_Tp>
+        && (std::__detail::__is_span<_Tp>
+     || __detail::__is_basic_string_view<_Tp>
+     || __detail::__is_iota_view<_Tp>
+     || __detail::__is_subrange<_Tp>))
+     {
+       __n = std::min<_Dp>(ranges::distance(__r), __n);
+       auto __begin = ranges::begin(__r) + __n;
+       auto __end = ranges::end(__r);
+       if constexpr (std::__detail::__is_span<_Tp>)
+  return span<typename _Tp::element_type>(__begin, __end);
+       else if constexpr (__detail::__is_subrange<_Tp>)
+  {
+    if constexpr (_Tp::_S_store_size)
+      {
+        using ranges::__detail::__to_unsigned_like;
+        auto __m = ranges::distance(__r) - __n;
+        return _Tp(__begin, __end, __to_unsigned_like(__m));
+      }
+    else
+      return _Tp(__begin, __end);
+  }
+       else
+  return _Tp(__begin, __end);
+     }
+   else if constexpr (__detail::__is_repeat_view<_Tp>)
+     return __detail::__drop_of_repeat_view(std::forward<_Range>(__r), __n);
+   else
+     return drop_view(std::forward<_Range>(__r), __n);
+ }
+
+      using _RangeAdaptor<_Drop>::operator();
+      static constexpr int _S_arity = 2;
+      template<typename _Tp>
+ static constexpr bool _S_has_simple_extra_args
+   = _Take::_S_has_simple_extra_args<_Tp>;
+    };
+
+    inline constexpr _Drop drop;
+  }
+
+  template<view _Vp, typename _Pred>
+    requires input_range<_Vp> && is_object_v<_Pred>
+      && indirect_unary_predicate<const _Pred, iterator_t<_Vp>>
+    class drop_while_view : public view_interface<drop_while_view<_Vp, _Pred>>
+    {
+    private:
+      _Vp _M_base = _Vp();
+      [[no_unique_address]] __detail::__box<_Pred> _M_pred;
+      [[no_unique_address]] __detail::_CachedPosition<_Vp> _M_cached_begin;
+
+    public:
+      drop_while_view() requires (default_initializable<_Vp>
+      && default_initializable<_Pred>)
+ = default;
+
+      constexpr
+      drop_while_view(_Vp __base, _Pred __pred)
+ : _M_base(std::move(__base)), _M_pred(std::move(__pred))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr const _Pred&
+      pred() const
+      { return *_M_pred; }
+
+      constexpr auto
+      begin()
+      {
+ if (_M_cached_begin._M_has_value())
+   return _M_cached_begin._M_get(_M_base);
+
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_pred.has_value()), false)) std::__glibcxx_assert_fail(); } while (false);
+ auto __it = ranges::find_if_not(ranges::begin(_M_base),
+     ranges::end(_M_base),
+     std::cref(*_M_pred));
+ _M_cached_begin._M_set(_M_base, __it);
+ return __it;
+      }
+
+      constexpr auto
+      end()
+      { return ranges::end(_M_base); }
+    };
+
+  template<typename _Range, typename _Pred>
+    drop_while_view(_Range&&, _Pred)
+      -> drop_while_view<views::all_t<_Range>, _Pred>;
+
+  template<typename _Tp, typename _Pred>
+    inline constexpr bool enable_borrowed_range<drop_while_view<_Tp, _Pred>>
+      = enable_borrowed_range<_Tp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range, typename _Pred>
+ concept __can_drop_while_view
+   = requires { drop_while_view(std::declval<_Range>(), std::declval<_Pred>()); };
+    }
+
+    struct _DropWhile : __adaptor::_RangeAdaptor<_DropWhile>
+    {
+      template<viewable_range _Range, typename _Pred>
+ requires __detail::__can_drop_while_view<_Range, _Pred>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, _Pred&& __p) const
+ {
+   return drop_while_view(std::forward<_Range>(__r),
+     std::forward<_Pred>(__p));
+ }
+
+      using _RangeAdaptor<_DropWhile>::operator();
+      static constexpr int _S_arity = 2;
+      static constexpr bool _S_has_simple_extra_args = true;
+    };
+
+    inline constexpr _DropWhile drop_while;
+  }
+
+  namespace __detail
+  {
+    template<typename _Tp>
+      constexpr _Tp&
+      __as_lvalue(_Tp&& __t)
+      { return static_cast<_Tp&>(__t); }
+  }
+
+  template<input_range _Vp>
+    requires view<_Vp> && input_range<range_reference_t<_Vp>>
+    class join_view : public view_interface<join_view<_Vp>>
+    {
+    private:
+      using _InnerRange = range_reference_t<_Vp>;
+
+      template<bool _Const>
+ using _Base = __detail::__maybe_const_t<_Const, _Vp>;
+
+      template<bool _Const>
+ using _Outer_iter = iterator_t<_Base<_Const>>;
+
+      template<bool _Const>
+ using _Inner_iter = iterator_t<range_reference_t<_Base<_Const>>>;
+
+      template<bool _Const>
+ static constexpr bool _S_ref_is_glvalue
+   = is_reference_v<range_reference_t<_Base<_Const>>>;
+
+      template<bool _Const>
+ struct __iter_cat
+ { };
+
+      template<bool _Const>
+ requires _S_ref_is_glvalue<_Const>
+   && forward_range<_Base<_Const>>
+   && forward_range<range_reference_t<_Base<_Const>>>
+ struct __iter_cat<_Const>
+ {
+ private:
+   static constexpr auto
+   _S_iter_cat()
+   {
+     using _Outer_iter = join_view::_Outer_iter<_Const>;
+     using _Inner_iter = join_view::_Inner_iter<_Const>;
+     using _OuterCat = typename iterator_traits<_Outer_iter>::iterator_category;
+     using _InnerCat = typename iterator_traits<_Inner_iter>::iterator_category;
+     if constexpr (derived_from<_OuterCat, bidirectional_iterator_tag>
+     && derived_from<_InnerCat, bidirectional_iterator_tag>
+     && common_range<range_reference_t<_Base<_Const>>>)
+       return bidirectional_iterator_tag{};
+     else if constexpr (derived_from<_OuterCat, forward_iterator_tag>
+          && derived_from<_InnerCat, forward_iterator_tag>)
+       return forward_iterator_tag{};
+     else
+       return input_iterator_tag{};
+   }
+ public:
+   using iterator_category = decltype(_S_iter_cat());
+ };
+
+      template<bool _Const>
+ struct _Sentinel;
+
+      template<bool _Const>
+ struct _Iterator : __iter_cat<_Const>
+ {
+ private:
+   using _Parent = __detail::__maybe_const_t<_Const, join_view>;
+   using _Base = join_view::_Base<_Const>;
+
+   friend join_view;
+
+   static constexpr bool _S_ref_is_glvalue
+     = join_view::_S_ref_is_glvalue<_Const>;
+
+   constexpr void
+   _M_satisfy()
+   {
+     auto __update_inner = [this] (const iterator_t<_Base>& __x) -> auto&& {
+       if constexpr (_S_ref_is_glvalue)
+  return *__x;
+       else
+  return _M_parent->_M_inner._M_emplace_deref(__x);
+     };
+
+     _Outer_iter& __outer = _M_get_outer();
+     for (; __outer != ranges::end(_M_parent->_M_base); ++__outer)
+       {
+  auto&& __inner = __update_inner(__outer);
+  _M_inner = ranges::begin(__inner);
+  if (_M_inner != ranges::end(__inner))
+    return;
+       }
+
+     if constexpr (_S_ref_is_glvalue)
+       _M_inner.reset();
+   }
+
+   static constexpr auto
+   _S_iter_concept()
+   {
+     if constexpr (_S_ref_is_glvalue
+     && bidirectional_range<_Base>
+     && bidirectional_range<range_reference_t<_Base>>
+     && common_range<range_reference_t<_Base>>)
+       return bidirectional_iterator_tag{};
+     else if constexpr (_S_ref_is_glvalue
+          && forward_range<_Base>
+          && forward_range<range_reference_t<_Base>>)
+       return forward_iterator_tag{};
+     else
+       return input_iterator_tag{};
+   }
+
+   using _Outer_iter = join_view::_Outer_iter<_Const>;
+   using _Inner_iter = join_view::_Inner_iter<_Const>;
+
+   constexpr _Outer_iter&
+   _M_get_outer()
+   {
+     if constexpr (forward_range<_Base>)
+       return _M_outer;
+     else
+       return *_M_parent->_M_outer;
+   }
+
+   constexpr const _Outer_iter&
+   _M_get_outer() const
+   {
+     if constexpr (forward_range<_Base>)
+       return _M_outer;
+     else
+       return *_M_parent->_M_outer;
+   }
+
+   constexpr
+   _Iterator(_Parent* __parent, _Outer_iter __outer) requires forward_range<_Base>
+     : _M_outer(std::move(__outer)), _M_parent(__parent)
+   { _M_satisfy(); }
+
+   constexpr explicit
+   _Iterator(_Parent* __parent) requires (!forward_range<_Base>)
+     : _M_parent(__parent)
+   { _M_satisfy(); }
+
+   [[no_unique_address]]
+     __detail::__maybe_present_t<forward_range<_Base>, _Outer_iter> _M_outer;
+   optional<_Inner_iter> _M_inner;
+   _Parent* _M_parent = nullptr;
+
+ public:
+   using iterator_concept = decltype(_S_iter_concept());
+
+   using value_type = range_value_t<range_reference_t<_Base>>;
+   using difference_type
+     = common_type_t<range_difference_t<_Base>,
+       range_difference_t<range_reference_t<_Base>>>;
+
+   _Iterator() = default;
+
+   constexpr
+   _Iterator(_Iterator<!_Const> __i)
+     requires _Const
+       && convertible_to<iterator_t<_Vp>, _Outer_iter>
+       && convertible_to<iterator_t<_InnerRange>, _Inner_iter>
+     : _M_outer(std::move(__i._M_outer)), _M_inner(std::move(__i._M_inner)),
+       _M_parent(__i._M_parent)
+   { }
+
+   constexpr decltype(auto)
+   operator*() const
+   { return **_M_inner; }
+
+
+
+   constexpr _Inner_iter
+   operator->() const
+     requires __detail::__has_arrow<_Inner_iter>
+       && copyable<_Inner_iter>
+   { return *_M_inner; }
+
+   constexpr _Iterator&
+   operator++()
+   {
+     auto&& __inner_range = [this] () -> auto&& {
+       if constexpr (_S_ref_is_glvalue)
+  return *_M_get_outer();
+       else
+  return *_M_parent->_M_inner;
+     }();
+     if (++*_M_inner == ranges::end(__inner_range))
+       {
+  ++_M_get_outer();
+  _M_satisfy();
+       }
+     return *this;
+   }
+
+   constexpr void
+   operator++(int)
+   { ++*this; }
+
+   constexpr _Iterator
+   operator++(int)
+     requires _S_ref_is_glvalue && forward_range<_Base>
+       && forward_range<range_reference_t<_Base>>
+   {
+     auto __tmp = *this;
+     ++*this;
+     return __tmp;
+   }
+
+   constexpr _Iterator&
+   operator--()
+     requires _S_ref_is_glvalue && bidirectional_range<_Base>
+       && bidirectional_range<range_reference_t<_Base>>
+       && common_range<range_reference_t<_Base>>
+   {
+     if (_M_outer == ranges::end(_M_parent->_M_base))
+       _M_inner = ranges::end(__detail::__as_lvalue(*--_M_outer));
+     while (*_M_inner == ranges::begin(__detail::__as_lvalue(*_M_outer)))
+       *_M_inner = ranges::end(__detail::__as_lvalue(*--_M_outer));
+     --*_M_inner;
+     return *this;
+   }
+
+   constexpr _Iterator
+   operator--(int)
+     requires _S_ref_is_glvalue && bidirectional_range<_Base>
+       && bidirectional_range<range_reference_t<_Base>>
+       && common_range<range_reference_t<_Base>>
+   {
+     auto __tmp = *this;
+     --*this;
+     return __tmp;
+   }
+
+   friend constexpr bool
+   operator==(const _Iterator& __x, const _Iterator& __y)
+     requires _S_ref_is_glvalue
+       && forward_range<_Base>
+       && equality_comparable<_Inner_iter>
+   {
+     return (__x._M_outer == __y._M_outer
+      && __x._M_inner == __y._M_inner);
+   }
+
+   friend constexpr decltype(auto)
+   iter_move(const _Iterator& __i)
+   noexcept(noexcept(ranges::iter_move(*__i._M_inner)))
+   { return ranges::iter_move(*__i._M_inner); }
+
+   friend constexpr void
+   iter_swap(const _Iterator& __x, const _Iterator& __y)
+     noexcept(noexcept(ranges::iter_swap(*__x._M_inner, *__y._M_inner)))
+     requires indirectly_swappable<_Inner_iter>
+   { return ranges::iter_swap(*__x._M_inner, *__y._M_inner); }
+
+   friend _Iterator<!_Const>;
+   template<bool> friend struct _Sentinel;
+ };
+
+      template<bool _Const>
+ struct _Sentinel
+ {
+ private:
+   using _Parent = __detail::__maybe_const_t<_Const, join_view>;
+   using _Base = join_view::_Base<_Const>;
+
+   template<bool _Const2>
+     constexpr bool
+     __equal(const _Iterator<_Const2>& __i) const
+     { return __i._M_get_outer() == _M_end; }
+
+   sentinel_t<_Base> _M_end = sentinel_t<_Base>();
+
+ public:
+   _Sentinel() = default;
+
+   constexpr explicit
+   _Sentinel(_Parent* __parent)
+     : _M_end(ranges::end(__parent->_M_base))
+   { }
+
+   constexpr
+   _Sentinel(_Sentinel<!_Const> __s)
+     requires _Const && convertible_to<sentinel_t<_Vp>, sentinel_t<_Base>>
+     : _M_end(std::move(__s._M_end))
+   { }
+
+   template<bool _Const2>
+     requires sentinel_for<sentinel_t<_Base>,
+         iterator_t<__detail::__maybe_const_t<_Const2, _Vp>>>
+     friend constexpr bool
+     operator==(const _Iterator<_Const2>& __x, const _Sentinel& __y)
+     { return __y.__equal(__x); }
+
+   friend _Sentinel<!_Const>;
+ };
+
+      _Vp _M_base = _Vp();
+      [[no_unique_address]]
+ __detail::__maybe_present_t<!forward_range<_Vp>,
+   __detail::__non_propagating_cache<iterator_t<_Vp>>> _M_outer;
+      [[no_unique_address]]
+ __detail::__non_propagating_cache<remove_cv_t<_InnerRange>> _M_inner;
+
+    public:
+      join_view() requires default_initializable<_Vp> = default;
+
+      constexpr explicit
+      join_view(_Vp __base)
+ : _M_base(std::move(__base))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr auto
+      begin()
+      {
+ if constexpr (forward_range<_Vp>)
+   {
+     constexpr bool __use_const
+       = (__detail::__simple_view<_Vp>
+   && is_reference_v<range_reference_t<_Vp>>);
+     return _Iterator<__use_const>{this, ranges::begin(_M_base)};
+   }
+ else
+   {
+     _M_outer = ranges::begin(_M_base);
+     return _Iterator<false>{this};
+   }
+      }
+
+      constexpr auto
+      begin() const
+ requires forward_range<const _Vp>
+   && is_reference_v<range_reference_t<const _Vp>>
+   && input_range<range_reference_t<const _Vp>>
+      {
+ return _Iterator<true>{this, ranges::begin(_M_base)};
+      }
+
+      constexpr auto
+      end()
+      {
+ if constexpr (forward_range<_Vp> && is_reference_v<_InnerRange>
+        && forward_range<_InnerRange>
+        && common_range<_Vp> && common_range<_InnerRange>)
+   return _Iterator<__detail::__simple_view<_Vp>>{this,
+        ranges::end(_M_base)};
+ else
+   return _Sentinel<__detail::__simple_view<_Vp>>{this};
+      }
+
+      constexpr auto
+      end() const
+ requires forward_range<const _Vp>
+   && is_reference_v<range_reference_t<const _Vp>>
+   && input_range<range_reference_t<const _Vp>>
+      {
+ if constexpr (is_reference_v<range_reference_t<const _Vp>>
+        && forward_range<range_reference_t<const _Vp>>
+        && common_range<const _Vp>
+        && common_range<range_reference_t<const _Vp>>)
+   return _Iterator<true>{this, ranges::end(_M_base)};
+ else
+   return _Sentinel<true>{this};
+      }
+    };
+
+  template<typename _Range>
+    explicit join_view(_Range&&) -> join_view<views::all_t<_Range>>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range>
+ concept __can_join_view
+   = requires { join_view<all_t<_Range>>{std::declval<_Range>()}; };
+    }
+
+    struct _Join : __adaptor::_RangeAdaptorClosure<_Join>
+    {
+      template<viewable_range _Range>
+ requires __detail::__can_join_view<_Range>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r) const
+ {
+
+
+   return join_view<all_t<_Range>>{std::forward<_Range>(__r)};
+ }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+
+    inline constexpr _Join join;
+  }
+
+  namespace __detail
+  {
+    template<auto>
+      struct __require_constant;
+
+    template<typename _Range>
+      concept __tiny_range = sized_range<_Range>
+ && requires
+    { typename __require_constant<remove_reference_t<_Range>::size()>; }
+ && (remove_reference_t<_Range>::size() <= 1);
+
+    template<typename _Base>
+      struct __lazy_split_view_outer_iter_cat
+      { };
+
+    template<forward_range _Base>
+      struct __lazy_split_view_outer_iter_cat<_Base>
+      { using iterator_category = input_iterator_tag; };
+
+    template<typename _Base>
+      struct __lazy_split_view_inner_iter_cat
+      { };
+
+    template<forward_range _Base>
+      struct __lazy_split_view_inner_iter_cat<_Base>
+      {
+      private:
+ static constexpr auto
+ _S_iter_cat()
+ {
+   using _Cat = typename iterator_traits<iterator_t<_Base>>::iterator_category;
+   if constexpr (derived_from<_Cat, forward_iterator_tag>)
+     return forward_iterator_tag{};
+   else
+     return _Cat{};
+ }
+      public:
+ using iterator_category = decltype(_S_iter_cat());
+      };
+  }
+
+  template<input_range _Vp, forward_range _Pattern>
+    requires view<_Vp> && view<_Pattern>
+      && indirectly_comparable<iterator_t<_Vp>, iterator_t<_Pattern>,
+          ranges::equal_to>
+      && (forward_range<_Vp> || __detail::__tiny_range<_Pattern>)
+    class lazy_split_view : public view_interface<lazy_split_view<_Vp, _Pattern>>
+    {
+    private:
+      template<bool _Const>
+ using _Base = __detail::__maybe_const_t<_Const, _Vp>;
+
+      template<bool _Const>
+ struct _InnerIter;
+
+      template<bool _Const>
+ struct _OuterIter
+   : __detail::__lazy_split_view_outer_iter_cat<_Base<_Const>>
+ {
+ private:
+   using _Parent = __detail::__maybe_const_t<_Const, lazy_split_view>;
+   using _Base = lazy_split_view::_Base<_Const>;
+
+   constexpr bool
+   __at_end() const
+   { return __current() == ranges::end(_M_parent->_M_base) && !_M_trailing_empty; }
+
+
+
+
+
+   constexpr auto&
+   __current() noexcept
+   {
+     if constexpr (forward_range<_Vp>)
+       return _M_current;
+     else
+       return *_M_parent->_M_current;
+   }
+
+   constexpr auto&
+   __current() const noexcept
+   {
+     if constexpr (forward_range<_Vp>)
+       return _M_current;
+     else
+       return *_M_parent->_M_current;
+   }
+
+   _Parent* _M_parent = nullptr;
+
+   [[no_unique_address]]
+     __detail::__maybe_present_t<forward_range<_Vp>,
+     iterator_t<_Base>> _M_current;
+   bool _M_trailing_empty = false;
+
+ public:
+   using iterator_concept = __conditional_t<forward_range<_Base>,
+         forward_iterator_tag,
+         input_iterator_tag>;
+
+   using difference_type = range_difference_t<_Base>;
+
+   struct value_type : view_interface<value_type>
+   {
+   private:
+     _OuterIter _M_i = _OuterIter();
+
+   public:
+     value_type() = default;
+
+     constexpr explicit
+     value_type(_OuterIter __i)
+       : _M_i(std::move(__i))
+     { }
+
+     constexpr _InnerIter<_Const>
+     begin() const
+     { return _InnerIter<_Const>{_M_i}; }
+
+     constexpr default_sentinel_t
+     end() const noexcept
+     { return default_sentinel; }
+   };
+
+   _OuterIter() = default;
+
+   constexpr explicit
+   _OuterIter(_Parent* __parent) requires (!forward_range<_Base>)
+     : _M_parent(__parent)
+   { }
+
+   constexpr
+   _OuterIter(_Parent* __parent, iterator_t<_Base> __current)
+     requires forward_range<_Base>
+     : _M_parent(__parent),
+       _M_current(std::move(__current))
+   { }
+
+   constexpr
+   _OuterIter(_OuterIter<!_Const> __i)
+     requires _Const
+       && convertible_to<iterator_t<_Vp>, iterator_t<_Base>>
+     : _M_parent(__i._M_parent), _M_current(std::move(__i._M_current)),
+       _M_trailing_empty(__i._M_trailing_empty)
+   { }
+
+   constexpr value_type
+   operator*() const
+   { return value_type{*this}; }
+
+   constexpr _OuterIter&
+   operator++()
+   {
+
+
+     const auto __end = ranges::end(_M_parent->_M_base);
+     if (__current() == __end)
+       {
+  _M_trailing_empty = false;
+  return *this;
+       }
+     const auto [__pbegin, __pend] = subrange{_M_parent->_M_pattern};
+     if (__pbegin == __pend)
+       ++__current();
+     else if constexpr (__detail::__tiny_range<_Pattern>)
+       {
+  __current() = ranges::find(std::move(__current()), __end,
+        *__pbegin);
+  if (__current() != __end)
+    {
+      ++__current();
+      if (__current() == __end)
+        _M_trailing_empty = true;
+    }
+       }
+     else
+       do
+  {
+    auto [__b, __p]
+      = ranges::mismatch(__current(), __end, __pbegin, __pend);
+    if (__p == __pend)
+      {
+        __current() = __b;
+        if (__current() == __end)
+   _M_trailing_empty = true;
+        break;
+      }
+  } while (++__current() != __end);
+     return *this;
+   }
+
+   constexpr decltype(auto)
+   operator++(int)
+   {
+     if constexpr (forward_range<_Base>)
+       {
+  auto __tmp = *this;
+  ++*this;
+  return __tmp;
+       }
+     else
+       ++*this;
+   }
+
+   friend constexpr bool
+   operator==(const _OuterIter& __x, const _OuterIter& __y)
+     requires forward_range<_Base>
+   {
+     return __x._M_current == __y._M_current
+       && __x._M_trailing_empty == __y._M_trailing_empty;
+   }
+
+   friend constexpr bool
+   operator==(const _OuterIter& __x, default_sentinel_t)
+   { return __x.__at_end(); };
+
+   friend _OuterIter<!_Const>;
+   friend _InnerIter<_Const>;
+ };
+
+      template<bool _Const>
+ struct _InnerIter
+   : __detail::__lazy_split_view_inner_iter_cat<_Base<_Const>>
+ {
+ private:
+   using _Base = lazy_split_view::_Base<_Const>;
+
+   constexpr bool
+   __at_end() const
+   {
+     auto [__pcur, __pend] = subrange{_M_i._M_parent->_M_pattern};
+     auto __end = ranges::end(_M_i._M_parent->_M_base);
+     if constexpr (__detail::__tiny_range<_Pattern>)
+       {
+  const auto& __cur = _M_i_current();
+  if (__cur == __end)
+    return true;
+  if (__pcur == __pend)
+    return _M_incremented;
+  return *__cur == *__pcur;
+       }
+     else
+       {
+  auto __cur = _M_i_current();
+  if (__cur == __end)
+    return true;
+  if (__pcur == __pend)
+    return _M_incremented;
+  do
+    {
+      if (*__cur != *__pcur)
+        return false;
+      if (++__pcur == __pend)
+        return true;
+    } while (++__cur != __end);
+  return false;
+       }
+   }
+
+   constexpr auto&
+   _M_i_current() noexcept
+   { return _M_i.__current(); }
+
+   constexpr auto&
+   _M_i_current() const noexcept
+   { return _M_i.__current(); }
+
+   _OuterIter<_Const> _M_i = _OuterIter<_Const>();
+   bool _M_incremented = false;
+
+ public:
+   using iterator_concept
+     = typename _OuterIter<_Const>::iterator_concept;
+
+   using value_type = range_value_t<_Base>;
+   using difference_type = range_difference_t<_Base>;
+
+   _InnerIter() = default;
+
+   constexpr explicit
+   _InnerIter(_OuterIter<_Const> __i)
+     : _M_i(std::move(__i))
+   { }
+
+   constexpr const iterator_t<_Base>&
+   base() const& noexcept
+   { return _M_i_current(); }
+
+   constexpr iterator_t<_Base>
+   base() && requires forward_range<_Vp>
+   { return std::move(_M_i_current()); }
+
+   constexpr decltype(auto)
+   operator*() const
+   { return *_M_i_current(); }
+
+   constexpr _InnerIter&
+   operator++()
+   {
+     _M_incremented = true;
+     if constexpr (!forward_range<_Base>)
+       if constexpr (_Pattern::size() == 0)
+  return *this;
+     ++_M_i_current();
+     return *this;
+   }
+
+   constexpr decltype(auto)
+   operator++(int)
+   {
+     if constexpr (forward_range<_Base>)
+       {
+  auto __tmp = *this;
+  ++*this;
+  return __tmp;
+       }
+     else
+       ++*this;
+   }
+
+   friend constexpr bool
+   operator==(const _InnerIter& __x, const _InnerIter& __y)
+     requires forward_range<_Base>
+   { return __x._M_i == __y._M_i; }
+
+   friend constexpr bool
+   operator==(const _InnerIter& __x, default_sentinel_t)
+   { return __x.__at_end(); }
+
+   friend constexpr decltype(auto)
+   iter_move(const _InnerIter& __i)
+     noexcept(noexcept(ranges::iter_move(__i._M_i_current())))
+   { return ranges::iter_move(__i._M_i_current()); }
+
+   friend constexpr void
+   iter_swap(const _InnerIter& __x, const _InnerIter& __y)
+     noexcept(noexcept(ranges::iter_swap(__x._M_i_current(),
+      __y._M_i_current())))
+     requires indirectly_swappable<iterator_t<_Base>>
+   { ranges::iter_swap(__x._M_i_current(), __y._M_i_current()); }
+ };
+
+      _Vp _M_base = _Vp();
+      _Pattern _M_pattern = _Pattern();
+      [[no_unique_address]]
+ __detail::__maybe_present_t<!forward_range<_Vp>,
+   __detail::__non_propagating_cache<iterator_t<_Vp>>> _M_current;
+
+
+    public:
+      lazy_split_view() requires (default_initializable<_Vp>
+      && default_initializable<_Pattern>)
+ = default;
+
+      constexpr
+      lazy_split_view(_Vp __base, _Pattern __pattern)
+ : _M_base(std::move(__base)), _M_pattern(std::move(__pattern))
+      { }
+
+      template<input_range _Range>
+ requires constructible_from<_Vp, views::all_t<_Range>>
+   && constructible_from<_Pattern, single_view<range_value_t<_Range>>>
+ constexpr
+ lazy_split_view(_Range&& __r, range_value_t<_Range> __e)
+   : _M_base(views::all(std::forward<_Range>(__r))),
+     _M_pattern(views::single(std::move(__e)))
+ { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr auto
+      begin()
+      {
+ if constexpr (forward_range<_Vp>)
+   {
+     constexpr bool __simple
+       = __detail::__simple_view<_Vp> && __detail::__simple_view<_Pattern>;
+     return _OuterIter<__simple>{this, ranges::begin(_M_base)};
+   }
+ else
+   {
+     _M_current = ranges::begin(_M_base);
+     return _OuterIter<false>{this};
+   }
+      }
+
+      constexpr auto
+      begin() const requires forward_range<_Vp> && forward_range<const _Vp>
+      {
+ return _OuterIter<true>{this, ranges::begin(_M_base)};
+      }
+
+      constexpr auto
+      end() requires forward_range<_Vp> && common_range<_Vp>
+      {
+ constexpr bool __simple
+   = __detail::__simple_view<_Vp> && __detail::__simple_view<_Pattern>;
+ return _OuterIter<__simple>{this, ranges::end(_M_base)};
+      }
+
+      constexpr auto
+      end() const
+      {
+ if constexpr (forward_range<_Vp>
+        && forward_range<const _Vp>
+        && common_range<const _Vp>)
+   return _OuterIter<true>{this, ranges::end(_M_base)};
+ else
+   return default_sentinel;
+      }
+    };
+
+  template<typename _Range, typename _Pattern>
+    lazy_split_view(_Range&&, _Pattern&&)
+      -> lazy_split_view<views::all_t<_Range>, views::all_t<_Pattern>>;
+
+  template<input_range _Range>
+    lazy_split_view(_Range&&, range_value_t<_Range>)
+      -> lazy_split_view<views::all_t<_Range>, single_view<range_value_t<_Range>>>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range, typename _Pattern>
+ concept __can_lazy_split_view
+   = requires { lazy_split_view(std::declval<_Range>(), std::declval<_Pattern>()); };
+    }
+
+    struct _LazySplit : __adaptor::_RangeAdaptor<_LazySplit>
+    {
+      template<viewable_range _Range, typename _Pattern>
+ requires __detail::__can_lazy_split_view<_Range, _Pattern>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, _Pattern&& __f) const
+ {
+   return lazy_split_view(std::forward<_Range>(__r), std::forward<_Pattern>(__f));
+ }
+
+      using _RangeAdaptor<_LazySplit>::operator();
+      static constexpr int _S_arity = 2;
+
+
+
+
+      template<typename _Pattern>
+ static constexpr bool _S_has_simple_extra_args
+   = is_scalar_v<_Pattern> || (view<_Pattern>
+          && copy_constructible<_Pattern>);
+    };
+
+    inline constexpr _LazySplit lazy_split;
+  }
+
+  template<forward_range _Vp, forward_range _Pattern>
+    requires view<_Vp> && view<_Pattern>
+      && indirectly_comparable<iterator_t<_Vp>, iterator_t<_Pattern>,
+          ranges::equal_to>
+  class split_view : public view_interface<split_view<_Vp, _Pattern>>
+  {
+  private:
+    _Vp _M_base = _Vp();
+    _Pattern _M_pattern = _Pattern();
+    __detail::__non_propagating_cache<subrange<iterator_t<_Vp>>> _M_cached_begin;
+
+    struct _Iterator;
+    struct _Sentinel;
+
+  public:
+    split_view() requires (default_initializable<_Vp>
+      && default_initializable<_Pattern>)
+      = default;
+
+    constexpr
+    split_view(_Vp __base, _Pattern __pattern)
+      : _M_base(std::move(__base)), _M_pattern(std::move(__pattern))
+    { }
+
+    template<forward_range _Range>
+      requires constructible_from<_Vp, views::all_t<_Range>>
+ && constructible_from<_Pattern, single_view<range_value_t<_Range>>>
+    constexpr
+    split_view(_Range&& __r, range_value_t<_Range> __e)
+      : _M_base(views::all(std::forward<_Range>(__r))),
+ _M_pattern(views::single(std::move(__e)))
+    { }
+
+    constexpr _Vp
+    base() const& requires copy_constructible<_Vp>
+    { return _M_base; }
+
+    constexpr _Vp
+    base() &&
+    { return std::move(_M_base); }
+
+    constexpr _Iterator
+    begin()
+    {
+      if (!_M_cached_begin)
+ _M_cached_begin = _M_find_next(ranges::begin(_M_base));
+      return {this, ranges::begin(_M_base), *_M_cached_begin};
+    }
+
+    constexpr auto
+    end()
+    {
+      if constexpr (common_range<_Vp>)
+ return _Iterator{this, ranges::end(_M_base), {}};
+      else
+ return _Sentinel{this};
+    }
+
+    constexpr subrange<iterator_t<_Vp>>
+    _M_find_next(iterator_t<_Vp> __it)
+    {
+      auto [__b, __e] = ranges::search(subrange(__it, ranges::end(_M_base)), _M_pattern);
+      if (__b != ranges::end(_M_base) && ranges::empty(_M_pattern))
+ {
+   ++__b;
+   ++__e;
+ }
+      return {__b, __e};
+    }
+
+  private:
+    struct _Iterator
+    {
+    private:
+      split_view* _M_parent = nullptr;
+      iterator_t<_Vp> _M_cur = iterator_t<_Vp>();
+      subrange<iterator_t<_Vp>> _M_next = subrange<iterator_t<_Vp>>();
+      bool _M_trailing_empty = false;
+
+      friend struct _Sentinel;
+
+    public:
+      using iterator_concept = forward_iterator_tag;
+      using iterator_category = input_iterator_tag;
+      using value_type = subrange<iterator_t<_Vp>>;
+      using difference_type = range_difference_t<_Vp>;
+
+      _Iterator() = default;
+
+      constexpr
+      _Iterator(split_view* __parent,
+  iterator_t<_Vp> __current,
+  subrange<iterator_t<_Vp>> __next)
+ : _M_parent(__parent),
+   _M_cur(std::move(__current)),
+   _M_next(std::move(__next))
+      { }
+
+      constexpr iterator_t<_Vp>
+      base() const
+      { return _M_cur; }
+
+      constexpr value_type
+      operator*() const
+      { return {_M_cur, _M_next.begin()}; }
+
+      constexpr _Iterator&
+      operator++()
+      {
+ _M_cur = _M_next.begin();
+ if (_M_cur != ranges::end(_M_parent->_M_base))
+   {
+     _M_cur = _M_next.end();
+     if (_M_cur == ranges::end(_M_parent->_M_base))
+       {
+  _M_trailing_empty = true;
+  _M_next = {_M_cur, _M_cur};
+       }
+     else
+       _M_next = _M_parent->_M_find_next(_M_cur);
+   }
+ else
+   _M_trailing_empty = false;
+ return *this;
+      }
+
+      constexpr _Iterator
+      operator++(int)
+      {
+ auto __tmp = *this;
+ ++*this;
+ return __tmp;
+      }
+
+      friend constexpr bool
+      operator==(const _Iterator& __x, const _Iterator& __y)
+      {
+ return __x._M_cur == __y._M_cur
+   && __x._M_trailing_empty == __y._M_trailing_empty;
+      }
+    };
+
+    struct _Sentinel
+    {
+    private:
+      sentinel_t<_Vp> _M_end = sentinel_t<_Vp>();
+
+      constexpr bool
+      _M_equal(const _Iterator& __x) const
+      { return __x._M_cur == _M_end && !__x._M_trailing_empty; }
+
+    public:
+      _Sentinel() = default;
+
+      constexpr explicit
+      _Sentinel(split_view* __parent)
+ : _M_end(ranges::end(__parent->_M_base))
+      { }
+
+      friend constexpr bool
+      operator==(const _Iterator& __x, const _Sentinel& __y)
+      { return __y._M_equal(__x); }
+    };
+  };
+
+  template<typename _Range, typename _Pattern>
+    split_view(_Range&&, _Pattern&&)
+      -> split_view<views::all_t<_Range>, views::all_t<_Pattern>>;
+
+  template<forward_range _Range>
+    split_view(_Range&&, range_value_t<_Range>)
+      -> split_view<views::all_t<_Range>, single_view<range_value_t<_Range>>>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range, typename _Pattern>
+ concept __can_split_view
+   = requires { split_view(std::declval<_Range>(), std::declval<_Pattern>()); };
+    }
+
+    struct _Split : __adaptor::_RangeAdaptor<_Split>
+    {
+      template<viewable_range _Range, typename _Pattern>
+ requires __detail::__can_split_view<_Range, _Pattern>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r, _Pattern&& __f) const
+ {
+   return split_view(std::forward<_Range>(__r), std::forward<_Pattern>(__f));
+ }
+
+      using _RangeAdaptor<_Split>::operator();
+      static constexpr int _S_arity = 2;
+      template<typename _Pattern>
+ static constexpr bool _S_has_simple_extra_args
+   = _LazySplit::_S_has_simple_extra_args<_Pattern>;
+    };
+
+    inline constexpr _Split split;
+  }
+
+  namespace views
+  {
+    struct _Counted
+    {
+      template<input_or_output_iterator _Iter>
+      constexpr auto
+      operator() [[nodiscard]] (_Iter __i, iter_difference_t<_Iter> __n) const
+      {
+ if constexpr (contiguous_iterator<_Iter>)
+   return span(std::__to_address(__i), __n);
+ else if constexpr (random_access_iterator<_Iter>)
+   return subrange(__i, __i + __n);
+ else
+   return subrange(counted_iterator(std::move(__i), __n),
+     default_sentinel);
+      }
+    };
+
+    inline constexpr _Counted counted{};
+  }
+
+  template<view _Vp>
+    requires (!common_range<_Vp>) && copyable<iterator_t<_Vp>>
+    class common_view : public view_interface<common_view<_Vp>>
+    {
+    private:
+      _Vp _M_base = _Vp();
+
+    public:
+      common_view() requires default_initializable<_Vp> = default;
+
+      constexpr explicit
+      common_view(_Vp __r)
+ : _M_base(std::move(__r))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr auto
+      begin()
+      {
+ if constexpr (random_access_range<_Vp> && sized_range<_Vp>)
+   return ranges::begin(_M_base);
+ else
+   return common_iterator<iterator_t<_Vp>, sentinel_t<_Vp>>
+    (ranges::begin(_M_base));
+      }
+
+      constexpr auto
+      begin() const requires range<const _Vp>
+      {
+ if constexpr (random_access_range<const _Vp> && sized_range<const _Vp>)
+   return ranges::begin(_M_base);
+ else
+   return common_iterator<iterator_t<const _Vp>, sentinel_t<const _Vp>>
+    (ranges::begin(_M_base));
+      }
+
+      constexpr auto
+      end()
+      {
+ if constexpr (random_access_range<_Vp> && sized_range<_Vp>)
+   return ranges::begin(_M_base) + ranges::size(_M_base);
+ else
+   return common_iterator<iterator_t<_Vp>, sentinel_t<_Vp>>
+    (ranges::end(_M_base));
+      }
+
+      constexpr auto
+      end() const requires range<const _Vp>
+      {
+ if constexpr (random_access_range<const _Vp> && sized_range<const _Vp>)
+   return ranges::begin(_M_base) + ranges::size(_M_base);
+ else
+   return common_iterator<iterator_t<const _Vp>, sentinel_t<const _Vp>>
+    (ranges::end(_M_base));
+      }
+
+      constexpr auto
+      size() requires sized_range<_Vp>
+      { return ranges::size(_M_base); }
+
+      constexpr auto
+      size() const requires sized_range<const _Vp>
+      { return ranges::size(_M_base); }
+    };
+
+  template<typename _Range>
+    common_view(_Range&&) -> common_view<views::all_t<_Range>>;
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<common_view<_Tp>>
+      = enable_borrowed_range<_Tp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename _Range>
+ concept __already_common = common_range<_Range>
+   && requires { views::all(std::declval<_Range>()); };
+
+      template<typename _Range>
+ concept __can_common_view
+   = requires { common_view{std::declval<_Range>()}; };
+    }
+
+    struct _Common : __adaptor::_RangeAdaptorClosure<_Common>
+    {
+      template<viewable_range _Range>
+ requires __detail::__already_common<_Range>
+   || __detail::__can_common_view<_Range>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r) const
+ {
+   if constexpr (__detail::__already_common<_Range>)
+     return views::all(std::forward<_Range>(__r));
+   else
+     return common_view{std::forward<_Range>(__r)};
+ }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+
+    inline constexpr _Common common;
+  }
+
+  template<view _Vp>
+    requires bidirectional_range<_Vp>
+    class reverse_view : public view_interface<reverse_view<_Vp>>
+    {
+    private:
+      static constexpr bool _S_needs_cached_begin
+ = !common_range<_Vp> && !(random_access_range<_Vp>
+      && sized_sentinel_for<sentinel_t<_Vp>,
+       iterator_t<_Vp>>);
+
+      _Vp _M_base = _Vp();
+      [[no_unique_address]]
+ __detail::__maybe_present_t<_S_needs_cached_begin,
+        __detail::_CachedPosition<_Vp>>
+          _M_cached_begin;
+
+    public:
+      reverse_view() requires default_initializable<_Vp> = default;
+
+      constexpr explicit
+      reverse_view(_Vp __r)
+ : _M_base(std::move(__r))
+ { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr reverse_iterator<iterator_t<_Vp>>
+      begin()
+      {
+ if constexpr (_S_needs_cached_begin)
+   if (_M_cached_begin._M_has_value())
+     return std::make_reverse_iterator(_M_cached_begin._M_get(_M_base));
+
+ auto __it = ranges::next(ranges::begin(_M_base), ranges::end(_M_base));
+ if constexpr (_S_needs_cached_begin)
+   _M_cached_begin._M_set(_M_base, __it);
+ return std::make_reverse_iterator(std::move(__it));
+      }
+
+      constexpr auto
+      begin() requires common_range<_Vp>
+      { return std::make_reverse_iterator(ranges::end(_M_base)); }
+
+      constexpr auto
+      begin() const requires common_range<const _Vp>
+      { return std::make_reverse_iterator(ranges::end(_M_base)); }
+
+      constexpr reverse_iterator<iterator_t<_Vp>>
+      end()
+      { return std::make_reverse_iterator(ranges::begin(_M_base)); }
+
+      constexpr auto
+      end() const requires common_range<const _Vp>
+      { return std::make_reverse_iterator(ranges::begin(_M_base)); }
+
+      constexpr auto
+      size() requires sized_range<_Vp>
+      { return ranges::size(_M_base); }
+
+      constexpr auto
+      size() const requires sized_range<const _Vp>
+      { return ranges::size(_M_base); }
+    };
+
+  template<typename _Range>
+    reverse_view(_Range&&) -> reverse_view<views::all_t<_Range>>;
+
+  template<typename _Tp>
+    inline constexpr bool enable_borrowed_range<reverse_view<_Tp>>
+      = enable_borrowed_range<_Tp>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<typename>
+ inline constexpr bool __is_reversible_subrange = false;
+
+      template<typename _Iter, subrange_kind _Kind>
+ inline constexpr bool
+   __is_reversible_subrange<subrange<reverse_iterator<_Iter>,
+         reverse_iterator<_Iter>,
+         _Kind>> = true;
+
+      template<typename>
+ inline constexpr bool __is_reverse_view = false;
+
+      template<typename _Vp>
+ inline constexpr bool __is_reverse_view<reverse_view<_Vp>> = true;
+
+      template<typename _Range>
+ concept __can_reverse_view
+   = requires { reverse_view{std::declval<_Range>()}; };
+    }
+
+    struct _Reverse : __adaptor::_RangeAdaptorClosure<_Reverse>
+    {
+      template<viewable_range _Range>
+ requires __detail::__is_reverse_view<remove_cvref_t<_Range>>
+   || __detail::__is_reversible_subrange<remove_cvref_t<_Range>>
+   || __detail::__can_reverse_view<_Range>
+ constexpr auto
+ operator() [[nodiscard]] (_Range&& __r) const
+ {
+   using _Tp = remove_cvref_t<_Range>;
+   if constexpr (__detail::__is_reverse_view<_Tp>)
+     return std::forward<_Range>(__r).base();
+   else if constexpr (__detail::__is_reversible_subrange<_Tp>)
+     {
+       using _Iter = decltype(ranges::begin(__r).base());
+       if constexpr (sized_range<_Tp>)
+  return subrange<_Iter, _Iter, subrange_kind::sized>
+   {__r.end().base(), __r.begin().base(), __r.size()};
+       else
+  return subrange<_Iter, _Iter, subrange_kind::unsized>
+   {__r.end().base(), __r.begin().base()};
+     }
+   else
+     return reverse_view{std::forward<_Range>(__r)};
+ }
+
+      static constexpr bool _S_has_simple_call_op = true;
+    };
+
+    inline constexpr _Reverse reverse;
+  }
+
+  namespace __detail
+  {
+
+
+
+
+    template<typename _Tp, size_t _Nm>
+    concept __has_tuple_element = requires(_Tp __t)
+      {
+ typename tuple_size<_Tp>::type;
+ requires _Nm < tuple_size_v<_Tp>;
+ typename tuple_element_t<_Nm, _Tp>;
+ { std::get<_Nm>(__t) }
+   -> convertible_to<const tuple_element_t<_Nm, _Tp>&>;
+      };
+
+
+    template<typename _Tp, size_t _Nm>
+      concept __returnable_element
+ = is_reference_v<_Tp> || move_constructible<tuple_element_t<_Nm, _Tp>>;
+  }
+
+  template<input_range _Vp, size_t _Nm>
+    requires view<_Vp>
+      && __detail::__has_tuple_element<range_value_t<_Vp>, _Nm>
+      && __detail::__has_tuple_element<remove_reference_t<range_reference_t<_Vp>>,
+           _Nm>
+      && __detail::__returnable_element<range_reference_t<_Vp>, _Nm>
+    class elements_view : public view_interface<elements_view<_Vp, _Nm>>
+    {
+    public:
+      elements_view() requires default_initializable<_Vp> = default;
+
+      constexpr explicit
+      elements_view(_Vp __base)
+ : _M_base(std::move(__base))
+      { }
+
+      constexpr _Vp
+      base() const& requires copy_constructible<_Vp>
+      { return _M_base; }
+
+      constexpr _Vp
+      base() &&
+      { return std::move(_M_base); }
+
+      constexpr auto
+      begin() requires (!__detail::__simple_view<_Vp>)
+      { return _Iterator<false>(ranges::begin(_M_base)); }
+
+      constexpr auto
+      begin() const requires range<const _Vp>
+      { return _Iterator<true>(ranges::begin(_M_base)); }
+
+      constexpr auto
+      end() requires (!__detail::__simple_view<_Vp> && !common_range<_Vp>)
+      { return _Sentinel<false>{ranges::end(_M_base)}; }
+
+      constexpr auto
+      end() requires (!__detail::__simple_view<_Vp> && common_range<_Vp>)
+      { return _Iterator<false>{ranges::end(_M_base)}; }
+
+      constexpr auto
+      end() const requires range<const _Vp>
+      { return _Sentinel<true>{ranges::end(_M_base)}; }
+
+      constexpr auto
+      end() const requires common_range<const _Vp>
+      { return _Iterator<true>{ranges::end(_M_base)}; }
+
+      constexpr auto
+      size() requires sized_range<_Vp>
+      { return ranges::size(_M_base); }
+
+      constexpr auto
+      size() const requires sized_range<const _Vp>
+      { return ranges::size(_M_base); }
+
+    private:
+      template<bool _Const>
+ using _Base = __detail::__maybe_const_t<_Const, _Vp>;
+
+      template<bool _Const>
+ struct __iter_cat
+ { };
+
+      template<bool _Const>
+ requires forward_range<_Base<_Const>>
+ struct __iter_cat<_Const>
+ {
+ private:
+   static auto _S_iter_cat()
+   {
+     using _Base = elements_view::_Base<_Const>;
+     using _Cat = typename iterator_traits<iterator_t<_Base>>::iterator_category;
+     using _Res = decltype((std::get<_Nm>(*std::declval<iterator_t<_Base>>())));
+     if constexpr (!is_lvalue_reference_v<_Res>)
+       return input_iterator_tag{};
+     else if constexpr (derived_from<_Cat, random_access_iterator_tag>)
+       return random_access_iterator_tag{};
+     else
+       return _Cat{};
+   }
+ public:
+   using iterator_category = decltype(_S_iter_cat());
+ };
+
+      template<bool _Const>
+ struct _Sentinel;
+
+      template<bool _Const>
+ struct _Iterator : __iter_cat<_Const>
+ {
+ private:
+   using _Base = elements_view::_Base<_Const>;
+
+   iterator_t<_Base> _M_current = iterator_t<_Base>();
+
+   static constexpr decltype(auto)
+   _S_get_element(const iterator_t<_Base>& __i)
+   {
+     if constexpr (is_reference_v<range_reference_t<_Base>>)
+       return std::get<_Nm>(*__i);
+     else
+       {
+  using _Et = remove_cv_t<tuple_element_t<_Nm, range_reference_t<_Base>>>;
+  return static_cast<_Et>(std::get<_Nm>(*__i));
+       }
+   }
+
+   static auto
+   _S_iter_concept()
+   {
+     if constexpr (random_access_range<_Base>)
+       return random_access_iterator_tag{};
+     else if constexpr (bidirectional_range<_Base>)
+       return bidirectional_iterator_tag{};
+     else if constexpr (forward_range<_Base>)
+       return forward_iterator_tag{};
+     else
+       return input_iterator_tag{};
+   }
+
+   friend _Iterator<!_Const>;
+
+ public:
+   using iterator_concept = decltype(_S_iter_concept());
+
+   using value_type
+     = remove_cvref_t<tuple_element_t<_Nm, range_value_t<_Base>>>;
+   using difference_type = range_difference_t<_Base>;
+
+   _Iterator() requires default_initializable<iterator_t<_Base>> = default;
+
+   constexpr explicit
+   _Iterator(iterator_t<_Base> __current)
+     : _M_current(std::move(__current))
+   { }
+
+   constexpr
+   _Iterator(_Iterator<!_Const> __i)
+     requires _Const && convertible_to<iterator_t<_Vp>, iterator_t<_Base>>
+     : _M_current(std::move(__i._M_current))
+   { }
+
+   constexpr const iterator_t<_Base>&
+   base() const& noexcept
+   { return _M_current; }
+
+   constexpr iterator_t<_Base>
+   base() &&
+   { return std::move(_M_current); }
+
+   constexpr decltype(auto)
+   operator*() const
+   { return _S_get_element(_M_current); }
+
+   constexpr _Iterator&
+   operator++()
+   {
+     ++_M_current;
+     return *this;
+   }
+
+   constexpr void
+   operator++(int)
+   { ++_M_current; }
+
+   constexpr _Iterator
+   operator++(int) requires forward_range<_Base>
+   {
+     auto __tmp = *this;
+     ++_M_current;
+     return __tmp;
+   }
+
+   constexpr _Iterator&
+   operator--() requires bidirectional_range<_Base>
+   {
+     --_M_current;
+     return *this;
+   }
+
+   constexpr _Iterator
+   operator--(int) requires bidirectional_range<_Base>
+   {
+     auto __tmp = *this;
+     --_M_current;
+     return __tmp;
+   }
+
+   constexpr _Iterator&
+   operator+=(difference_type __n)
+     requires random_access_range<_Base>
+   {
+     _M_current += __n;
+     return *this;
+   }
+
+   constexpr _Iterator&
+   operator-=(difference_type __n)
+     requires random_access_range<_Base>
+   {
+     _M_current -= __n;
+     return *this;
+   }
+
+   constexpr decltype(auto)
+   operator[](difference_type __n) const
+     requires random_access_range<_Base>
+   { return _S_get_element(_M_current + __n); }
+
+   friend constexpr bool
+   operator==(const _Iterator& __x, const _Iterator& __y)
+     requires equality_comparable<iterator_t<_Base>>
+   { return __x._M_current == __y._M_current; }
+
+   friend constexpr bool
+   operator<(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return __x._M_current < __y._M_current; }
+
+   friend constexpr bool
+   operator>(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return __y._M_current < __x._M_current; }
+
+   friend constexpr bool
+   operator<=(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return !(__y._M_current > __x._M_current); }
+
+   friend constexpr bool
+   operator>=(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return !(__x._M_current > __y._M_current); }
+
+
+   friend constexpr auto
+   operator<=>(const _Iterator& __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+       && three_way_comparable<iterator_t<_Base>>
+   { return __x._M_current <=> __y._M_current; }
+
+
+   friend constexpr _Iterator
+   operator+(const _Iterator& __x, difference_type __y)
+     requires random_access_range<_Base>
+   { return _Iterator{__x} += __y; }
+
+   friend constexpr _Iterator
+   operator+(difference_type __x, const _Iterator& __y)
+     requires random_access_range<_Base>
+   { return __y + __x; }
+
+   friend constexpr _Iterator
+   operator-(const _Iterator& __x, difference_type __y)
+     requires random_access_range<_Base>
+   { return _Iterator{__x} -= __y; }
+
+
+
+   friend constexpr difference_type
+   operator-(const _Iterator& __x, const _Iterator& __y)
+     requires sized_sentinel_for<iterator_t<_Base>, iterator_t<_Base>>
+   { return __x._M_current - __y._M_current; }
+
+   template <bool> friend struct _Sentinel;
+ };
+
+      template<bool _Const>
+ struct _Sentinel
+ {
+ private:
+   template<bool _Const2>
+     constexpr bool
+     _M_equal(const _Iterator<_Const2>& __x) const
+     { return __x._M_current == _M_end; }
+
+   template<bool _Const2>
+     constexpr auto
+     _M_distance_from(const _Iterator<_Const2>& __i) const
+     { return _M_end - __i._M_current; }
+
+   using _Base = elements_view::_Base<_Const>;
+   sentinel_t<_Base> _M_end = sentinel_t<_Base>();
+
+ public:
+   _Sentinel() = default;
+
+   constexpr explicit
+   _Sentinel(sentinel_t<_Base> __end)
+     : _M_end(std::move(__end))
+   { }
+
+   constexpr
+   _Sentinel(_Sentinel<!_Const> __other)
+     requires _Const
+       && convertible_to<sentinel_t<_Vp>, sentinel_t<_Base>>
+     : _M_end(std::move(__other._M_end))
+   { }
+
+   constexpr sentinel_t<_Base>
+   base() const
+   { return _M_end; }
+
+   template<bool _Const2>
+     requires sentinel_for<sentinel_t<_Base>,
+         iterator_t<__detail::__maybe_const_t<_Const2, _Vp>>>
+     friend constexpr bool
+     operator==(const _Iterator<_Const2>& __x, const _Sentinel& __y)
+     { return __y._M_equal(__x); }
+
+   template<bool _Const2,
+     typename _Base2 = __detail::__maybe_const_t<_Const2, _Vp>>
+     requires sized_sentinel_for<sentinel_t<_Base>, iterator_t<_Base2>>
+     friend constexpr range_difference_t<_Base2>
+     operator-(const _Iterator<_Const2>& __x, const _Sentinel& __y)
+     { return -__y._M_distance_from(__x); }
+
+   template<bool _Const2,
+     typename _Base2 = __detail::__maybe_const_t<_Const2, _Vp>>
+     requires sized_sentinel_for<sentinel_t<_Base>, iterator_t<_Base2>>
+     friend constexpr range_difference_t<_Base2>
+     operator-(const _Sentinel& __x, const _Iterator<_Const2>& __y)
+     { return __x._M_distance_from(__y); }
+
+   friend _Sentinel<!_Const>;
+ };
+
+      _Vp _M_base = _Vp();
+    };
+
+  template<typename _Tp, size_t _Nm>
+    inline constexpr bool enable_borrowed_range<elements_view<_Tp, _Nm>>
+      = enable_borrowed_range<_Tp>;
+
+  template<typename _Range>
+    using keys_view = elements_view<views::all_t<_Range>, 0>;
+
+  template<typename _Range>
+    using values_view = elements_view<views::all_t<_Range>, 1>;
+
+  namespace views
+  {
+    namespace __detail
+    {
+      template<size_t _Nm, typename _Range>
+ concept __can_elements_view
+   = requires { elements_view<all_t<_Range>, _Nm>{std::declval<_Range>()}; };
+    }
+
+    template<size_t _Nm>
+      struct _Elements : __adaptor::_RangeAdaptorClosure<_Elements<_Nm>>
+      {
+ template<viewable_range _Range>
+   requires __detail::__can_elements_view<_Nm, _Range>
+   constexpr auto
+   operator() [[nodiscard]] (_Range&& __r) const
+   {
+     return elements_view<all_t<_Range>, _Nm>{std::forward<_Range>(__r)};
+   }
+
+ static constexpr bool _S_has_simple_call_op = true;
+      };
+
+    template<size_t _Nm>
+      inline constexpr _Elements<_Nm> elements;
+    inline constexpr auto keys = elements<0>;
+    inline constexpr auto values = elements<1>;
+  }
+# 9255 "/usr/include/c++/14.2.0/ranges" 3
+}
+
+  namespace views = ranges::views;
+# 9517 "/usr/include/c++/14.2.0/ranges" 3
+
+}
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/bruteforce.h" 2
+
+
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/bruteforce.h"
+namespace Attacks::BruteForce {
+    void caeser(const std::string &cipher_text);
+    void affine(const std::string &cipher_text);
     namespace impl {
-        std::vector<std::pair<char, int>> sortFrequency(std::map<char, int> map);
+        constexpr std::array possible_a = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
+        constexpr std::ranges::iota_view<int, int> shifts = std::views::iota(0, 26);
     }
 }
-# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 6 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/plaintext.h" 1
 # 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/plaintext.h"
 namespace Attacks::KnownPlainText {
@@ -53324,7 +60030,8 @@ namespace Attacks::KnownPlainText {
         std::string findVigenereKey(const std::string &cipher_text, const std::string &known_plain_text);
     }
 }
-# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+
 
 int main() {
     using namespace Classic;
@@ -53335,10 +60042,26 @@ int main() {
 
     std::cout << "Enter the key: ";
     std::cin >> key;
-# 44 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
-    const std::string cipher = Columnar::encrypt(name, key);
+    int mul, bias;
+    std::cout << "Enter the multiplier and bias: ";
+    std::cin >> mul >> bias;
+
+
+
+
+
+
+    const std::string cipher = Affine::encrypt(name, mul, bias);
     std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << Columnar::decrypt(cipher, key) << std::endl;
-# 55 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    std::cout << "Decrypted name: " << Affine::decrypt(cipher, mul, bias) << std::endl;
+# 43 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    Attacks::BruteForce::affine(cipher);
+
+
+
+
+
+
+
     return 0;
 }

@@ -20,8 +20,8 @@ add_executable(CryptoCPP main.cpp
         src/classic/hillcipher.cc
         include/classic/vigenere.h
         src/classic/vigenere.cc
-        include/attacks/caeser.h
-        src/attacks/caeser.cc
+        include/attacks/bruteforce.h
+        src/attacks/bruteforce.cc
         include/attacks/plaintext.h
         src/attacks/plaintext.cc
         include/classic/columnar.h
@@ -30,4 +30,6 @@ add_executable(CryptoCPP main.cpp
         lib/stringUtils.h
         lib/stringUtils.cc
         include/modern/des.h
-        src/modern/des.cc)
+        src/modern/des.cc
+        include/attacks/frequency.h
+        src/attacks/frequency.cc)

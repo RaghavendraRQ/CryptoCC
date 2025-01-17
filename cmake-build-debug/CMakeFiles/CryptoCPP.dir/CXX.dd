@@ -13,9 +13,15 @@ build CMakeFiles/CryptoCPP.dir/src/classic/hillcipher.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/classic/vigenere.cc.o: dyndep
 
-build CMakeFiles/CryptoCPP.dir/src/attacks/caeser.cc.o: dyndep
+build CMakeFiles/CryptoCPP.dir/src/attacks/bruteforce.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/attacks/plaintext.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/src/classic/columnar.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/lib/stringUtils.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/modern/des.cc.o: dyndep
+
+build CMakeFiles/CryptoCPP.dir/src/attacks/frequency.cc.o: dyndep
 
