@@ -23,8 +23,33 @@ namespace Classic::Affine {
             {23, 17},
             {25, 25}
     };
+    /**
+     * Encrypts the given plain text using the multiplier and bias provided
+     *
+     * @param plain_text: A simple string to be encrypted
+     * @param multiplier: Key to multiply the characters
+     * @param bias: Key to add to the characters
+     * @return Encrypted string
+     */
     std::string encrypt(const std::string &plain_text, int multiplier, int bias);
+
+    /**
+     * Decrypts the given cipher text using the multiplier and bias provided
+     *
+     * @param cipher: A simple string to be decrypted
+     * @param multiplier: Key to multiply the characters
+     * @param bias: Key to add to the characters
+     * @return Decrypted string
+     */
+
     std::string decrypt(const std::string &cipher, int multiplier, int bias);
+    /**
+     * Calculates the modular inverse of a number
+     *
+     * @param a: Number to find the inverse
+     * @param m: Modulus
+     * @return Inverse of the number
+     */
     int modInverse(int a, int m);
 }
 

@@ -23,8 +23,28 @@ namespace Classic {
         };
         void set_reverse_key();
     public:
+
+        /**
+         * Encrypts the given plain text using the key provided
+         *
+         * @param plain_text: A simple string to be encrypted
+         * @return Encrypted string
+         */
         std::string encrypt(const std::string &plain_text);
+
+        /**
+         * Decrypts the given cipher text using the key provided
+         *
+         * @param cipher_text: A simple string to be decrypted
+         * @return Decrypted string
+         */
         std::string decrypt(const std::string &cipher_text);
+        /**
+         * Sets the key for the substitution cipher
+         *
+         * @param new_key: A map containing the key
+         * @return 0 if the key is set successfully, 1 otherwise
+         */
 
         int set_key(const std::map<char, char> &new_key);
     };

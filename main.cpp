@@ -1,6 +1,8 @@
+
 #include <iostream>
 
 #include <classic.h>
+#include <mycipher.h>
 
 #include <attacks/bruteforce.h>
 #include <attacks/plaintext.h>
@@ -15,18 +17,23 @@ int main() {
     // std::cin >> name
     std::cout << "Enter the key: ";
     std::cin >> key;
-    int mul, bias;
-    std::cout << "Enter the multiplier and bias: ";
-    std::cin >> mul >> bias;
+    // int mul, bias;
+    // std::cout << "Enter the multiplier and bias: ";
+    // std::cin >> mul >> bias;
+
+    const MyCipher my_cipher(key);
+    const std::string cipher = my_cipher.encrypt(name);
+    std::cout << "Encrypted name: " << cipher << std::endl;
+    std::cout << "Decrypted name: " << my_cipher.decrypt(cipher) << std::endl;
 
     // Substitution substitution;
     // const std::string cipher = substitution.encrypt(name);
     // std::cout << "Encrypted name: " << cipher << std::endl;
     // std::cout << "Decrypted name: " << substitution.decrypt(cipher) << std::endl;
-
-    const std::string cipher = Affine::encrypt(name, mul, bias);
-    std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << Affine::decrypt(cipher, mul, bias) << std::endl;
+    //
+    // const std::string cipher = Affine::encrypt(name, mul, bias);
+    // std::cout << "Encrypted name: " << cipher << std::endl;
+    // std::cout << "Decrypted name: " << Affine::decrypt(cipher, mul, bias) << std::endl;
 
     // const HillCipher::hill_key_t key_matrix = {
     //     {17, 17, 5},
@@ -40,7 +47,7 @@ int main() {
     // const std::string cipher = Columnar::encrypt(name, key);
     // std::cout << "Encrypted name: " << cipher << std::endl;
     // std::cout << "Decrypted name: " << Columnar::decrypt(cipher, key) << std::endl;
-    Attacks::BruteForce::affine(cipher);
+    // Attacks::BruteForce::affine(cipher);
     // std::string know_plain_text;
     // std::cout << "Enter know plain text: ", std::cin >> know_plain_text;
     // cipher = "VBTBLMPEDB";

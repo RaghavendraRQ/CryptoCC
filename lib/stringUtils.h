@@ -9,6 +9,7 @@
 namespace CryptoCPP::StringUtils {
     void removeSpaces(std::string &text);
     void padString(std::string &text, const int &n, const char &filling_char='X');
+    void toUpper(std::string &text);
 }
 
 

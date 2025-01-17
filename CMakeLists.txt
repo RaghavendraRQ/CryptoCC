@@ -32,4 +32,6 @@ add_executable(CryptoCPP main.cpp
         include/modern/des.h
         src/modern/des.cc
         include/attacks/frequency.h
-        src/attacks/frequency.cc)
+        src/attacks/frequency.cc
+        include/mycipher.h
+        src/mycipher.cc)
