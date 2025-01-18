@@ -172,4 +172,14 @@ CMakeFiles/CryptoCPP.dir/src/mycipher.cc.o.ddi: \
  /usr/include/c++/14.2.0/bits/locale_facets.tcc \
  /usr/include/c++/14.2.0/bits/basic_ios.tcc \
  /usr/include/c++/14.2.0/bits/ostream.tcc /usr/include/c++/14.2.0/istream \
- /usr/include/c++/14.2.0/bits/istream.tcc
+ /usr/include/c++/14.2.0/bits/istream.tcc \
+ /usr/include/c++/14.2.0/algorithm \
+ /usr/include/c++/14.2.0/bits/stl_algo.h \
+ /usr/include/c++/14.2.0/bits/algorithmfwd.h \
+ /usr/include/c++/14.2.0/bits/stl_heap.h \
+ /usr/include/c++/14.2.0/bits/uniform_int_dist.h \
+ /usr/include/c++/14.2.0/bits/stl_tempbuf.h \
+ /usr/include/c++/14.2.0/bits/ranges_algo.h \
+ /usr/include/c++/14.2.0/bits/ranges_algobase.h \
+ /usr/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/14.2.0/pstl/execution_defs.h

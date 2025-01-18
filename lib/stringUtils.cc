@@ -3,6 +3,7 @@
 //
 #include "stringUtils.h"
 #include <algorithm>
+#include <random>
 
 namespace CryptoCPP::StringUtils {
 
@@ -19,4 +20,19 @@ namespace CryptoCPP::StringUtils {
     void toUpper(std::string &text) {
         std::ranges::transform(text, text.begin(), ::toupper);
     }
+
+    std::string Random::String(const int &length) {
+        std::string random_string;
+        for (int i = 0; i < length; i++)
+            random_string += static_cast<char>(Number(65, 90));
+        return random_string;
+    }
+
+    int Random::Number(const int &min, const int &max) {
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_int_distribution<int> dist(min, max);
+        return dist(mt);
+    }
+
 }

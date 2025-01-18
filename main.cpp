@@ -3,9 +3,18 @@
 
 // #include <classic.h>
 #include <mycipher.h>
+#include <bitset>
+#include "lib/stringUtils.h"
 
 // #include <attacks/bruteforce.h>
 // #include <attacks/plaintext.h>
+
+void printKey(const std::string& key) {
+    for (char c : key) {
+        std::cout << c << " ";  // Print each character as a binary string
+    }
+    std::cout << std::endl;
+}
 
 
 int main() {
@@ -17,12 +26,16 @@ int main() {
     // std::cin >> name
     std::cout << "Enter the key: ";
     std::cin >> key;
+
     // int mul, bias;
     // std::cout << "Enter the multiplier and bias: ";
     // std::cin >> mul >> bias;
 
     const MyCipher my_cipher(key);
-    const std::string cipher = my_cipher.encrypt(name);
+    std::string salt = CryptoCPP::StringUtils::Random::String(4);
+    std::cout << "Salt: " << salt << std::endl;
+
+    std::string cipher = my_cipher.encrypt(name);
     std::cout << "Encrypted name: " << cipher << std::endl;
     std::cout << "Decrypted name: " << my_cipher.decrypt(cipher) << std::endl;
 

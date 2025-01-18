@@ -10,6 +10,11 @@ namespace CryptoCPP::StringUtils {
     void removeSpaces(std::string &text);
     void padString(std::string &text, const int &n, const char &filling_char='X');
     void toUpper(std::string &text);
+    class Random {
+    public:
+        static std::string String(const int &length);
+        static int Number(const int &min, const int &max);
+    };
 }
 
 
