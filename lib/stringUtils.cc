@@ -21,6 +21,10 @@ namespace CryptoCPP::StringUtils {
         std::ranges::transform(text, text.begin(), ::toupper);
     }
 
+    std::bitset<8> charToBitset(unsigned long long c) {
+        return {c};
+    }
+
     std::string Random::String(const int &length) {
         std::string random_string;
         for (int i = 0; i < length; i++)

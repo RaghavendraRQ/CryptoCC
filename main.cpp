@@ -3,8 +3,6 @@
 
 #include <classic.h>
 #include <mycipher.h>
-#include <cstdint>
-#include <bitset>
 #include <modern/des.h>
 
 #include "attacks/bruteforce.h"
@@ -20,9 +18,7 @@ void printKey(const std::string& key) {
     std::cout << std::endl;
 }
 
-std::vector<uint8_t> stringToBytes(const std::string& input) {
-    return std::vector<uint8_t>(input.begin(), input.end());
-}
+
 
 int main() {
     using namespace Classic;
@@ -33,13 +29,13 @@ int main() {
     // std::cin >> name
     std::cout << "Enter the key: ";
     std::cin >> key;
-    std::vector<uint8_t> bytes = stringToBytes(name);
-    std::vector<uint8_t> key_bytes = stringToBytes(key);
+    std::vector<uint8_t> bytes = CryptoCPP::StringUtils::stringToBytes(name);
+    std::vector<uint8_t> key_bytes = CryptoCPP::StringUtils::stringToBytes(key);
     std::vector<uint8_t> check = Modern::DES::impl::feistalRound(bytes, key_bytes, [](std::vector<uint8_t> text, std::vector<uint8_t> key) {
-        return text;
+        return key;
     });
-    for (uint8_t byte : check) {
-        std::cout << byte << " ";
+    for (const uint8_t byte : check) {
+        std::cout << CryptoCPP::StringUtils::charToBitset(byte) << " ";
     }
     // Attacks::BruteForce::caeser(name);
 

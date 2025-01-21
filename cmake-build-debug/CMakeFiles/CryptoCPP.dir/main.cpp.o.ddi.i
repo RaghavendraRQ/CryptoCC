@@ -53397,6 +53397,8 @@ namespace Classic {
 
 }
 # 6 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/des.h" 1
+# 12 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/des.h"
 # 1 "/usr/include/c++/14.2.0/cstdint" 1 3
 # 32 "/usr/include/c++/14.2.0/cstdint" 3
        
@@ -53512,1435 +53514,7 @@ namespace std
   using ::uintptr_t;
 # 142 "/usr/include/c++/14.2.0/cstdint" 3
 }
-# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 1 "/usr/include/c++/14.2.0/bitset" 1 3
-# 45 "/usr/include/c++/14.2.0/bitset" 3
-       
-# 46 "/usr/include/c++/14.2.0/bitset" 3
-# 62 "/usr/include/c++/14.2.0/bitset" 3
-# 1 "/usr/include/c++/14.2.0/bits/version.h" 1 3
-# 47 "/usr/include/c++/14.2.0/bits/version.h" 3
-       
-# 48 "/usr/include/c++/14.2.0/bits/version.h" 3
-# 63 "/usr/include/c++/14.2.0/bitset" 2 3
-# 71 "/usr/include/c++/14.2.0/bitset" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-
-
-
-
-
-  template<size_t _Nw>
-    struct _Base_bitset
-    {
-      typedef unsigned long _WordT;
-
-
-      _WordT _M_w[_Nw];
-
-      constexpr _Base_bitset() noexcept
-      : _M_w() { }
-
-
-      constexpr _Base_bitset(unsigned long long __val) noexcept
-      : _M_w{ _WordT(__val)
-
-
-
-       } { }
-
-
-
-
-
-
-      static constexpr size_t
-      _S_whichword(size_t __pos) noexcept
-      { return __pos / (8 * 8); }
-
-      static constexpr size_t
-      _S_whichbyte(size_t __pos) noexcept
-      { return (__pos % (8 * 8)) / 8; }
-
-      static constexpr size_t
-      _S_whichbit(size_t __pos) noexcept
-      { return __pos % (8 * 8); }
-
-      static constexpr _WordT
-      _S_maskbit(size_t __pos) noexcept
-      { return (static_cast<_WordT>(1)) << _S_whichbit(__pos); }
-
-      constexpr _WordT&
-      _M_getword(size_t __pos) noexcept
-      { return _M_w[_S_whichword(__pos)]; }
-
-      constexpr _WordT
-      _M_getword(size_t __pos) const noexcept
-      { return _M_w[_S_whichword(__pos)]; }
-
-
-      constexpr const _WordT*
-      _M_getdata() const noexcept
-      { return _M_w; }
-
-
-      _WordT&
-      _M_hiword() noexcept
-      { return _M_w[_Nw - 1]; }
-
-      constexpr _WordT
-      _M_hiword() const noexcept
-      { return _M_w[_Nw - 1]; }
-
-      void
-      _M_do_and(const _Base_bitset<_Nw>& __x) noexcept
-      {
- for (size_t __i = 0; __i < _Nw; __i++)
-   _M_w[__i] &= __x._M_w[__i];
-      }
-
-      constexpr void
-      _M_do_or(const _Base_bitset<_Nw>& __x) noexcept
-      {
- for (size_t __i = 0; __i < _Nw; __i++)
-   _M_w[__i] |= __x._M_w[__i];
-      }
-
-      constexpr void
-      _M_do_xor(const _Base_bitset<_Nw>& __x) noexcept
-      {
- for (size_t __i = 0; __i < _Nw; __i++)
-   _M_w[__i] ^= __x._M_w[__i];
-      }
-
-      constexpr void
-      _M_do_left_shift(size_t __shift) noexcept;
-
-      constexpr void
-      _M_do_right_shift(size_t __shift) noexcept;
-
-      constexpr void
-      _M_do_flip() noexcept
-      {
- for (size_t __i = 0; __i < _Nw; __i++)
-   _M_w[__i] = ~_M_w[__i];
-      }
-
-      constexpr void
-      _M_do_set() noexcept
-      {
-
- if (__builtin_is_constant_evaluated())
-   {
-     for (_WordT& __w : _M_w)
-       __w = ~static_cast<_WordT>(0);;
-     return;
-   }
-
- __builtin_memset(_M_w, 0xFF, _Nw * sizeof(_WordT));
-      }
-
-      constexpr void
-      _M_do_reset() noexcept
-      {
-
- if (__builtin_is_constant_evaluated())
-   {
-     for (_WordT& __w : _M_w)
-       __w = 0;
-     return;
-   }
-
- __builtin_memset(_M_w, 0, _Nw * sizeof(_WordT));
-      }
-
-      constexpr bool
-      _M_is_equal(const _Base_bitset<_Nw>& __x) const noexcept
-      {
- for (size_t __i = 0; __i < _Nw; ++__i)
-   if (_M_w[__i] != __x._M_w[__i])
-     return false;
- return true;
-      }
-
-      template<size_t _Nb>
-        constexpr bool
-        _M_are_all() const noexcept
-        {
-   for (size_t __i = 0; __i < _Nw - 1; __i++)
-     if (_M_w[__i] != ~static_cast<_WordT>(0))
-       return false;
-   return _M_hiword() == (~static_cast<_WordT>(0)
-     >> (_Nw * (8 * 8)
-         - _Nb));
- }
-
-      constexpr bool
-      _M_is_any() const noexcept
-      {
- for (size_t __i = 0; __i < _Nw; __i++)
-   if (_M_w[__i] != static_cast<_WordT>(0))
-     return true;
- return false;
-      }
-
-      constexpr size_t
-      _M_do_count() const noexcept
-      {
- size_t __result = 0;
- for (size_t __i = 0; __i < _Nw; __i++)
-   __result += __builtin_popcountl(_M_w[__i]);
- return __result;
-      }
-
-      constexpr unsigned long
-      _M_do_to_ulong() const;
-
-
-      constexpr unsigned long long
-      _M_do_to_ullong() const;
-
-
-
-      constexpr size_t
-      _M_do_find_first(size_t) const noexcept;
-
-
-      constexpr size_t
-      _M_do_find_next(size_t, size_t) const noexcept;
-    };
-
-
-  template<size_t _Nw>
-    constexpr void
-    _Base_bitset<_Nw>::_M_do_left_shift(size_t __shift) noexcept
-    {
-      if (__builtin_expect(__shift != 0, 1))
- {
-   const size_t __wshift = __shift / (8 * 8);
-   const size_t __offset = __shift % (8 * 8);
-
-   if (__offset == 0)
-     for (size_t __n = _Nw - 1; __n >= __wshift; --__n)
-       _M_w[__n] = _M_w[__n - __wshift];
-   else
-     {
-       const size_t __sub_offset = ((8 * 8)
-        - __offset);
-       for (size_t __n = _Nw - 1; __n > __wshift; --__n)
-  _M_w[__n] = ((_M_w[__n - __wshift] << __offset)
-        | (_M_w[__n - __wshift - 1] >> __sub_offset));
-       _M_w[__wshift] = _M_w[0] << __offset;
-     }
-
-   std::fill(_M_w + 0, _M_w + __wshift, static_cast<_WordT>(0));
- }
-    }
-
-  template<size_t _Nw>
-    constexpr void
-    _Base_bitset<_Nw>::_M_do_right_shift(size_t __shift) noexcept
-    {
-      if (__builtin_expect(__shift != 0, 1))
- {
-   const size_t __wshift = __shift / (8 * 8);
-   const size_t __offset = __shift % (8 * 8);
-   const size_t __limit = _Nw - __wshift - 1;
-
-   if (__offset == 0)
-     for (size_t __n = 0; __n <= __limit; ++__n)
-       _M_w[__n] = _M_w[__n + __wshift];
-   else
-     {
-       const size_t __sub_offset = ((8 * 8)
-        - __offset);
-       for (size_t __n = 0; __n < __limit; ++__n)
-  _M_w[__n] = ((_M_w[__n + __wshift] >> __offset)
-        | (_M_w[__n + __wshift + 1] << __sub_offset));
-       _M_w[__limit] = _M_w[_Nw-1] >> __offset;
-     }
-
-   std::fill(_M_w + __limit + 1, _M_w + _Nw, static_cast<_WordT>(0));
- }
-    }
-
-  template<size_t _Nw>
-    constexpr unsigned long
-    _Base_bitset<_Nw>::_M_do_to_ulong() const
-    {
-      for (size_t __i = 1; __i < _Nw; ++__i)
- if (_M_w[__i])
-   __throw_overflow_error(("_Base_bitset::_M_do_to_ulong"));
-      return _M_w[0];
-    }
-
-
-  template<size_t _Nw>
-    constexpr unsigned long long
-    _Base_bitset<_Nw>::_M_do_to_ullong() const
-    {
-
-      return _M_do_to_ulong();
-# 340 "/usr/include/c++/14.2.0/bitset" 3
-    }
-
-
-  template<size_t _Nw>
-    constexpr size_t
-    _Base_bitset<_Nw>::
-    _M_do_find_first(size_t __not_found) const noexcept
-    {
-      for (size_t __i = 0; __i < _Nw; __i++)
- {
-   _WordT __thisword = _M_w[__i];
-   if (__thisword != static_cast<_WordT>(0))
-     return (__i * (8 * 8)
-      + __builtin_ctzl(__thisword));
- }
-
-      return __not_found;
-    }
-
-  template<size_t _Nw>
-    constexpr size_t
-    _Base_bitset<_Nw>::
-    _M_do_find_next(size_t __prev, size_t __not_found) const noexcept
-    {
-
-      ++__prev;
-
-
-      if (__prev >= _Nw * (8 * 8))
- return __not_found;
-
-
-      size_t __i = _S_whichword(__prev);
-      _WordT __thisword = _M_w[__i];
-
-
-      __thisword &= (~static_cast<_WordT>(0)) << _S_whichbit(__prev);
-
-      if (__thisword != static_cast<_WordT>(0))
- return (__i * (8 * 8)
-  + __builtin_ctzl(__thisword));
-
-
-      __i++;
-      for (; __i < _Nw; __i++)
- {
-   __thisword = _M_w[__i];
-   if (__thisword != static_cast<_WordT>(0))
-     return (__i * (8 * 8)
-      + __builtin_ctzl(__thisword));
- }
-
-      return __not_found;
-    }
-
-
-
-
-
-
-  template<>
-    struct _Base_bitset<1>
-    {
-      typedef unsigned long _WordT;
-      _WordT _M_w;
-
-      constexpr _Base_bitset() noexcept
-      : _M_w(0)
-      { }
-
-
-      constexpr _Base_bitset(unsigned long long __val) noexcept
-
-
-
-      : _M_w(__val)
-      { }
-
-      static constexpr size_t
-      _S_whichword(size_t __pos) noexcept
-      { return __pos / (8 * 8); }
-
-      static constexpr size_t
-      _S_whichbyte(size_t __pos) noexcept
-      { return (__pos % (8 * 8)) / 8; }
-
-      static constexpr size_t
-      _S_whichbit(size_t __pos) noexcept
-      { return __pos % (8 * 8); }
-
-      static constexpr _WordT
-      _S_maskbit(size_t __pos) noexcept
-      { return (static_cast<_WordT>(1)) << _S_whichbit(__pos); }
-
-      constexpr _WordT&
-      _M_getword(size_t) noexcept
-      { return _M_w; }
-
-      constexpr _WordT
-      _M_getword(size_t) const noexcept
-      { return _M_w; }
-
-
-      constexpr const _WordT*
-      _M_getdata() const noexcept
-      { return &_M_w; }
-
-
-      constexpr _WordT&
-      _M_hiword() noexcept
-      { return _M_w; }
-
-      constexpr _WordT
-      _M_hiword() const noexcept
-      { return _M_w; }
-
-      constexpr void
-      _M_do_and(const _Base_bitset<1>& __x) noexcept
-      { _M_w &= __x._M_w; }
-
-      constexpr void
-      _M_do_or(const _Base_bitset<1>& __x) noexcept
-      { _M_w |= __x._M_w; }
-
-      constexpr void
-      _M_do_xor(const _Base_bitset<1>& __x) noexcept
-      { _M_w ^= __x._M_w; }
-
-      constexpr void
-      _M_do_left_shift(size_t __shift) noexcept
-      { _M_w <<= __shift; }
-
-      constexpr void
-      _M_do_right_shift(size_t __shift) noexcept
-      { _M_w >>= __shift; }
-
-      constexpr void
-      _M_do_flip() noexcept
-      { _M_w = ~_M_w; }
-
-      constexpr void
-      _M_do_set() noexcept
-      { _M_w = ~static_cast<_WordT>(0); }
-
-      constexpr void
-      _M_do_reset() noexcept
-      { _M_w = 0; }
-
-      constexpr bool
-      _M_is_equal(const _Base_bitset<1>& __x) const noexcept
-      { return _M_w == __x._M_w; }
-
-      template<size_t _Nb>
-        constexpr bool
-        _M_are_all() const noexcept
-        { return _M_w == (~static_cast<_WordT>(0)
-     >> ((8 * 8) - _Nb)); }
-
-      constexpr bool
-      _M_is_any() const noexcept
-      { return _M_w != 0; }
-
-      constexpr size_t
-      _M_do_count() const noexcept
-      { return __builtin_popcountl(_M_w); }
-
-      constexpr unsigned long
-      _M_do_to_ulong() const noexcept
-      { return _M_w; }
-
-
-      constexpr unsigned long long
-      _M_do_to_ullong() const noexcept
-      { return _M_w; }
-
-
-      constexpr size_t
-      _M_do_find_first(size_t __not_found) const noexcept
-      {
-        if (_M_w != 0)
-          return __builtin_ctzl(_M_w);
-        else
-          return __not_found;
-      }
-
-
-      constexpr size_t
-      _M_do_find_next(size_t __prev, size_t __not_found) const
- noexcept
-      {
- ++__prev;
- if (__prev >= ((size_t) (8 * 8)))
-   return __not_found;
-
- _WordT __x = _M_w >> __prev;
- if (__x != 0)
-   return __builtin_ctzl(__x) + __prev;
- else
-   return __not_found;
-      }
-    };
-
-
-
-
-
-
-  template<>
-    struct _Base_bitset<0>
-    {
-      typedef unsigned long _WordT;
-
-      constexpr _Base_bitset() noexcept
-      { }
-
-
-      constexpr _Base_bitset(unsigned long long) noexcept
-
-
-
-      { }
-
-      static constexpr size_t
-      _S_whichword(size_t __pos) noexcept
-      { return __pos / (8 * 8); }
-
-      static constexpr size_t
-      _S_whichbyte(size_t __pos) noexcept
-      { return (__pos % (8 * 8)) / 8; }
-
-      static constexpr size_t
-      _S_whichbit(size_t __pos) noexcept
-      { return __pos % (8 * 8); }
-
-      static constexpr _WordT
-      _S_maskbit(size_t __pos) noexcept
-      { return (static_cast<_WordT>(1)) << _S_whichbit(__pos); }
-
-
-
-
-
-
-
-      __attribute__((__noreturn__))
-      _WordT&
-      _M_getword(size_t) noexcept
-      { __throw_out_of_range(("_Base_bitset::_M_getword")); }
-
-      constexpr _WordT
-      _M_getword(size_t) const noexcept
-      { return 0; }
-
-      constexpr _WordT
-      _M_hiword() const noexcept
-      { return 0; }
-
-      constexpr void
-      _M_do_and(const _Base_bitset<0>&) noexcept
-      { }
-
-      constexpr void
-      _M_do_or(const _Base_bitset<0>&) noexcept
-      { }
-
-      constexpr void
-      _M_do_xor(const _Base_bitset<0>&) noexcept
-      { }
-
-      constexpr void
-      _M_do_left_shift(size_t) noexcept
-      { }
-
-      constexpr void
-      _M_do_right_shift(size_t) noexcept
-      { }
-
-      constexpr void
-      _M_do_flip() noexcept
-      { }
-
-      constexpr void
-      _M_do_set() noexcept
-      { }
-
-      constexpr void
-      _M_do_reset() noexcept
-      { }
-
-
-
-
-      constexpr bool
-      _M_is_equal(const _Base_bitset<0>&) const noexcept
-      { return true; }
-
-      template<size_t _Nb>
-        constexpr bool
-        _M_are_all() const noexcept
-        { return true; }
-
-      constexpr bool
-      _M_is_any() const noexcept
-      { return false; }
-
-      constexpr size_t
-      _M_do_count() const noexcept
-      { return 0; }
-
-      constexpr unsigned long
-      _M_do_to_ulong() const noexcept
-      { return 0; }
-
-
-      constexpr unsigned long long
-      _M_do_to_ullong() const noexcept
-      { return 0; }
-
-
-
-
-      constexpr size_t
-      _M_do_find_first(size_t) const noexcept
-      { return 0; }
-
-      constexpr size_t
-      _M_do_find_next(size_t, size_t) const noexcept
-      { return 0; }
-    };
-
-
-
-  template<size_t _Extrabits>
-    struct _Sanitize
-    {
-      typedef unsigned long _WordT;
-
-      static constexpr void
-      _S_do_sanitize(_WordT& __val) noexcept
-      { __val &= ~((~static_cast<_WordT>(0)) << _Extrabits); }
-    };
-
-  template<>
-    struct _Sanitize<0>
-    {
-      typedef unsigned long _WordT;
-
-      static constexpr void
-      _S_do_sanitize(_WordT) noexcept { }
-    };
-
-
-  template<size_t _Nb, bool = (_Nb < (8 * 8))>
-    struct _Sanitize_val
-    {
-      static constexpr unsigned long long
-      _S_do_sanitize_val(unsigned long long __val)
-      { return __val; }
-    };
-
-  template<size_t _Nb>
-    struct _Sanitize_val<_Nb, true>
-    {
-      static constexpr unsigned long long
-      _S_do_sanitize_val(unsigned long long __val)
-      { return __val & ~((~static_cast<unsigned long long>(0)) << _Nb); }
-    };
-
-  namespace __bitset
-  {
-
-    template<typename _CharT>
-      using __string = std::basic_string<_CharT>;
-# 737 "/usr/include/c++/14.2.0/bitset" 3
-  }
-# 803 "/usr/include/c++/14.2.0/bitset" 3
-  template<size_t _Nb>
-    class bitset
-    : private _Base_bitset<((_Nb) / (8 * 8) + ((_Nb) % (8 * 8) == 0 ? 0 : 1))>
-    {
-    private:
-      typedef _Base_bitset<((_Nb) / (8 * 8) + ((_Nb) % (8 * 8) == 0 ? 0 : 1))> _Base;
-      typedef unsigned long _WordT;
-
-
-      template<class _CharT, class _Traits, class _Alloc>
-     
-      void
-      _M_check_initial_position(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
-    size_t __position) const
-      {
- if (__position > __s.size())
-   __throw_out_of_range_fmt(("bitset::bitset: __position " "(which is %zu) > __s.size() " "(which is %zu)")
-
-                            ,
-       __position, __s.size());
-      }
-
-
-     
-      void _M_check(size_t __position, const char *__s) const
-      {
- if (__position >= _Nb)
-   __throw_out_of_range_fmt(("%s: __position (which is %zu) " ">= _Nb (which is %zu)")
-                                   ,
-       __s, __position, _Nb);
-      }
-
-     
-      void
-      _M_do_sanitize() noexcept
-      {
- typedef _Sanitize<_Nb % (8 * 8)> __sanitize_type;
- __sanitize_type::_S_do_sanitize(this->_M_hiword());
-      }
-
-
-      friend struct std::hash<bitset>;
-
-
-    public:
-# 860 "/usr/include/c++/14.2.0/bitset" 3
-      class reference
-      {
- friend class bitset;
-
- _WordT* _M_wp;
- size_t _M_bpos;
-
-
- reference();
-
-      public:
-
- reference(bitset& __b, size_t __pos) noexcept
- {
-   _M_wp = &__b._M_getword(__pos);
-   _M_bpos = _Base::_S_whichbit(__pos);
- }
-
-
- reference(const reference&) = default;
-
-
-
-
-
- ~reference() noexcept
- { }
-
-
-
- reference&
- operator=(bool __x) noexcept
- {
-   if (__x)
-     *_M_wp |= _Base::_S_maskbit(_M_bpos);
-   else
-     *_M_wp &= ~_Base::_S_maskbit(_M_bpos);
-   return *this;
- }
-
-
-
- reference&
- operator=(const reference& __j) noexcept
- {
-   if ((*(__j._M_wp) & _Base::_S_maskbit(__j._M_bpos)))
-     *_M_wp |= _Base::_S_maskbit(_M_bpos);
-   else
-     *_M_wp &= ~_Base::_S_maskbit(_M_bpos);
-   return *this;
- }
-
-
-
- bool
- operator~() const noexcept
- { return (*(_M_wp) & _Base::_S_maskbit(_M_bpos)) == 0; }
-
-
-
- operator bool() const noexcept
- { return (*(_M_wp) & _Base::_S_maskbit(_M_bpos)) != 0; }
-
-
-
- reference&
- flip() noexcept
- {
-   *_M_wp ^= _Base::_S_maskbit(_M_bpos);
-   return *this;
- }
-      };
-      friend class reference;
-
-
-
-      constexpr bitset() noexcept
-      { }
-
-
-
-      constexpr bitset(unsigned long long __val) noexcept
-      : _Base(_Sanitize_val<_Nb>::_S_do_sanitize_val(__val)) { }
-# 959 "/usr/include/c++/14.2.0/bitset" 3
-      template<class _CharT, class _Traits, class _Alloc>
-
- explicit
- bitset(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
-        size_t __position = 0)
- : _Base()
- {
-   _M_check_initial_position(__s, __position);
-   _M_copy_from_string(__s, __position,
-         std::basic_string<_CharT, _Traits, _Alloc>::npos,
-         _CharT('0'), _CharT('1'));
- }
-# 982 "/usr/include/c++/14.2.0/bitset" 3
-      template<class _CharT, class _Traits, class _Alloc>
-
- bitset(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
-        size_t __position, size_t __n)
- : _Base()
- {
-   _M_check_initial_position(__s, __position);
-   _M_copy_from_string(__s, __position, __n, _CharT('0'), _CharT('1'));
- }
-
-
-
-      template<class _CharT, class _Traits, class _Alloc>
-
- bitset(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
-        size_t __position, size_t __n,
-        _CharT __zero, _CharT __one = _CharT('1'))
- : _Base()
- {
-   _M_check_initial_position(__s, __position);
-   _M_copy_from_string(__s, __position, __n, __zero, __one);
- }
-# 1016 "/usr/include/c++/14.2.0/bitset" 3
-      template<typename _CharT>
- [[__gnu__::__nonnull__]]
-
-        explicit
- bitset(const _CharT* __str,
-        typename __bitset::__string<_CharT>::size_type __n
-   = __bitset::__string<_CharT>::npos,
-        _CharT __zero = _CharT('0'), _CharT __one = _CharT('1'))
-        : _Base()
-        {
-
-   if (!__str)
-     __throw_logic_error(("bitset::bitset(const _CharT*, ...)"));
-
-   using _Traits = typename __bitset::__string<_CharT>::traits_type;
-
-   if (__n == __bitset::__string<_CharT>::npos)
-     __n = _Traits::length(__str);
-   _M_copy_from_ptr<_CharT, _Traits>(__str, __n, 0, __n, __zero, __one);
- }
-# 1046 "/usr/include/c++/14.2.0/bitset" 3
-     
-      bitset<_Nb>&
-      operator&=(const bitset<_Nb>& __rhs) noexcept
-      {
- this->_M_do_and(__rhs);
- return *this;
-      }
-
-     
-      bitset<_Nb>&
-      operator|=(const bitset<_Nb>& __rhs) noexcept
-      {
- this->_M_do_or(__rhs);
- return *this;
-      }
-
-     
-      bitset<_Nb>&
-      operator^=(const bitset<_Nb>& __rhs) noexcept
-      {
- this->_M_do_xor(__rhs);
- return *this;
-      }
-# 1078 "/usr/include/c++/14.2.0/bitset" 3
-     
-      bitset<_Nb>&
-      operator<<=(size_t __position) noexcept
-      {
- if (__builtin_expect(__position < _Nb, 1))
-   {
-     this->_M_do_left_shift(__position);
-     this->_M_do_sanitize();
-   }
- else
-   this->_M_do_reset();
- return *this;
-      }
-
-     
-      bitset<_Nb>&
-      operator>>=(size_t __position) noexcept
-      {
- if (__builtin_expect(__position < _Nb, 1))
-   this->_M_do_right_shift(__position);
- else
-   this->_M_do_reset();
- return *this;
-      }
-# 1110 "/usr/include/c++/14.2.0/bitset" 3
-     
-      bitset<_Nb>&
-      _Unchecked_set(size_t __pos) noexcept
-      {
- this->_M_getword(__pos) |= _Base::_S_maskbit(__pos);
- return *this;
-      }
-
-     
-      bitset<_Nb>&
-      _Unchecked_set(size_t __pos, int __val) noexcept
-      {
- if (__val)
-   this->_M_getword(__pos) |= _Base::_S_maskbit(__pos);
- else
-   this->_M_getword(__pos) &= ~_Base::_S_maskbit(__pos);
- return *this;
-      }
-
-     
-      bitset<_Nb>&
-      _Unchecked_reset(size_t __pos) noexcept
-      {
- this->_M_getword(__pos) &= ~_Base::_S_maskbit(__pos);
- return *this;
-      }
-
-     
-      bitset<_Nb>&
-      _Unchecked_flip(size_t __pos) noexcept
-      {
- this->_M_getword(__pos) ^= _Base::_S_maskbit(__pos);
- return *this;
-      }
-
-      constexpr bool
-      _Unchecked_test(size_t __pos) const noexcept
-      { return ((this->_M_getword(__pos) & _Base::_S_maskbit(__pos))
-  != static_cast<_WordT>(0)); }
-
-
-
-
-
-
-     
-      bitset<_Nb>&
-      set() noexcept
-      {
- this->_M_do_set();
- this->_M_do_sanitize();
- return *this;
-      }
-
-
-
-
-
-
-
-     
-      bitset<_Nb>&
-      set(size_t __position, bool __val = true)
-      {
- this->_M_check(__position, ("bitset::set"));
- return _Unchecked_set(__position, __val);
-      }
-
-
-
-
-     
-      bitset<_Nb>&
-      reset() noexcept
-      {
- this->_M_do_reset();
- return *this;
-      }
-# 1196 "/usr/include/c++/14.2.0/bitset" 3
-     
-      bitset<_Nb>&
-      reset(size_t __position)
-      {
- this->_M_check(__position, ("bitset::reset"));
- return _Unchecked_reset(__position);
-      }
-
-
-
-
-     
-      bitset<_Nb>&
-      flip() noexcept
-      {
- this->_M_do_flip();
- this->_M_do_sanitize();
- return *this;
-      }
-
-
-
-
-
-
-     
-      bitset<_Nb>&
-      flip(size_t __position)
-      {
- this->_M_check(__position, ("bitset::flip"));
- return _Unchecked_flip(__position);
-      }
-
-
-     
-      bitset<_Nb>
-      operator~() const noexcept
-      { return bitset<_Nb>(*this).flip(); }
-# 1250 "/usr/include/c++/14.2.0/bitset" 3
-     
-      reference
-      operator[](size_t __position)
-      { return reference(*this, __position); }
-
-      constexpr bool
-      operator[](size_t __position) const
-      { return _Unchecked_test(__position); }
-# 1266 "/usr/include/c++/14.2.0/bitset" 3
-     
-      unsigned long
-      to_ulong() const
-      { return this->_M_do_to_ulong(); }
-
-
-     
-      unsigned long long
-      to_ullong() const
-      { return this->_M_do_to_ullong(); }
-# 1287 "/usr/include/c++/14.2.0/bitset" 3
-      template<class _CharT, class _Traits, class _Alloc>
-
- std::basic_string<_CharT, _Traits, _Alloc>
- to_string() const
- {
-   std::basic_string<_CharT, _Traits, _Alloc> __result;
-   _M_copy_to_string(__result, _CharT('0'), _CharT('1'));
-   return __result;
- }
-
-
-
-      template<class _CharT, class _Traits, class _Alloc>
-
- std::basic_string<_CharT, _Traits, _Alloc>
- to_string(_CharT __zero, _CharT __one = _CharT('1')) const
- {
-   std::basic_string<_CharT, _Traits, _Alloc> __result;
-   _M_copy_to_string(__result, __zero, __one);
-   return __result;
- }
-
-
-
-      template<class _CharT, class _Traits>
-
- std::basic_string<_CharT, _Traits, std::allocator<_CharT> >
- to_string() const
- { return to_string<_CharT, _Traits, std::allocator<_CharT> >(); }
-
-
-
-      template<class _CharT, class _Traits>
-
- std::basic_string<_CharT, _Traits, std::allocator<_CharT> >
- to_string(_CharT __zero, _CharT __one = _CharT('1')) const
- { return to_string<_CharT, _Traits,
-                    std::allocator<_CharT> >(__zero, __one); }
-
-      template<class _CharT>
-
- std::basic_string<_CharT, std::char_traits<_CharT>,
-                   std::allocator<_CharT> >
- to_string() const
- {
-   return to_string<_CharT, std::char_traits<_CharT>,
-                    std::allocator<_CharT> >();
- }
-
-      template<class _CharT>
-
- std::basic_string<_CharT, std::char_traits<_CharT>,
-                   std::allocator<_CharT> >
- to_string(_CharT __zero, _CharT __one = _CharT('1')) const
- {
-   return to_string<_CharT, std::char_traits<_CharT>,
-                    std::allocator<_CharT> >(__zero, __one);
- }
-
-     
-      std::basic_string<char, std::char_traits<char>, std::allocator<char> >
-      to_string() const
-      {
- return to_string<char, std::char_traits<char>,
-                  std::allocator<char> >();
-      }
-
-     
-      std::basic_string<char, std::char_traits<char>, std::allocator<char> >
-      to_string(char __zero, char __one = '1') const
-      {
- return to_string<char, std::char_traits<char>,
-                  std::allocator<char> >(__zero, __one);
-      }
-
-
-
-     
-      size_t
-      count() const noexcept
-      { return this->_M_do_count(); }
-
-
-      constexpr size_t
-      size() const noexcept
-      { return _Nb; }
-
-
-
-     
-      bool
-      operator==(const bitset<_Nb>& __rhs) const noexcept
-      { return this->_M_is_equal(__rhs); }
-# 1395 "/usr/include/c++/14.2.0/bitset" 3
-     
-      bool
-      test(size_t __position) const
-      {
- this->_M_check(__position, ("bitset::test"));
- return _Unchecked_test(__position);
-      }
-
-
-
-
-
-
-
-     
-      bool
-      all() const noexcept
-      { return this->template _M_are_all<_Nb>(); }
-
-
-
-
-
-     
-      bool
-      any() const noexcept
-      { return this->_M_is_any(); }
-
-
-
-
-
-     
-      bool
-      none() const noexcept
-      { return !this->_M_is_any(); }
-
-
-
-     
-      bitset<_Nb>
-      operator<<(size_t __position) const noexcept
-      { return bitset<_Nb>(*this) <<= __position; }
-
-     
-      bitset<_Nb>
-      operator>>(size_t __position) const noexcept
-      { return bitset<_Nb>(*this) >>= __position; }
-# 1451 "/usr/include/c++/14.2.0/bitset" 3
-     
-      size_t
-      _Find_first() const noexcept
-      { return this->_M_do_find_first(_Nb); }
-# 1463 "/usr/include/c++/14.2.0/bitset" 3
-     
-      size_t
-      _Find_next(size_t __prev) const noexcept
-      { return this->_M_do_find_next(__prev, _Nb); }
-
-    private:
-
-      template<class _CharT, class _Traits>
-
-        void
-        _M_copy_from_ptr(const _CharT*, size_t, size_t, size_t,
-    _CharT, _CharT);
-
-
-      template<class _CharT, class _Traits, class _Alloc>
-
- void
- _M_copy_from_string(const std::basic_string<_CharT,
-       _Traits, _Alloc>& __s, size_t __pos, size_t __n,
-       _CharT __zero, _CharT __one)
- { _M_copy_from_ptr<_CharT, _Traits>(__s.data(), __s.size(), __pos, __n,
-         __zero, __one); }
-
-      template<class _CharT, class _Traits, class _Alloc>
-
- void
-        _M_copy_to_string(std::basic_string<_CharT, _Traits, _Alloc>&,
-     _CharT, _CharT) const;
-
-      template<class _CharT, class _Traits, size_t _Nb2>
- friend std::basic_istream<_CharT, _Traits>&
- operator>>(std::basic_istream<_CharT, _Traits>&, bitset<_Nb2>&);
-
-      template <class _CharT, class _Traits, size_t _Nb2>
- friend std::basic_ostream<_CharT, _Traits>&
- operator<<(std::basic_ostream<_CharT, _Traits>&, const bitset<_Nb2>&);
-
-    };
-
-
-  template<size_t _Nb>
-    template<class _CharT, class _Traits>
-     
-      void
-      bitset<_Nb>::
-      _M_copy_from_ptr(const _CharT* __s, size_t __len,
-         size_t __pos, size_t __n, _CharT __zero, _CharT __one)
-      {
- reset();
- const size_t __nbits = std::min(_Nb, std::min(__n, size_t(__len - __pos)));
- for (size_t __i = __nbits; __i > 0; --__i)
-   {
-     const _CharT __c = __s[__pos + __nbits - __i];
-     if (_Traits::eq(__c, __zero))
-       ;
-     else if (_Traits::eq(__c, __one))
-       _Unchecked_set(__i - 1);
-     else
-       __throw_invalid_argument(("bitset::_M_copy_from_ptr"));
-   }
-      }
-
-
-  template<size_t _Nb>
-    template<class _CharT, class _Traits, class _Alloc>
-     
-      void
-      bitset<_Nb>::
-      _M_copy_to_string(std::basic_string<_CharT, _Traits, _Alloc>& __s,
-   _CharT __zero, _CharT __one) const
-      {
- __s.assign(_Nb, __zero);
- size_t __n = this->_Find_first();
- while (__n < _Nb)
-   {
-     __s[_Nb - __n - 1] = __one;
-     __n = _Find_next(__n);
-   }
-      }
-# 1554 "/usr/include/c++/14.2.0/bitset" 3
-  template<size_t _Nb>
-   
-    inline bitset<_Nb>
-    operator&(const bitset<_Nb>& __x, const bitset<_Nb>& __y) noexcept
-    {
-      bitset<_Nb> __result(__x);
-      __result &= __y;
-      return __result;
-    }
-
-  template<size_t _Nb>
-   
-    inline bitset<_Nb>
-    operator|(const bitset<_Nb>& __x, const bitset<_Nb>& __y) noexcept
-    {
-      bitset<_Nb> __result(__x);
-      __result |= __y;
-      return __result;
-    }
-
-  template <size_t _Nb>
-   
-    inline bitset<_Nb>
-    operator^(const bitset<_Nb>& __x, const bitset<_Nb>& __y) noexcept
-    {
-      bitset<_Nb> __result(__x);
-      __result ^= __y;
-      return __result;
-    }
-# 1595 "/usr/include/c++/14.2.0/bitset" 3
-  template<class _CharT, class _Traits, size_t _Nb>
-    std::basic_istream<_CharT, _Traits>&
-    operator>>(std::basic_istream<_CharT, _Traits>& __is, bitset<_Nb>& __x)
-    {
-      typedef typename _Traits::char_type char_type;
-      typedef std::basic_istream<_CharT, _Traits> __istream_type;
-      typedef typename __istream_type::ios_base __ios_base;
-
-      struct _Buffer
-      {
- static constexpr bool _S_use_alloca() { return _Nb <= 256; }
-
- explicit _Buffer(_CharT* __p) : _M_ptr(__p) { }
-
- ~_Buffer()
- {
-   if constexpr (!_S_use_alloca())
-     delete[] _M_ptr;
- }
-
- _CharT* const _M_ptr;
-      };
-      _CharT* __ptr;
-      if constexpr (_Buffer::_S_use_alloca())
- __ptr = (_CharT*)__builtin_alloca(_Nb);
-      else
- __ptr = new _CharT[_Nb];
-      const _Buffer __buf(__ptr);
-
-
-
-      const char_type __zero = __is.widen('0');
-      const char_type __one = __is.widen('1');
-
-      typename __ios_base::iostate __state = __ios_base::goodbit;
-      typename __istream_type::sentry __sentry(__is);
-      if (__sentry)
- {
-   try
-     {
-       for (size_t __i = _Nb; __i > 0; --__i)
-  {
-    static typename _Traits::int_type __eof = _Traits::eof();
-
-    typename _Traits::int_type __c1 = __is.rdbuf()->sbumpc();
-    if (_Traits::eq_int_type(__c1, __eof))
-      {
-        __state |= __ios_base::eofbit;
-        break;
-      }
-    else
-      {
-        const char_type __c2 = _Traits::to_char_type(__c1);
-        if (_Traits::eq(__c2, __zero))
-   *__ptr++ = __zero;
-        else if (_Traits::eq(__c2, __one))
-   *__ptr++ = __one;
-        else if (_Traits::
-          eq_int_type(__is.rdbuf()->sputbackc(__c2),
-        __eof))
-   {
-     __state |= __ios_base::failbit;
-     break;
-   }
-      }
-  }
-     }
-   catch(__cxxabiv1::__forced_unwind&)
-     {
-       __is._M_setstate(__ios_base::badbit);
-       throw;
-     }
-   catch(...)
-     { __is._M_setstate(__ios_base::badbit); }
- }
-
-      if constexpr (_Nb)
-      {
- if (size_t __len = __ptr - __buf._M_ptr)
-   __x.template _M_copy_from_ptr<_CharT, _Traits>(__buf._M_ptr, __len,
-        0, __len,
-        __zero, __one);
- else
-   __state |= __ios_base::failbit;
-      }
-      if (__state)
- __is.setstate(__state);
-      return __is;
-    }
-
-  template <class _CharT, class _Traits, size_t _Nb>
-    std::basic_ostream<_CharT, _Traits>&
-    operator<<(std::basic_ostream<_CharT, _Traits>& __os,
-        const bitset<_Nb>& __x)
-    {
-      std::basic_string<_CharT, _Traits> __tmp;
-
-
-
-      const ctype<_CharT>& __ct = use_facet<ctype<_CharT> >(__os.getloc());
-      __x._M_copy_to_string(__tmp, __ct.widen('0'), __ct.widen('1'));
-      return __os << __tmp;
-    }
-
-
-
-
-}
-
-
-
-
-
-
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-
-  template<size_t _Nb>
-    struct hash<std::bitset<_Nb>>
-    : public __hash_base<size_t, std::bitset<_Nb>>
-    {
-      size_t
-      operator()(const std::bitset<_Nb>& __b) const noexcept
-      {
- const size_t __clength = (_Nb + 8 - 1) / 8;
- return std::_Hash_impl::hash(__b._M_getdata(), __clength);
-      }
-    };
-
-  template<>
-    struct hash<std::bitset<0>>
-    : public __hash_base<size_t, std::bitset<0>>
-    {
-      size_t
-      operator()(const std::bitset<0>&) const noexcept
-      { return 0; }
-    };
-
-
-}
-# 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/des.h" 1
-# 13 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/des.h"
+# 13 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/des.h" 2
 # 1 "/usr/include/c++/14.2.0/functional" 1 3
 # 46 "/usr/include/c++/14.2.0/functional" 3
        
@@ -63052,7 +61626,7 @@ namespace Modern::DES {
 
     }
 }
-# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 7 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/attacks/bruteforce.h" 1
 
@@ -69455,20 +68029,1457 @@ namespace Attacks::BruteForce {
         constexpr std::ranges::iota_view<int, int> shifts = std::views::iota(0, 26);
     }
 }
-# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.h" 1
-# 9 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.h"
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.h"
+# 1 "/usr/include/c++/14.2.0/bitset" 1 3
+# 45 "/usr/include/c++/14.2.0/bitset" 3
+       
+# 46 "/usr/include/c++/14.2.0/bitset" 3
+# 62 "/usr/include/c++/14.2.0/bitset" 3
+# 1 "/usr/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.0/bits/version.h" 3
+# 63 "/usr/include/c++/14.2.0/bitset" 2 3
+# 71 "/usr/include/c++/14.2.0/bitset" 3
+
+# 71 "/usr/include/c++/14.2.0/bitset" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+
+
+
+
+  template<size_t _Nw>
+    struct _Base_bitset
+    {
+      typedef unsigned long _WordT;
+
+
+      _WordT _M_w[_Nw];
+
+      constexpr _Base_bitset() noexcept
+      : _M_w() { }
+
+
+      constexpr _Base_bitset(unsigned long long __val) noexcept
+      : _M_w{ _WordT(__val)
+
+
+
+       } { }
+
+
+
+
+
+
+      static constexpr size_t
+      _S_whichword(size_t __pos) noexcept
+      { return __pos / (8 * 8); }
+
+      static constexpr size_t
+      _S_whichbyte(size_t __pos) noexcept
+      { return (__pos % (8 * 8)) / 8; }
+
+      static constexpr size_t
+      _S_whichbit(size_t __pos) noexcept
+      { return __pos % (8 * 8); }
+
+      static constexpr _WordT
+      _S_maskbit(size_t __pos) noexcept
+      { return (static_cast<_WordT>(1)) << _S_whichbit(__pos); }
+
+      constexpr _WordT&
+      _M_getword(size_t __pos) noexcept
+      { return _M_w[_S_whichword(__pos)]; }
+
+      constexpr _WordT
+      _M_getword(size_t __pos) const noexcept
+      { return _M_w[_S_whichword(__pos)]; }
+
+
+      constexpr const _WordT*
+      _M_getdata() const noexcept
+      { return _M_w; }
+
+
+      _WordT&
+      _M_hiword() noexcept
+      { return _M_w[_Nw - 1]; }
+
+      constexpr _WordT
+      _M_hiword() const noexcept
+      { return _M_w[_Nw - 1]; }
+
+      void
+      _M_do_and(const _Base_bitset<_Nw>& __x) noexcept
+      {
+ for (size_t __i = 0; __i < _Nw; __i++)
+   _M_w[__i] &= __x._M_w[__i];
+      }
+
+      constexpr void
+      _M_do_or(const _Base_bitset<_Nw>& __x) noexcept
+      {
+ for (size_t __i = 0; __i < _Nw; __i++)
+   _M_w[__i] |= __x._M_w[__i];
+      }
+
+      constexpr void
+      _M_do_xor(const _Base_bitset<_Nw>& __x) noexcept
+      {
+ for (size_t __i = 0; __i < _Nw; __i++)
+   _M_w[__i] ^= __x._M_w[__i];
+      }
+
+      constexpr void
+      _M_do_left_shift(size_t __shift) noexcept;
+
+      constexpr void
+      _M_do_right_shift(size_t __shift) noexcept;
+
+      constexpr void
+      _M_do_flip() noexcept
+      {
+ for (size_t __i = 0; __i < _Nw; __i++)
+   _M_w[__i] = ~_M_w[__i];
+      }
+
+      constexpr void
+      _M_do_set() noexcept
+      {
+
+ if (__builtin_is_constant_evaluated())
+   {
+     for (_WordT& __w : _M_w)
+       __w = ~static_cast<_WordT>(0);;
+     return;
+   }
+
+ __builtin_memset(_M_w, 0xFF, _Nw * sizeof(_WordT));
+      }
+
+      constexpr void
+      _M_do_reset() noexcept
+      {
+
+ if (__builtin_is_constant_evaluated())
+   {
+     for (_WordT& __w : _M_w)
+       __w = 0;
+     return;
+   }
+
+ __builtin_memset(_M_w, 0, _Nw * sizeof(_WordT));
+      }
+
+      constexpr bool
+      _M_is_equal(const _Base_bitset<_Nw>& __x) const noexcept
+      {
+ for (size_t __i = 0; __i < _Nw; ++__i)
+   if (_M_w[__i] != __x._M_w[__i])
+     return false;
+ return true;
+      }
+
+      template<size_t _Nb>
+        constexpr bool
+        _M_are_all() const noexcept
+        {
+   for (size_t __i = 0; __i < _Nw - 1; __i++)
+     if (_M_w[__i] != ~static_cast<_WordT>(0))
+       return false;
+   return _M_hiword() == (~static_cast<_WordT>(0)
+     >> (_Nw * (8 * 8)
+         - _Nb));
+ }
+
+      constexpr bool
+      _M_is_any() const noexcept
+      {
+ for (size_t __i = 0; __i < _Nw; __i++)
+   if (_M_w[__i] != static_cast<_WordT>(0))
+     return true;
+ return false;
+      }
+
+      constexpr size_t
+      _M_do_count() const noexcept
+      {
+ size_t __result = 0;
+ for (size_t __i = 0; __i < _Nw; __i++)
+   __result += __builtin_popcountl(_M_w[__i]);
+ return __result;
+      }
+
+      constexpr unsigned long
+      _M_do_to_ulong() const;
+
+
+      constexpr unsigned long long
+      _M_do_to_ullong() const;
+
+
+
+      constexpr size_t
+      _M_do_find_first(size_t) const noexcept;
+
+
+      constexpr size_t
+      _M_do_find_next(size_t, size_t) const noexcept;
+    };
+
+
+  template<size_t _Nw>
+    constexpr void
+    _Base_bitset<_Nw>::_M_do_left_shift(size_t __shift) noexcept
+    {
+      if (__builtin_expect(__shift != 0, 1))
+ {
+   const size_t __wshift = __shift / (8 * 8);
+   const size_t __offset = __shift % (8 * 8);
+
+   if (__offset == 0)
+     for (size_t __n = _Nw - 1; __n >= __wshift; --__n)
+       _M_w[__n] = _M_w[__n - __wshift];
+   else
+     {
+       const size_t __sub_offset = ((8 * 8)
+        - __offset);
+       for (size_t __n = _Nw - 1; __n > __wshift; --__n)
+  _M_w[__n] = ((_M_w[__n - __wshift] << __offset)
+        | (_M_w[__n - __wshift - 1] >> __sub_offset));
+       _M_w[__wshift] = _M_w[0] << __offset;
+     }
+
+   std::fill(_M_w + 0, _M_w + __wshift, static_cast<_WordT>(0));
+ }
+    }
+
+  template<size_t _Nw>
+    constexpr void
+    _Base_bitset<_Nw>::_M_do_right_shift(size_t __shift) noexcept
+    {
+      if (__builtin_expect(__shift != 0, 1))
+ {
+   const size_t __wshift = __shift / (8 * 8);
+   const size_t __offset = __shift % (8 * 8);
+   const size_t __limit = _Nw - __wshift - 1;
+
+   if (__offset == 0)
+     for (size_t __n = 0; __n <= __limit; ++__n)
+       _M_w[__n] = _M_w[__n + __wshift];
+   else
+     {
+       const size_t __sub_offset = ((8 * 8)
+        - __offset);
+       for (size_t __n = 0; __n < __limit; ++__n)
+  _M_w[__n] = ((_M_w[__n + __wshift] >> __offset)
+        | (_M_w[__n + __wshift + 1] << __sub_offset));
+       _M_w[__limit] = _M_w[_Nw-1] >> __offset;
+     }
+
+   std::fill(_M_w + __limit + 1, _M_w + _Nw, static_cast<_WordT>(0));
+ }
+    }
+
+  template<size_t _Nw>
+    constexpr unsigned long
+    _Base_bitset<_Nw>::_M_do_to_ulong() const
+    {
+      for (size_t __i = 1; __i < _Nw; ++__i)
+ if (_M_w[__i])
+   __throw_overflow_error(("_Base_bitset::_M_do_to_ulong"));
+      return _M_w[0];
+    }
+
+
+  template<size_t _Nw>
+    constexpr unsigned long long
+    _Base_bitset<_Nw>::_M_do_to_ullong() const
+    {
+
+      return _M_do_to_ulong();
+# 340 "/usr/include/c++/14.2.0/bitset" 3
+    }
+
+
+  template<size_t _Nw>
+    constexpr size_t
+    _Base_bitset<_Nw>::
+    _M_do_find_first(size_t __not_found) const noexcept
+    {
+      for (size_t __i = 0; __i < _Nw; __i++)
+ {
+   _WordT __thisword = _M_w[__i];
+   if (__thisword != static_cast<_WordT>(0))
+     return (__i * (8 * 8)
+      + __builtin_ctzl(__thisword));
+ }
+
+      return __not_found;
+    }
+
+  template<size_t _Nw>
+    constexpr size_t
+    _Base_bitset<_Nw>::
+    _M_do_find_next(size_t __prev, size_t __not_found) const noexcept
+    {
+
+      ++__prev;
+
+
+      if (__prev >= _Nw * (8 * 8))
+ return __not_found;
+
+
+      size_t __i = _S_whichword(__prev);
+      _WordT __thisword = _M_w[__i];
+
+
+      __thisword &= (~static_cast<_WordT>(0)) << _S_whichbit(__prev);
+
+      if (__thisword != static_cast<_WordT>(0))
+ return (__i * (8 * 8)
+  + __builtin_ctzl(__thisword));
+
+
+      __i++;
+      for (; __i < _Nw; __i++)
+ {
+   __thisword = _M_w[__i];
+   if (__thisword != static_cast<_WordT>(0))
+     return (__i * (8 * 8)
+      + __builtin_ctzl(__thisword));
+ }
+
+      return __not_found;
+    }
+
+
+
+
+
+
+  template<>
+    struct _Base_bitset<1>
+    {
+      typedef unsigned long _WordT;
+      _WordT _M_w;
+
+      constexpr _Base_bitset() noexcept
+      : _M_w(0)
+      { }
+
+
+      constexpr _Base_bitset(unsigned long long __val) noexcept
+
+
+
+      : _M_w(__val)
+      { }
+
+      static constexpr size_t
+      _S_whichword(size_t __pos) noexcept
+      { return __pos / (8 * 8); }
+
+      static constexpr size_t
+      _S_whichbyte(size_t __pos) noexcept
+      { return (__pos % (8 * 8)) / 8; }
+
+      static constexpr size_t
+      _S_whichbit(size_t __pos) noexcept
+      { return __pos % (8 * 8); }
+
+      static constexpr _WordT
+      _S_maskbit(size_t __pos) noexcept
+      { return (static_cast<_WordT>(1)) << _S_whichbit(__pos); }
+
+      constexpr _WordT&
+      _M_getword(size_t) noexcept
+      { return _M_w; }
+
+      constexpr _WordT
+      _M_getword(size_t) const noexcept
+      { return _M_w; }
+
+
+      constexpr const _WordT*
+      _M_getdata() const noexcept
+      { return &_M_w; }
+
+
+      constexpr _WordT&
+      _M_hiword() noexcept
+      { return _M_w; }
+
+      constexpr _WordT
+      _M_hiword() const noexcept
+      { return _M_w; }
+
+      constexpr void
+      _M_do_and(const _Base_bitset<1>& __x) noexcept
+      { _M_w &= __x._M_w; }
+
+      constexpr void
+      _M_do_or(const _Base_bitset<1>& __x) noexcept
+      { _M_w |= __x._M_w; }
+
+      constexpr void
+      _M_do_xor(const _Base_bitset<1>& __x) noexcept
+      { _M_w ^= __x._M_w; }
+
+      constexpr void
+      _M_do_left_shift(size_t __shift) noexcept
+      { _M_w <<= __shift; }
+
+      constexpr void
+      _M_do_right_shift(size_t __shift) noexcept
+      { _M_w >>= __shift; }
+
+      constexpr void
+      _M_do_flip() noexcept
+      { _M_w = ~_M_w; }
+
+      constexpr void
+      _M_do_set() noexcept
+      { _M_w = ~static_cast<_WordT>(0); }
+
+      constexpr void
+      _M_do_reset() noexcept
+      { _M_w = 0; }
+
+      constexpr bool
+      _M_is_equal(const _Base_bitset<1>& __x) const noexcept
+      { return _M_w == __x._M_w; }
+
+      template<size_t _Nb>
+        constexpr bool
+        _M_are_all() const noexcept
+        { return _M_w == (~static_cast<_WordT>(0)
+     >> ((8 * 8) - _Nb)); }
+
+      constexpr bool
+      _M_is_any() const noexcept
+      { return _M_w != 0; }
+
+      constexpr size_t
+      _M_do_count() const noexcept
+      { return __builtin_popcountl(_M_w); }
+
+      constexpr unsigned long
+      _M_do_to_ulong() const noexcept
+      { return _M_w; }
+
+
+      constexpr unsigned long long
+      _M_do_to_ullong() const noexcept
+      { return _M_w; }
+
+
+      constexpr size_t
+      _M_do_find_first(size_t __not_found) const noexcept
+      {
+        if (_M_w != 0)
+          return __builtin_ctzl(_M_w);
+        else
+          return __not_found;
+      }
+
+
+      constexpr size_t
+      _M_do_find_next(size_t __prev, size_t __not_found) const
+ noexcept
+      {
+ ++__prev;
+ if (__prev >= ((size_t) (8 * 8)))
+   return __not_found;
+
+ _WordT __x = _M_w >> __prev;
+ if (__x != 0)
+   return __builtin_ctzl(__x) + __prev;
+ else
+   return __not_found;
+      }
+    };
+
+
+
+
+
+
+  template<>
+    struct _Base_bitset<0>
+    {
+      typedef unsigned long _WordT;
+
+      constexpr _Base_bitset() noexcept
+      { }
+
+
+      constexpr _Base_bitset(unsigned long long) noexcept
+
+
+
+      { }
+
+      static constexpr size_t
+      _S_whichword(size_t __pos) noexcept
+      { return __pos / (8 * 8); }
+
+      static constexpr size_t
+      _S_whichbyte(size_t __pos) noexcept
+      { return (__pos % (8 * 8)) / 8; }
+
+      static constexpr size_t
+      _S_whichbit(size_t __pos) noexcept
+      { return __pos % (8 * 8); }
+
+      static constexpr _WordT
+      _S_maskbit(size_t __pos) noexcept
+      { return (static_cast<_WordT>(1)) << _S_whichbit(__pos); }
+
+
+
+
+
+
+
+      __attribute__((__noreturn__))
+      _WordT&
+      _M_getword(size_t) noexcept
+      { __throw_out_of_range(("_Base_bitset::_M_getword")); }
+
+      constexpr _WordT
+      _M_getword(size_t) const noexcept
+      { return 0; }
+
+      constexpr _WordT
+      _M_hiword() const noexcept
+      { return 0; }
+
+      constexpr void
+      _M_do_and(const _Base_bitset<0>&) noexcept
+      { }
+
+      constexpr void
+      _M_do_or(const _Base_bitset<0>&) noexcept
+      { }
+
+      constexpr void
+      _M_do_xor(const _Base_bitset<0>&) noexcept
+      { }
+
+      constexpr void
+      _M_do_left_shift(size_t) noexcept
+      { }
+
+      constexpr void
+      _M_do_right_shift(size_t) noexcept
+      { }
+
+      constexpr void
+      _M_do_flip() noexcept
+      { }
+
+      constexpr void
+      _M_do_set() noexcept
+      { }
+
+      constexpr void
+      _M_do_reset() noexcept
+      { }
+
+
+
+
+      constexpr bool
+      _M_is_equal(const _Base_bitset<0>&) const noexcept
+      { return true; }
+
+      template<size_t _Nb>
+        constexpr bool
+        _M_are_all() const noexcept
+        { return true; }
+
+      constexpr bool
+      _M_is_any() const noexcept
+      { return false; }
+
+      constexpr size_t
+      _M_do_count() const noexcept
+      { return 0; }
+
+      constexpr unsigned long
+      _M_do_to_ulong() const noexcept
+      { return 0; }
+
+
+      constexpr unsigned long long
+      _M_do_to_ullong() const noexcept
+      { return 0; }
+
+
+
+
+      constexpr size_t
+      _M_do_find_first(size_t) const noexcept
+      { return 0; }
+
+      constexpr size_t
+      _M_do_find_next(size_t, size_t) const noexcept
+      { return 0; }
+    };
+
+
+
+  template<size_t _Extrabits>
+    struct _Sanitize
+    {
+      typedef unsigned long _WordT;
+
+      static constexpr void
+      _S_do_sanitize(_WordT& __val) noexcept
+      { __val &= ~((~static_cast<_WordT>(0)) << _Extrabits); }
+    };
+
+  template<>
+    struct _Sanitize<0>
+    {
+      typedef unsigned long _WordT;
+
+      static constexpr void
+      _S_do_sanitize(_WordT) noexcept { }
+    };
+
+
+  template<size_t _Nb, bool = (_Nb < (8 * 8))>
+    struct _Sanitize_val
+    {
+      static constexpr unsigned long long
+      _S_do_sanitize_val(unsigned long long __val)
+      { return __val; }
+    };
+
+  template<size_t _Nb>
+    struct _Sanitize_val<_Nb, true>
+    {
+      static constexpr unsigned long long
+      _S_do_sanitize_val(unsigned long long __val)
+      { return __val & ~((~static_cast<unsigned long long>(0)) << _Nb); }
+    };
+
+  namespace __bitset
+  {
+
+    template<typename _CharT>
+      using __string = std::basic_string<_CharT>;
+# 737 "/usr/include/c++/14.2.0/bitset" 3
+  }
+# 803 "/usr/include/c++/14.2.0/bitset" 3
+  template<size_t _Nb>
+    class bitset
+    : private _Base_bitset<((_Nb) / (8 * 8) + ((_Nb) % (8 * 8) == 0 ? 0 : 1))>
+    {
+    private:
+      typedef _Base_bitset<((_Nb) / (8 * 8) + ((_Nb) % (8 * 8) == 0 ? 0 : 1))> _Base;
+      typedef unsigned long _WordT;
+
+
+      template<class _CharT, class _Traits, class _Alloc>
+     
+      void
+      _M_check_initial_position(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
+    size_t __position) const
+      {
+ if (__position > __s.size())
+   __throw_out_of_range_fmt(("bitset::bitset: __position " "(which is %zu) > __s.size() " "(which is %zu)")
+
+                            ,
+       __position, __s.size());
+      }
+
+
+     
+      void _M_check(size_t __position, const char *__s) const
+      {
+ if (__position >= _Nb)
+   __throw_out_of_range_fmt(("%s: __position (which is %zu) " ">= _Nb (which is %zu)")
+                                   ,
+       __s, __position, _Nb);
+      }
+
+     
+      void
+      _M_do_sanitize() noexcept
+      {
+ typedef _Sanitize<_Nb % (8 * 8)> __sanitize_type;
+ __sanitize_type::_S_do_sanitize(this->_M_hiword());
+      }
+
+
+      friend struct std::hash<bitset>;
+
+
+    public:
+# 860 "/usr/include/c++/14.2.0/bitset" 3
+      class reference
+      {
+ friend class bitset;
+
+ _WordT* _M_wp;
+ size_t _M_bpos;
+
+
+ reference();
+
+      public:
+
+ reference(bitset& __b, size_t __pos) noexcept
+ {
+   _M_wp = &__b._M_getword(__pos);
+   _M_bpos = _Base::_S_whichbit(__pos);
+ }
+
+
+ reference(const reference&) = default;
+
+
+
+
+
+ ~reference() noexcept
+ { }
+
+
+
+ reference&
+ operator=(bool __x) noexcept
+ {
+   if (__x)
+     *_M_wp |= _Base::_S_maskbit(_M_bpos);
+   else
+     *_M_wp &= ~_Base::_S_maskbit(_M_bpos);
+   return *this;
+ }
+
+
+
+ reference&
+ operator=(const reference& __j) noexcept
+ {
+   if ((*(__j._M_wp) & _Base::_S_maskbit(__j._M_bpos)))
+     *_M_wp |= _Base::_S_maskbit(_M_bpos);
+   else
+     *_M_wp &= ~_Base::_S_maskbit(_M_bpos);
+   return *this;
+ }
+
+
+
+ bool
+ operator~() const noexcept
+ { return (*(_M_wp) & _Base::_S_maskbit(_M_bpos)) == 0; }
+
+
+
+ operator bool() const noexcept
+ { return (*(_M_wp) & _Base::_S_maskbit(_M_bpos)) != 0; }
+
+
+
+ reference&
+ flip() noexcept
+ {
+   *_M_wp ^= _Base::_S_maskbit(_M_bpos);
+   return *this;
+ }
+      };
+      friend class reference;
+
+
+
+      constexpr bitset() noexcept
+      { }
+
+
+
+      constexpr bitset(unsigned long long __val) noexcept
+      : _Base(_Sanitize_val<_Nb>::_S_do_sanitize_val(__val)) { }
+# 959 "/usr/include/c++/14.2.0/bitset" 3
+      template<class _CharT, class _Traits, class _Alloc>
+
+ explicit
+ bitset(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
+        size_t __position = 0)
+ : _Base()
+ {
+   _M_check_initial_position(__s, __position);
+   _M_copy_from_string(__s, __position,
+         std::basic_string<_CharT, _Traits, _Alloc>::npos,
+         _CharT('0'), _CharT('1'));
+ }
+# 982 "/usr/include/c++/14.2.0/bitset" 3
+      template<class _CharT, class _Traits, class _Alloc>
+
+ bitset(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
+        size_t __position, size_t __n)
+ : _Base()
+ {
+   _M_check_initial_position(__s, __position);
+   _M_copy_from_string(__s, __position, __n, _CharT('0'), _CharT('1'));
+ }
+
+
+
+      template<class _CharT, class _Traits, class _Alloc>
+
+ bitset(const std::basic_string<_CharT, _Traits, _Alloc>& __s,
+        size_t __position, size_t __n,
+        _CharT __zero, _CharT __one = _CharT('1'))
+ : _Base()
+ {
+   _M_check_initial_position(__s, __position);
+   _M_copy_from_string(__s, __position, __n, __zero, __one);
+ }
+# 1016 "/usr/include/c++/14.2.0/bitset" 3
+      template<typename _CharT>
+ [[__gnu__::__nonnull__]]
+
+        explicit
+ bitset(const _CharT* __str,
+        typename __bitset::__string<_CharT>::size_type __n
+   = __bitset::__string<_CharT>::npos,
+        _CharT __zero = _CharT('0'), _CharT __one = _CharT('1'))
+        : _Base()
+        {
+
+   if (!__str)
+     __throw_logic_error(("bitset::bitset(const _CharT*, ...)"));
+
+   using _Traits = typename __bitset::__string<_CharT>::traits_type;
+
+   if (__n == __bitset::__string<_CharT>::npos)
+     __n = _Traits::length(__str);
+   _M_copy_from_ptr<_CharT, _Traits>(__str, __n, 0, __n, __zero, __one);
+ }
+# 1046 "/usr/include/c++/14.2.0/bitset" 3
+     
+      bitset<_Nb>&
+      operator&=(const bitset<_Nb>& __rhs) noexcept
+      {
+ this->_M_do_and(__rhs);
+ return *this;
+      }
+
+     
+      bitset<_Nb>&
+      operator|=(const bitset<_Nb>& __rhs) noexcept
+      {
+ this->_M_do_or(__rhs);
+ return *this;
+      }
+
+     
+      bitset<_Nb>&
+      operator^=(const bitset<_Nb>& __rhs) noexcept
+      {
+ this->_M_do_xor(__rhs);
+ return *this;
+      }
+# 1078 "/usr/include/c++/14.2.0/bitset" 3
+     
+      bitset<_Nb>&
+      operator<<=(size_t __position) noexcept
+      {
+ if (__builtin_expect(__position < _Nb, 1))
+   {
+     this->_M_do_left_shift(__position);
+     this->_M_do_sanitize();
+   }
+ else
+   this->_M_do_reset();
+ return *this;
+      }
+
+     
+      bitset<_Nb>&
+      operator>>=(size_t __position) noexcept
+      {
+ if (__builtin_expect(__position < _Nb, 1))
+   this->_M_do_right_shift(__position);
+ else
+   this->_M_do_reset();
+ return *this;
+      }
+# 1110 "/usr/include/c++/14.2.0/bitset" 3
+     
+      bitset<_Nb>&
+      _Unchecked_set(size_t __pos) noexcept
+      {
+ this->_M_getword(__pos) |= _Base::_S_maskbit(__pos);
+ return *this;
+      }
+
+     
+      bitset<_Nb>&
+      _Unchecked_set(size_t __pos, int __val) noexcept
+      {
+ if (__val)
+   this->_M_getword(__pos) |= _Base::_S_maskbit(__pos);
+ else
+   this->_M_getword(__pos) &= ~_Base::_S_maskbit(__pos);
+ return *this;
+      }
+
+     
+      bitset<_Nb>&
+      _Unchecked_reset(size_t __pos) noexcept
+      {
+ this->_M_getword(__pos) &= ~_Base::_S_maskbit(__pos);
+ return *this;
+      }
+
+     
+      bitset<_Nb>&
+      _Unchecked_flip(size_t __pos) noexcept
+      {
+ this->_M_getword(__pos) ^= _Base::_S_maskbit(__pos);
+ return *this;
+      }
+
+      constexpr bool
+      _Unchecked_test(size_t __pos) const noexcept
+      { return ((this->_M_getword(__pos) & _Base::_S_maskbit(__pos))
+  != static_cast<_WordT>(0)); }
+
+
+
+
+
+
+     
+      bitset<_Nb>&
+      set() noexcept
+      {
+ this->_M_do_set();
+ this->_M_do_sanitize();
+ return *this;
+      }
+
+
+
+
+
+
+
+     
+      bitset<_Nb>&
+      set(size_t __position, bool __val = true)
+      {
+ this->_M_check(__position, ("bitset::set"));
+ return _Unchecked_set(__position, __val);
+      }
+
+
+
+
+     
+      bitset<_Nb>&
+      reset() noexcept
+      {
+ this->_M_do_reset();
+ return *this;
+      }
+# 1196 "/usr/include/c++/14.2.0/bitset" 3
+     
+      bitset<_Nb>&
+      reset(size_t __position)
+      {
+ this->_M_check(__position, ("bitset::reset"));
+ return _Unchecked_reset(__position);
+      }
+
+
+
+
+     
+      bitset<_Nb>&
+      flip() noexcept
+      {
+ this->_M_do_flip();
+ this->_M_do_sanitize();
+ return *this;
+      }
+
+
+
+
+
+
+     
+      bitset<_Nb>&
+      flip(size_t __position)
+      {
+ this->_M_check(__position, ("bitset::flip"));
+ return _Unchecked_flip(__position);
+      }
+
+
+     
+      bitset<_Nb>
+      operator~() const noexcept
+      { return bitset<_Nb>(*this).flip(); }
+# 1250 "/usr/include/c++/14.2.0/bitset" 3
+     
+      reference
+      operator[](size_t __position)
+      { return reference(*this, __position); }
+
+      constexpr bool
+      operator[](size_t __position) const
+      { return _Unchecked_test(__position); }
+# 1266 "/usr/include/c++/14.2.0/bitset" 3
+     
+      unsigned long
+      to_ulong() const
+      { return this->_M_do_to_ulong(); }
+
+
+     
+      unsigned long long
+      to_ullong() const
+      { return this->_M_do_to_ullong(); }
+# 1287 "/usr/include/c++/14.2.0/bitset" 3
+      template<class _CharT, class _Traits, class _Alloc>
+
+ std::basic_string<_CharT, _Traits, _Alloc>
+ to_string() const
+ {
+   std::basic_string<_CharT, _Traits, _Alloc> __result;
+   _M_copy_to_string(__result, _CharT('0'), _CharT('1'));
+   return __result;
+ }
+
+
+
+      template<class _CharT, class _Traits, class _Alloc>
+
+ std::basic_string<_CharT, _Traits, _Alloc>
+ to_string(_CharT __zero, _CharT __one = _CharT('1')) const
+ {
+   std::basic_string<_CharT, _Traits, _Alloc> __result;
+   _M_copy_to_string(__result, __zero, __one);
+   return __result;
+ }
+
+
+
+      template<class _CharT, class _Traits>
+
+ std::basic_string<_CharT, _Traits, std::allocator<_CharT> >
+ to_string() const
+ { return to_string<_CharT, _Traits, std::allocator<_CharT> >(); }
+
+
+
+      template<class _CharT, class _Traits>
+
+ std::basic_string<_CharT, _Traits, std::allocator<_CharT> >
+ to_string(_CharT __zero, _CharT __one = _CharT('1')) const
+ { return to_string<_CharT, _Traits,
+                    std::allocator<_CharT> >(__zero, __one); }
+
+      template<class _CharT>
+
+ std::basic_string<_CharT, std::char_traits<_CharT>,
+                   std::allocator<_CharT> >
+ to_string() const
+ {
+   return to_string<_CharT, std::char_traits<_CharT>,
+                    std::allocator<_CharT> >();
+ }
+
+      template<class _CharT>
+
+ std::basic_string<_CharT, std::char_traits<_CharT>,
+                   std::allocator<_CharT> >
+ to_string(_CharT __zero, _CharT __one = _CharT('1')) const
+ {
+   return to_string<_CharT, std::char_traits<_CharT>,
+                    std::allocator<_CharT> >(__zero, __one);
+ }
+
+     
+      std::basic_string<char, std::char_traits<char>, std::allocator<char> >
+      to_string() const
+      {
+ return to_string<char, std::char_traits<char>,
+                  std::allocator<char> >();
+      }
+
+     
+      std::basic_string<char, std::char_traits<char>, std::allocator<char> >
+      to_string(char __zero, char __one = '1') const
+      {
+ return to_string<char, std::char_traits<char>,
+                  std::allocator<char> >(__zero, __one);
+      }
+
+
+
+     
+      size_t
+      count() const noexcept
+      { return this->_M_do_count(); }
+
+
+      constexpr size_t
+      size() const noexcept
+      { return _Nb; }
+
+
+
+     
+      bool
+      operator==(const bitset<_Nb>& __rhs) const noexcept
+      { return this->_M_is_equal(__rhs); }
+# 1395 "/usr/include/c++/14.2.0/bitset" 3
+     
+      bool
+      test(size_t __position) const
+      {
+ this->_M_check(__position, ("bitset::test"));
+ return _Unchecked_test(__position);
+      }
+
+
+
+
+
+
+
+     
+      bool
+      all() const noexcept
+      { return this->template _M_are_all<_Nb>(); }
+
+
+
+
+
+     
+      bool
+      any() const noexcept
+      { return this->_M_is_any(); }
+
+
+
+
+
+     
+      bool
+      none() const noexcept
+      { return !this->_M_is_any(); }
+
+
+
+     
+      bitset<_Nb>
+      operator<<(size_t __position) const noexcept
+      { return bitset<_Nb>(*this) <<= __position; }
+
+     
+      bitset<_Nb>
+      operator>>(size_t __position) const noexcept
+      { return bitset<_Nb>(*this) >>= __position; }
+# 1451 "/usr/include/c++/14.2.0/bitset" 3
+     
+      size_t
+      _Find_first() const noexcept
+      { return this->_M_do_find_first(_Nb); }
+# 1463 "/usr/include/c++/14.2.0/bitset" 3
+     
+      size_t
+      _Find_next(size_t __prev) const noexcept
+      { return this->_M_do_find_next(__prev, _Nb); }
+
+    private:
+
+      template<class _CharT, class _Traits>
+
+        void
+        _M_copy_from_ptr(const _CharT*, size_t, size_t, size_t,
+    _CharT, _CharT);
+
+
+      template<class _CharT, class _Traits, class _Alloc>
+
+ void
+ _M_copy_from_string(const std::basic_string<_CharT,
+       _Traits, _Alloc>& __s, size_t __pos, size_t __n,
+       _CharT __zero, _CharT __one)
+ { _M_copy_from_ptr<_CharT, _Traits>(__s.data(), __s.size(), __pos, __n,
+         __zero, __one); }
+
+      template<class _CharT, class _Traits, class _Alloc>
+
+ void
+        _M_copy_to_string(std::basic_string<_CharT, _Traits, _Alloc>&,
+     _CharT, _CharT) const;
+
+      template<class _CharT, class _Traits, size_t _Nb2>
+ friend std::basic_istream<_CharT, _Traits>&
+ operator>>(std::basic_istream<_CharT, _Traits>&, bitset<_Nb2>&);
+
+      template <class _CharT, class _Traits, size_t _Nb2>
+ friend std::basic_ostream<_CharT, _Traits>&
+ operator<<(std::basic_ostream<_CharT, _Traits>&, const bitset<_Nb2>&);
+
+    };
+
+
+  template<size_t _Nb>
+    template<class _CharT, class _Traits>
+     
+      void
+      bitset<_Nb>::
+      _M_copy_from_ptr(const _CharT* __s, size_t __len,
+         size_t __pos, size_t __n, _CharT __zero, _CharT __one)
+      {
+ reset();
+ const size_t __nbits = std::min(_Nb, std::min(__n, size_t(__len - __pos)));
+ for (size_t __i = __nbits; __i > 0; --__i)
+   {
+     const _CharT __c = __s[__pos + __nbits - __i];
+     if (_Traits::eq(__c, __zero))
+       ;
+     else if (_Traits::eq(__c, __one))
+       _Unchecked_set(__i - 1);
+     else
+       __throw_invalid_argument(("bitset::_M_copy_from_ptr"));
+   }
+      }
+
+
+  template<size_t _Nb>
+    template<class _CharT, class _Traits, class _Alloc>
+     
+      void
+      bitset<_Nb>::
+      _M_copy_to_string(std::basic_string<_CharT, _Traits, _Alloc>& __s,
+   _CharT __zero, _CharT __one) const
+      {
+ __s.assign(_Nb, __zero);
+ size_t __n = this->_Find_first();
+ while (__n < _Nb)
+   {
+     __s[_Nb - __n - 1] = __one;
+     __n = _Find_next(__n);
+   }
+      }
+# 1554 "/usr/include/c++/14.2.0/bitset" 3
+  template<size_t _Nb>
+   
+    inline bitset<_Nb>
+    operator&(const bitset<_Nb>& __x, const bitset<_Nb>& __y) noexcept
+    {
+      bitset<_Nb> __result(__x);
+      __result &= __y;
+      return __result;
+    }
+
+  template<size_t _Nb>
+   
+    inline bitset<_Nb>
+    operator|(const bitset<_Nb>& __x, const bitset<_Nb>& __y) noexcept
+    {
+      bitset<_Nb> __result(__x);
+      __result |= __y;
+      return __result;
+    }
+
+  template <size_t _Nb>
+   
+    inline bitset<_Nb>
+    operator^(const bitset<_Nb>& __x, const bitset<_Nb>& __y) noexcept
+    {
+      bitset<_Nb> __result(__x);
+      __result ^= __y;
+      return __result;
+    }
+# 1595 "/usr/include/c++/14.2.0/bitset" 3
+  template<class _CharT, class _Traits, size_t _Nb>
+    std::basic_istream<_CharT, _Traits>&
+    operator>>(std::basic_istream<_CharT, _Traits>& __is, bitset<_Nb>& __x)
+    {
+      typedef typename _Traits::char_type char_type;
+      typedef std::basic_istream<_CharT, _Traits> __istream_type;
+      typedef typename __istream_type::ios_base __ios_base;
+
+      struct _Buffer
+      {
+ static constexpr bool _S_use_alloca() { return _Nb <= 256; }
+
+ explicit _Buffer(_CharT* __p) : _M_ptr(__p) { }
+
+ ~_Buffer()
+ {
+   if constexpr (!_S_use_alloca())
+     delete[] _M_ptr;
+ }
+
+ _CharT* const _M_ptr;
+      };
+      _CharT* __ptr;
+      if constexpr (_Buffer::_S_use_alloca())
+ __ptr = (_CharT*)__builtin_alloca(_Nb);
+      else
+ __ptr = new _CharT[_Nb];
+      const _Buffer __buf(__ptr);
+
+
+
+      const char_type __zero = __is.widen('0');
+      const char_type __one = __is.widen('1');
+
+      typename __ios_base::iostate __state = __ios_base::goodbit;
+      typename __istream_type::sentry __sentry(__is);
+      if (__sentry)
+ {
+   try
+     {
+       for (size_t __i = _Nb; __i > 0; --__i)
+  {
+    static typename _Traits::int_type __eof = _Traits::eof();
+
+    typename _Traits::int_type __c1 = __is.rdbuf()->sbumpc();
+    if (_Traits::eq_int_type(__c1, __eof))
+      {
+        __state |= __ios_base::eofbit;
+        break;
+      }
+    else
+      {
+        const char_type __c2 = _Traits::to_char_type(__c1);
+        if (_Traits::eq(__c2, __zero))
+   *__ptr++ = __zero;
+        else if (_Traits::eq(__c2, __one))
+   *__ptr++ = __one;
+        else if (_Traits::
+          eq_int_type(__is.rdbuf()->sputbackc(__c2),
+        __eof))
+   {
+     __state |= __ios_base::failbit;
+     break;
+   }
+      }
+  }
+     }
+   catch(__cxxabiv1::__forced_unwind&)
+     {
+       __is._M_setstate(__ios_base::badbit);
+       throw;
+     }
+   catch(...)
+     { __is._M_setstate(__ios_base::badbit); }
+ }
+
+      if constexpr (_Nb)
+      {
+ if (size_t __len = __ptr - __buf._M_ptr)
+   __x.template _M_copy_from_ptr<_CharT, _Traits>(__buf._M_ptr, __len,
+        0, __len,
+        __zero, __one);
+ else
+   __state |= __ios_base::failbit;
+      }
+      if (__state)
+ __is.setstate(__state);
+      return __is;
+    }
+
+  template <class _CharT, class _Traits, size_t _Nb>
+    std::basic_ostream<_CharT, _Traits>&
+    operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+        const bitset<_Nb>& __x)
+    {
+      std::basic_string<_CharT, _Traits> __tmp;
+
+
+
+      const ctype<_CharT>& __ct = use_facet<ctype<_CharT> >(__os.getloc());
+      __x._M_copy_to_string(__tmp, __ct.widen('0'), __ct.widen('1'));
+      return __os << __tmp;
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+  template<size_t _Nb>
+    struct hash<std::bitset<_Nb>>
+    : public __hash_base<size_t, std::bitset<_Nb>>
+    {
+      size_t
+      operator()(const std::bitset<_Nb>& __b) const noexcept
+      {
+ const size_t __clength = (_Nb + 8 - 1) / 8;
+ return std::_Hash_impl::hash(__b._M_getdata(), __clength);
+      }
+    };
+
+  template<>
+    struct hash<std::bitset<0>>
+    : public __hash_base<size_t, std::bitset<0>>
+    {
+      size_t
+      operator()(const std::bitset<0>&) const noexcept
+      { return 0; }
+    };
+
+
+}
+# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.h" 2
+
+
+# 12 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/stringUtils.h"
 namespace CryptoCPP::StringUtils {
     void removeSpaces(std::string &text);
     void padString(std::string &text, const int &n, const char &filling_char='X');
     void toUpper(std::string &text);
+
+    inline std::vector<uint8_t> stringToBytes(const std::string& input) {
+        return std::vector<uint8_t>(input.begin(), input.end());
+    }
+
+    std::bitset<8> charToBitset(unsigned long long c);
     class Random {
     public:
         static std::string String(const int &length);
         static int Number(const int &min, const int &max);
     };
 }
-# 12 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 
 
 
@@ -69480,9 +69491,7 @@ void printKey(const std::string& key) {
     std::cout << std::endl;
 }
 
-std::vector<uint8_t> stringToBytes(const std::string& input) {
-    return std::vector<uint8_t>(input.begin(), input.end());
-}
+
 
 int main() {
     using namespace Classic;
@@ -69493,14 +69502,14 @@ int main() {
 
     std::cout << "Enter the key: ";
     std::cin >> key;
-    std::vector<uint8_t> bytes = stringToBytes(name);
-    std::vector<uint8_t> key_bytes = stringToBytes(key);
+    std::vector<uint8_t> bytes = CryptoCPP::StringUtils::stringToBytes(name);
+    std::vector<uint8_t> key_bytes = CryptoCPP::StringUtils::stringToBytes(key);
     std::vector<uint8_t> check = Modern::DES::impl::feistalRound(bytes, key_bytes, [](std::vector<uint8_t> text, std::vector<uint8_t> key) {
-        return text;
+        return key;
     });
-    for (uint8_t byte : check) {
-        std::cout << byte << " ";
+    for (const uint8_t byte : check) {
+        std::cout << CryptoCPP::StringUtils::charToBitset(byte) << " ";
     }
-# 87 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+# 83 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;
 }
