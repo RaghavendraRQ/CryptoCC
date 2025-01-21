@@ -32344,8 +32344,8 @@ namespace Classic {
 
     public:
         explicit MyCipher(std::string key) : m_key(std::move(key)) {}
-        [[nodiscard]] std::string encrypt(const std::string &plain_text, int salt_length=10) const;
-        [[nodiscard]] std::string decrypt(std::string& cipher_text, int salt_length=10) const;
+        [[nodiscard]] std::string encrypt(const std::string &plain_text, int salt_length=16) const;
+        [[nodiscard]] std::string decrypt(std::string& cipher_text, int salt_length=16) const;
     };
 
 }

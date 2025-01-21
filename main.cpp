@@ -1,9 +1,13 @@
 
 #include <iostream>
 
-// #include <classic.h>
+#include <classic.h>
 #include <mycipher.h>
+#include <cstdint>
 #include <bitset>
+#include <modern/des.h>
+
+#include "attacks/bruteforce.h"
 #include "lib/stringUtils.h"
 
 // #include <attacks/bruteforce.h>
@@ -16,6 +20,9 @@ void printKey(const std::string& key) {
     std::cout << std::endl;
 }
 
+std::vector<uint8_t> stringToBytes(const std::string& input) {
+    return std::vector<uint8_t>(input.begin(), input.end());
+}
 
 int main() {
     using namespace Classic;
@@ -26,18 +33,27 @@ int main() {
     // std::cin >> name
     std::cout << "Enter the key: ";
     std::cin >> key;
+    std::vector<uint8_t> bytes = stringToBytes(name);
+    std::vector<uint8_t> key_bytes = stringToBytes(key);
+    std::vector<uint8_t> check = Modern::DES::impl::feistalRound(bytes, key_bytes, [](std::vector<uint8_t> text, std::vector<uint8_t> key) {
+        return text;
+    });
+    for (uint8_t byte : check) {
+        std::cout << byte << " ";
+    }
+    // Attacks::BruteForce::caeser(name);
 
     // int mul, bias;
     // std::cout << "Enter the multiplier and bias: ";
     // std::cin >> mul >> bias;
-
-    const MyCipher my_cipher(key);
-    std::string salt = CryptoCPP::StringUtils::Random::String(4);
-    std::cout << "Salt: " << salt << std::endl;
-
-    std::string cipher = my_cipher.encrypt(name);
-    std::cout << "Encrypted name: " << cipher << std::endl;
-    std::cout << "Decrypted name: " << my_cipher.decrypt(cipher) << std::endl;
+    //
+    // const MyCipher my_cipher(key);
+    // std::string salt = CryptoCPP::StringUtils::Random::String(4);
+    // std::cout << "Salt: " << salt << std::endl;
+    //
+    // std::string cipher = my_cipher.encrypt(name);
+    // std::cout << "Encrypted name: " << cipher << std::endl;
+    // std::cout << "Decrypted name: " << my_cipher.decrypt(cipher) << std::endl;
 
     // Substitution substitution;
     // const std::string cipher = substitution.encrypt(name);
