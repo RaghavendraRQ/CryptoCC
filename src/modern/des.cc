@@ -4,9 +4,10 @@
 // #include <stdexcept>
 #include <modern/des.h>
 #include <algorithm>
-#include <utility>
 #include <iostream>
 #include <bitset>
+
+#include "../../lib/stringUtils.h"
 
 
 namespace Modern::DES {
@@ -14,6 +15,47 @@ namespace Modern::DES {
         return plain_text;
     }
     namespace impl {
+
+
+        std::vector<uint8_t> roundFunction(const std::vector<uint8_t> &chunk, const std::vector<uint8_t> &key) {
+            std::vector<uint8_t> expanded_chunk(SUB_KEY_SIZE);
+            for (int i = 0; i < expanded_chunk.size(); i++) {
+                expanded_chunk[i] = chunk[EXPANSION_P_BOX[i] - 1];
+            }
+            std::cout << "Expanded chunk: ";
+            CryptoCPP::StringUtils::printBits(expanded_chunk);
+            // XOR with the round key
+            for (int i = 0; i < expanded_chunk.size(); i++) {
+                expanded_chunk[i] ^= key[i];
+            }
+            // S-Box
+            // For now i am using same S-BOX for all the 8 S-Boxes
+            std::vector<uint8_t> s_box_output;
+            for (int i = 0; i < 8; i++) {
+                std::vector mairu(expanded_chunk.begin() + i * 6, expanded_chunk.begin() + (i + 1) * 6);
+                for (std::vector<uint8_t> temp = sBox(mairu); uint8_t & j : temp)
+                    s_box_output.push_back(j);
+            }
+            std::cout << "S-Box Output: ";
+            CryptoCPP::StringUtils::printBits(s_box_output);
+            // Straight P-Box
+            std::vector<uint8_t> straight_p_box_output(SUB_BLOCK_SIZE);
+            for (int i = 0; i < straight_p_box_output.size(); i++) {
+                straight_p_box_output[i] = s_box_output[STRAIGHT_P_BOX[i] - 1];
+            }
+            return straight_p_box_output;
+        }
+
+        std::vector<uint8_t> sBox(const std::vector<uint8_t> &chunk) {
+            std::vector<uint8_t> s_box_output(4);
+            const int row = chunk[0] * 2 + chunk[5];
+            const int col = chunk[1] * 8 + chunk[2] * 4 + chunk[3] * 2 + chunk[4];
+            for (int i = 0; i < 4; i++) {
+                s_box_output[i] = S_BOX[row][col][i];
+            }
+            return s_box_output;
+        }
+
         std::vector<uint8_t> feistalRound(std::vector<uint8_t> text, std::vector<uint8_t> key, const std::function<std::vector<uint8_t>(std::vector<uint8_t>, std::vector<uint8_t>)> &roundFunction) {
             const std::vector first_half(text.begin(), text.begin() + text.size() / 2);
             const std::vector second_half(text.begin() + text.size() / 2, text.end());
@@ -52,12 +94,17 @@ namespace Modern::DES {
         }
 
         std::vector<uint8_t> initialPermutation(const std::vector<uint8_t> &text) {
-            std::vector<uint8_t> permuted_text;
-            for (int i = 0; i < text.size(); i++) {
-                permuted_text.push_back(text[INITIAL_PERMUTATION.at(i + 1) - 1]);
-            }
+            std::vector<uint8_t> permuted_text(64);
+            for (const auto& [original, mapped]: INITIAL_PERMUTATION)
+                permuted_text[mapped - 1] = text[original - 1];
             return permuted_text;
+        }
 
+        std::vector<uint8_t> finalPermutation(const std::vector<uint8_t> &permuted_text) {
+            std::vector<uint8_t> final_permuted_text(64);
+            for (const auto& [original, mapped]: FINAL_PERMUTATION)
+                final_permuted_text[mapped - 1] = permuted_text[original - 1];
+            return final_permuted_text;
         }
     }
 

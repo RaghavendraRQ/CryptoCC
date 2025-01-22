@@ -9,6 +9,7 @@
 #include <vector>
 #include <map>
 #include <array>
+#include <bitset>
 #include <cstdint>
 #include <functional>
 
@@ -23,12 +24,15 @@ namespace Modern::DES {
     std::string encrypt(std::string plain_text, std::string key);
     std::string decrypt(std::string cipher_text, std::string key);
     namespace impl {
-        std::string permute(std::string text, const std::vector<int> &permutation);
         std::string leftShift(const std::string& text, int shift);
         std::string xorOperation(std::string text1, std::string text2);
-        std::string sBox(std::string text);
-        std::string fFunction(std::string text, std::string key);
+
         std::vector<std::string> generateKeys(std::string key);
+
+        std::vector<uint8_t> roundFunction(const std::vector<uint8_t>& chunk, const std::vector<uint8_t>& key);
+
+        std::vector<uint8_t> sBox(const std::vector<uint8_t>& chunk);
+
 
         std::vector<uint8_t> feistalRound(
             std::vector<uint8_t> text,
@@ -42,6 +46,40 @@ namespace Modern::DES {
 
         std::vector<uint8_t> initialPermutation(const std::vector<uint8_t>& text);
 
+        std::vector<uint8_t> finalPermutation(const std::vector<uint8_t>& permuted_text);
+
+
+        constexpr std::array EXPANSION_P_BOX = {
+            32, 1, 2, 3, 4, 5,
+            4, 5, 6, 7, 8, 9,
+            8, 9, 10, 11, 12, 13,
+            12, 13, 14, 15, 16, 17,
+            16, 17, 18, 19, 20, 21,
+            20, 21, 22, 23, 24, 25,
+            24, 25, 26, 27, 28, 29,
+            28, 29, 30, 31, 32, 1
+        };
+
+        constexpr std::array STRAIGHT_P_BOX = {
+            16, 7, 20, 21, 29, 12, 28, 17,
+            1, 15, 23, 26, 5, 18, 31, 10,
+            2, 8, 24, 14, 32, 27, 3, 9,
+            19, 13, 30, 6, 22, 11, 4, 25
+        };
+
+        const std::vector<std::vector<std::bitset<4>>> S_BOX = {
+            {
+                0010, 1100, 0100, 0001, 0111, 1010, 1011, 0110, 1000, 0101, 0011, 1111, 1101, 0000, 1110, 1001,
+            },
+            {
+                1110, 1011, 0010, 1100, 0100, 0111, 1101, 0001, 0101, 0000, 1111, 1010, 0011, 1001, 1000, 0110,
+            },
+            {
+                0100, 0010, 0001, 1011, 1010, 1101, 0111, 1000, 1111, 1001, 1100, 0101, 0110, 0011, 0000, 1110
+            }, {
+                1011, 1000, 1100, 0111, 0001, 1110, 0010, 1101, 0110, 1111, 0000, 1001, 1010, 0100, 0101, 0011
+            }
+        };
 
         // Constants for the DES algorithm
         const std::map<int, int> SHIFT_TABLE = {
@@ -148,6 +186,73 @@ namespace Modern::DES {
             {62, 17},
             {63, 57},
             {64, 25}
+        };
+
+        const std::map<int, int> FINAL_PERMUTATION = {
+            {40, 1},
+            {8, 2},
+            {48, 3},
+            {16, 4},
+            {56, 5},
+            {24, 6},
+            {64, 7},
+            {32, 8},
+            {39, 9},
+            {7, 10},
+            {47, 11},
+            {15, 12},
+            {55, 13},
+            {23, 14},
+            {63, 15},
+            {31, 16},
+            {38, 17},
+            {6, 18},
+            {46, 19},
+            {14, 20},
+            {54, 21},
+            {22, 22},
+            {62, 23},
+            {30, 24},
+            {37, 25},
+            {5, 26},
+            {45, 27},
+            {13, 28},
+            {53, 29},
+            {21, 30},
+            {61, 31},
+            {29, 32},
+            {36, 33},
+            {4, 34},
+            {44, 35},
+            {12, 36},
+            {52, 37},
+            {20, 38},
+            {60, 39},
+            {28, 40},
+            {35, 41},
+            {3, 42},
+            {43, 43},
+            {11, 44},
+            {51, 45},
+            {19, 46},
+            {59, 47},
+            {27, 48},
+            {34, 49},
+            {2, 50},
+            {42, 51},
+            {10, 52},
+            {50, 53},
+            {18, 54},
+            {58, 55},
+            {26, 56},
+            {33, 57},
+            {1, 58},
+            {41, 59},
+            {9, 60},
+            {49, 61},
+            {17, 62},
+            {57, 63},
+            {25, 64}
         };
     }
 }

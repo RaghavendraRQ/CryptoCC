@@ -4,6 +4,7 @@
 #include "stringUtils.h"
 #include <algorithm>
 #include <random>
+#include <iostream>
 
 namespace CryptoCPP::StringUtils {
 
@@ -20,6 +21,26 @@ namespace CryptoCPP::StringUtils {
     void toUpper(std::string &text) {
         std::ranges::transform(text, text.begin(), ::toupper);
     }
+
+    std::vector<uint8_t> stringToBits(const std::string& input) {
+        std::vector<uint8_t> bits;
+        for (const char c : input) {
+            std::bitset<8> charBits(c);
+            for (size_t i = 0; i < 8; ++i) {
+                bits.push_back(charBits[i]);
+            }
+        }
+        return bits;
+    }
+
+    void printBits(const std::vector<uint8_t>& bits) {
+        for (size_t i = 0; i < bits.size(); ++i) {
+            std::cout << static_cast<int>(bits[i]);
+            if ((i + 1) % 8 == 0) std::cout << " ";
+        }
+        std::cout << std::endl;
+    }
+
 
     std::bitset<8> charToBitset(unsigned long long c) {
         return {c};

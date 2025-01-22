@@ -38821,6 +38821,10 @@ namespace CryptoCPP::StringUtils {
         return std::vector<uint8_t>(input.begin(), input.end());
     }
 
+    std::vector<uint8_t> stringToBits(const std::string& input);
+
+    void printBits(const std::vector<uint8_t>& bits);
+
     std::bitset<8> charToBitset(unsigned long long c);
     class Random {
     public:

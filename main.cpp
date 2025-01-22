@@ -11,13 +11,12 @@
 // #include <attacks/bruteforce.h>
 // #include <attacks/plaintext.h>
 
-void printKey(const std::string& key) {
-    for (char c : key) {
-        std::cout << c << " ";  // Print each character as a binary string
-    }
-    std::cout << std::endl;
-}
-
+// void printBytes(std::vector<uint8_t>& bytes) {
+//     for (const uint8_t byte : bytes) {
+//         std::cout << CryptoCPP::StringUtils::charToBitset(byte) << " ";
+//     }
+//     std::cout << std::endl;
+// }
 
 
 int main() {
@@ -29,14 +28,26 @@ int main() {
     // std::cin >> name
     std::cout << "Enter the key: ";
     std::cin >> key;
-    std::vector<uint8_t> bytes = CryptoCPP::StringUtils::stringToBytes(name);
-    std::vector<uint8_t> key_bytes = CryptoCPP::StringUtils::stringToBytes(key);
-    std::vector<uint8_t> check = Modern::DES::impl::feistalRound(bytes, key_bytes, [](std::vector<uint8_t> text, std::vector<uint8_t> key) {
-        return key;
-    });
-    for (const uint8_t byte : check) {
-        std::cout << CryptoCPP::StringUtils::charToBitset(byte) << " ";
-    }
+    std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
+    std::vector<uint8_t> key_bits = CryptoCPP::StringUtils::stringToBits(key);
+    CryptoCPP::StringUtils::printBits(bits);
+    CryptoCPP::StringUtils::printBits(key_bits);
+    std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
+    CryptoCPP::StringUtils::printBits(permuted_bits);
+    std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
+    std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key_bits);
+    std::cout << "Round 1: ";
+    CryptoCPP::StringUtils::printBits(round_1);
+    // printBytes(bytes);
+    // std::vector<std::bitset<8>> initial_perm = Modern::DES::impl::initialPermutation(bits);
+    // printBytes(initial_perm);
+    // std::vector<uint8_t> key_bytes = CryptoCPP::StringUtils::stringToBytes(key);
+    // std::vector<uint8_t> check = Modern::DES::impl::feistalRound(bytes, key_bytes, [](std::vector<uint8_t> text, std::vector<uint8_t> key) {
+    //     return key;
+    // });
+    // for (const uint8_t byte : check) {
+    //     std::cout << CryptoCPP::StringUtils::charToBitset(byte) << " ";
+    // }
     // Attacks::BruteForce::caeser(name);
 
     // int mul, bias;
