@@ -18,7 +18,7 @@ namespace Modern::DES {
 
 
         std::vector<uint8_t> roundFunction(const std::vector<uint8_t> &chunk, const std::vector<uint8_t> &key) {
-            std::vector<uint8_t> expanded_chunk(SUB_KEY_SIZE);
+            std::vector<uint8_t> expanded_chunk(ROUND_KEY_SIZE);
             for (int i = 0; i < expanded_chunk.size(); i++) {
                 expanded_chunk[i] = chunk[EXPANSION_P_BOX[i] - 1];
             }
@@ -55,6 +55,34 @@ namespace Modern::DES {
             }
             return s_box_output;
         }
+
+        std::vector<uint8_t> permuteKey(const std::vector<uint8_t>& key) {
+            if (key.size() != 8) {
+                throw std::invalid_argument("Input key must be 64 bits (8 bytes).");
+            }
+
+            std::vector<uint8_t> permutation(7); // 56 bits = 7 bytes
+            int bitPosition = 0;
+
+            for (size_t i = 0; i < 8; ++i) {
+                for (int j = 0; j < 7; ++j) { // Only process the first 7 bits of each byte
+                    int targetByte = bitPosition / 8;
+                    int targetBit = 7 - (bitPosition % 8);
+
+                    // Extract the j-th bit of the i-th byte
+                    int sourceBit = 7 - j;
+                    uint8_t bit = (key[i] >> sourceBit) & 0x01;
+
+                    // Set the corresponding bit in the new 56-bit key
+                    permutation[targetByte] |= (bit << targetBit);
+
+                    ++bitPosition;
+                }
+            }
+
+            return permutation;
+        }
+
 
         std::vector<uint8_t> feistalRound(std::vector<uint8_t> text, std::vector<uint8_t> key, const std::function<std::vector<uint8_t>(std::vector<uint8_t>, std::vector<uint8_t>)> &roundFunction) {
             const std::vector first_half(text.begin(), text.begin() + text.size() / 2);

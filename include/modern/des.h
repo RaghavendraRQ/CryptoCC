@@ -19,7 +19,8 @@ namespace Modern::DES {
     inline constexpr int KEY_SIZE = 64;
     inline constexpr int ROUND_COUNT = 16;
     inline constexpr int SUB_BLOCK_SIZE = 32;
-    inline constexpr int SUB_KEY_SIZE = 48;
+    inline constexpr int SUB_KEY_SIZE = 56;
+    inline constexpr int ROUND_KEY_SIZE = 48;
 
     std::string encrypt(std::string plain_text, std::string key);
     std::string decrypt(std::string cipher_text, std::string key);
@@ -32,6 +33,8 @@ namespace Modern::DES {
         std::vector<uint8_t> roundFunction(const std::vector<uint8_t>& chunk, const std::vector<uint8_t>& key);
 
         std::vector<uint8_t> sBox(const std::vector<uint8_t>& chunk);
+
+        std::vector<uint8_t> permuteKey(const std::vector<uint8_t>& key);
 
 
         std::vector<uint8_t> feistalRound(
