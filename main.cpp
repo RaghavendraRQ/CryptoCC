@@ -28,25 +28,22 @@ int main() {
     // std::cin >> name
     // std::cout << "Enter the key: ";
     // std::cin >> key;
-    // std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
+    std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
+    std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB};
     // std::vector<uint8_t> key_bits = CryptoCPP::StringUtils::stringToBits(key);
-    // CryptoCPP::StringUtils::printBits(bits);
+    CryptoCPP::StringUtils::printBits(bits);
     // CryptoCPP::StringUtils::printBits(key_bits);
-    // std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
-    // CryptoCPP::StringUtils::printBits(permuted_bits);
-    // std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
-    // std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key_bits);
-    // std::cout << "Round 1: ";
-    // CryptoCPP::StringUtils::printBits(round_1);
-    std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB, 0x7D, 0xAB};
+    std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
+    CryptoCPP::StringUtils::printBits(permuted_bits);
+    std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
+    std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key64);
+    std::cout << "Round 1: ";
+    CryptoCPP::StringUtils::printBits(round_1);
+
     for (uint8_t byte : key64) {
         std::cout << std::bitset<8>(byte) << " ";
     }
-    std::vector<uint8_t> key56 = Modern::DES::impl::permuteKey(key64);
-    std::cout << "Key 56: \n";
-    for (uint8_t byte : key56) {
-        std::cout << std::bitset<7>(byte) << " ";
-    }
+
 
 
     // printBytes(bytes);

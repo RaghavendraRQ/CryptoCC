@@ -34,4 +34,5 @@ add_executable(CryptoCPP main.cpp
         include/attacks/frequency.h
         src/attacks/frequency.cc
         include/mycipher.h
-        src/mycipher.cc)
+        src/mycipher.cc
+        lib/aesUtils.h)

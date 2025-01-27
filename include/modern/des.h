@@ -22,7 +22,7 @@ namespace Modern::DES {
     inline constexpr int SUB_KEY_SIZE = 56;
     inline constexpr int ROUND_KEY_SIZE = 48;
 
-    std::string encrypt(std::string plain_text, std::string key);
+    std::vector<uint8_t> encrypt(std::vector<uint8_t>& plain_text,const std::vector<uint8_t> &key);
     std::string decrypt(std::string cipher_text, std::string key);
     namespace impl {
         std::string leftShift(const std::string& text, int shift);

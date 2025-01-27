@@ -62987,9 +62987,10 @@ namespace Modern::DES {
     inline constexpr int KEY_SIZE = 64;
     inline constexpr int ROUND_COUNT = 16;
     inline constexpr int SUB_BLOCK_SIZE = 32;
-    inline constexpr int SUB_KEY_SIZE = 48;
+    inline constexpr int SUB_KEY_SIZE = 56;
+    inline constexpr int ROUND_KEY_SIZE = 48;
 
-    std::string encrypt(std::string plain_text, std::string key);
+    std::vector<uint8_t> encrypt(std::vector<uint8_t>& plain_text,const std::vector<uint8_t> &key);
     std::string decrypt(std::string cipher_text, std::string key);
     namespace impl {
         std::string leftShift(const std::string& text, int shift);
@@ -63000,6 +63001,8 @@ namespace Modern::DES {
         std::vector<uint8_t> roundFunction(const std::vector<uint8_t>& chunk, const std::vector<uint8_t>& key);
 
         std::vector<uint8_t> sBox(const std::vector<uint8_t>& chunk);
+
+        std::vector<uint8_t> permuteKey(const std::vector<uint8_t>& key);
 
 
         std::vector<uint8_t> feistalRound(
@@ -69659,18 +69662,24 @@ int main() {
 
     std::getline(std::cin, name);
 
-    std::cout << "Enter the key: ";
-    std::cin >> key;
+
+
     std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
-    std::vector<uint8_t> key_bits = CryptoCPP::StringUtils::stringToBits(key);
+    std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB};
+
     CryptoCPP::StringUtils::printBits(bits);
-    CryptoCPP::StringUtils::printBits(key_bits);
+
     std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
     CryptoCPP::StringUtils::printBits(permuted_bits);
+    std::cout << "Left half: ";
     std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
-    std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key_bits);
+    std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key64);
     std::cout << "Round 1: ";
     CryptoCPP::StringUtils::printBits(round_1);
-# 94 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+
+    for (uint8_t byte : key64) {
+        std::cout << std::bitset<8>(byte) << " ";
+    }
+# 103 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;
 }

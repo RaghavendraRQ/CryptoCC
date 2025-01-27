@@ -11,40 +11,61 @@
 
 
 namespace Modern::DES {
-    std::string encrypt(std::string plain_text, std::string key) {
-        return plain_text;
+    std::vector<uint8_t> encrypt(std::vector<uint8_t> &plain_text,const std::vector<uint8_t>& key) {
+        const std::vector<uint8_t> permuted_key = impl::permuteKey(key);
+        std::vector<uint8_t> permuted_text = impl::initialPermutation(plain_text);
+        for (int i = 0; i < ROUND_COUNT; i++) {
+            permuted_text = impl::feistalRound(permuted_text, permuted_key, impl::roundFunction);
+        }
+        std::vector<uint8_t> cipher_text = impl::finalPermutation(permuted_text);
+        return cipher_text;
     }
     namespace impl {
 
+        std::vector<uint8_t> roundFunction(const std::vector<uint8_t>& chunk, const std::vector<uint8_t>& key64) {
+            // Check input sizes
+            if (key64.size() < 6) {
+                throw std::invalid_argument("Key size is too small");
+            }
+            if (chunk.size() < 4) {
+                throw std::invalid_argument("Chunk size is too small");
+            }
 
-        std::vector<uint8_t> roundFunction(const std::vector<uint8_t> &chunk, const std::vector<uint8_t> &key) {
+            // Expand key to match the required size
             std::vector<uint8_t> expanded_chunk(ROUND_KEY_SIZE);
-            for (int i = 0; i < expanded_chunk.size(); i++) {
+            std::cout << "Check:";
+            for (size_t i = 0; i < expanded_chunk.size(); ++i) {
                 expanded_chunk[i] = chunk[EXPANSION_P_BOX[i] - 1];
             }
-            std::cout << "Expanded chunk: ";
-            CryptoCPP::StringUtils::printBits(expanded_chunk);
             // XOR with the round key
-            for (int i = 0; i < expanded_chunk.size(); i++) {
-                expanded_chunk[i] ^= key[i];
+            for (size_t i = 0; i < expanded_chunk.size(); ++i) {
+                expanded_chunk[i] ^= key64[i % key64.size()];
             }
+
             // S-Box
-            // For now i am using same S-BOX for all the 8 S-Boxes
             std::vector<uint8_t> s_box_output;
-            for (int i = 0; i < 8; i++) {
-                std::vector mairu(expanded_chunk.begin() + i * 6, expanded_chunk.begin() + (i + 1) * 6);
-                for (std::vector<uint8_t> temp = sBox(mairu); uint8_t & j : temp)
-                    s_box_output.push_back(j);
+            for (size_t i = 0; i < 8; ++i) {
+                if (expanded_chunk.size() < (i + 1) * 6) {
+                    throw std::out_of_range("Insufficient size for slicing expanded_chunk");
+                }
+                std::vector<uint8_t> chunk_part(expanded_chunk.begin() + i * 6, expanded_chunk.begin() + (i + 1) * 6);
+                auto temp = sBox(chunk_part);
+                s_box_output.insert(s_box_output.end(), temp.begin(), temp.end());
             }
-            std::cout << "S-Box Output: ";
-            CryptoCPP::StringUtils::printBits(s_box_output);
+
             // Straight P-Box
             std::vector<uint8_t> straight_p_box_output(SUB_BLOCK_SIZE);
-            for (int i = 0; i < straight_p_box_output.size(); i++) {
+            for (size_t i = 0; i < straight_p_box_output.size(); ++i) {
+                if (STRAIGHT_P_BOX[i] - 1 >= s_box_output.size()) {
+                    throw std::out_of_range("STRAIGHT_P_BOX index out of range");
+                }
                 straight_p_box_output[i] = s_box_output[STRAIGHT_P_BOX[i] - 1];
             }
+
             return straight_p_box_output;
         }
+
+
 
         std::vector<uint8_t> sBox(const std::vector<uint8_t> &chunk) {
             std::vector<uint8_t> s_box_output(4);
@@ -92,10 +113,6 @@ namespace Modern::DES {
             std::vector<uint8_t> new_second_half = roundFunction(first_half, std::move(key));
             for (int i = 0; i < new_first_half.size(); i++) {
                 new_second_half[i] ^= first_half[i];
-            }
-            std::cout << "New Second half: ";
-            for (auto const &byte : new_second_half) {
-                std::cout << std::bitset<8>(byte) << " ";
             }
             for (uint8_t byte : new_second_half) {
                 new_first_half.push_back(byte);
