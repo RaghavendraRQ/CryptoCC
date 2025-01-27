@@ -69654,32 +69654,73 @@ namespace CryptoCPP::StringUtils {
     };
 }
 # 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 22 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+# 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/aesUtils.h" 1
+# 14 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/aesUtils.h"
+namespace CryptoCPP::AESUtils {
+
+    typedef bool fieldElement_t;
+
+
+    inline auto IRREDUCIBLE_POLYNOMIAL = std::array{
+        1, 1, 0, 1, 1, 0, 0, 0, 1
+    };
+    inline unsigned int MODULUS = 2;
+
+    template<int size>
+    struct Field {
+        std::array<fieldElement_t, size> polynomial;
+        Field() {
+            for (size_t i = 0; i < size; i++)
+                polynomial[i] = 0;
+        }
+        explicit Field(const std::array<fieldElement_t, size> &_polynomial): polynomial(_polynomial) {
+        }
+        Field operator+(const Field &other) const {
+            Field sum;
+            for (size_t i = 0; i < size; i++)
+                sum.polynomial[i] = (polynomial[i] + other.polynomial[i]) % MODULUS;
+            return sum;
+        }
+        Field operator-(const Field &other) const {
+            Field difference;
+            for (size_t i = 0; i < size; i++)
+                difference.polynomial[i] = (polynomial[i] - other.polynomial[i] + MODULUS) % MODULUS;
+            return difference;
+        }
+        Field operator*(const Field &other) const {
+            Field product;
+            for (size_t i = 0; i < size; i++)
+                product.polynomial[i] = (polynomial[i] * other.polynomial[i]) % MODULUS;
+            return product;
+        }
+        friend std::ostream &operator<<(std::ostream &os, const Field &field) {
+            for (const auto &element: field.polynomial)
+                os << element << " ";
+            return os;
+        }
+    };
+
+    typedef Field<8> field8_t;
+    typedef std::array<field8_t, 4> word_t;
+    typedef std::array<word_t, 4> state_t;
+
+    uint8_t fieldToHex(const field8_t &field);
+
+}
+# 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
+# 24 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
 int main() {
     using namespace Classic;
-    std::string name, key;
-    std::cout << "Enter your name: ";
+# 49 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    CryptoCPP::AESUtils::Field<8> a({1, 0, 1, 1, 0, 1, 0, 1});
+    CryptoCPP::AESUtils::Field<8> b({1, 1, 0, 1, 0, 1, 0, 1});
+    CryptoCPP::AESUtils::Field<8> c = a + b;
+    CryptoCPP::AESUtils::Field<8> d = a - b;
 
-    std::getline(std::cin, name);
-
-
-
-    std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
-    std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB};
-
-    CryptoCPP::StringUtils::printBits(bits);
-
-    std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
-    CryptoCPP::StringUtils::printBits(permuted_bits);
-    std::cout << "Left half: ";
-    std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
-    std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key64);
-    std::cout << "Round 1: ";
-    CryptoCPP::StringUtils::printBits(round_1);
-
-    for (uint8_t byte : key64) {
-        std::cout << std::bitset<8>(byte) << " ";
-    }
-# 103 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    std::cout << a << std::endl;
+    std::cout << b << std::endl;
+    std::cout << c << std::endl;
+    std::cout << d << std::endl;
+# 115 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;
 }

@@ -7,6 +7,7 @@
 
 #include "attacks/bruteforce.h"
 #include "lib/stringUtils.h"
+#include "lib/aesUtils.h"
 
 // #include <attacks/bruteforce.h>
 // #include <attacks/plaintext.h>
@@ -19,30 +20,42 @@
 // }
 
 
+
 int main() {
     using namespace Classic;
-    std::string name, key;
-    std::cout << "Enter your name: ";
-    // Get a line input
-    std::getline(std::cin, name);
-    // std::cin >> name
-    // std::cout << "Enter the key: ";
-    // std::cin >> key;
-    std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
-    std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB};
-    // std::vector<uint8_t> key_bits = CryptoCPP::StringUtils::stringToBits(key);
-    CryptoCPP::StringUtils::printBits(bits);
-    // CryptoCPP::StringUtils::printBits(key_bits);
-    std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
-    CryptoCPP::StringUtils::printBits(permuted_bits);
-    std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
-    std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key64);
-    std::cout << "Round 1: ";
-    CryptoCPP::StringUtils::printBits(round_1);
+    // std::string name, key;
+    // std::cout << "Enter your name: ";
+    // // Get a line input
+    // std::getline(std::cin, name);
+    // // std::cin >> name
+    // // std::cout << "Enter the key: ";
+    // // std::cin >> key;
+    // std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
+    // std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB};
+    // // std::vector<uint8_t> key_bits = CryptoCPP::StringUtils::stringToBits(key);
+    // CryptoCPP::StringUtils::printBits(bits);
+    // // CryptoCPP::StringUtils::printBits(key_bits);
+    // std::vector<uint8_t> permuted_bits = Modern::DES::impl::initialPermutation(bits);
+    // CryptoCPP::StringUtils::printBits(permuted_bits);
+    // std::vector right_half(permuted_bits.begin() + permuted_bits.size() / 2, permuted_bits.end());
+    // std::vector<uint8_t> round_1 = Modern::DES::impl::roundFunction(right_half, key64);
+    // std::cout << "Round 1: ";
+    // CryptoCPP::StringUtils::printBits(round_1);
+    //
+    // for (uint8_t byte : key64) {
+    //     std::cout << std::bitset<8>(byte) << " ";
+    // }
 
-    for (uint8_t byte : key64) {
-        std::cout << std::bitset<8>(byte) << " ";
-    }
+    CryptoCPP::AESUtils::Field<8> a({1, 0, 1, 1, 0, 1, 0, 1});
+    CryptoCPP::AESUtils::Field<8> b({1, 1, 0, 1, 0, 1, 0, 1});
+    CryptoCPP::AESUtils::Field<8> c = a + b;
+    CryptoCPP::AESUtils::Field<8> d = a - b;
+
+    std::cout << a << std::endl;
+    std::cout << b << std::endl;
+    std::cout << c << std::endl;
+    std::cout << d << std::endl;
+
 
 
 
