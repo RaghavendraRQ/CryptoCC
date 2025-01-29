@@ -36,4 +36,5 @@ add_executable(CryptoCPP main.cpp
         include/mycipher.h
         src/mycipher.cc
         lib/aesUtils.h
-        lib/aesUtils.cpp)
+        lib/aesUtils.cpp
+        include/modern/aes.h)

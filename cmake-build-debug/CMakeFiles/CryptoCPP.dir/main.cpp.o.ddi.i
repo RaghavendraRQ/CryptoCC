@@ -69655,7 +69655,7 @@ namespace CryptoCPP::StringUtils {
 }
 # 10 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
 # 1 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/aesUtils.h" 1
-# 14 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/aesUtils.h"
+# 15 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/lib/aesUtils.h"
 namespace CryptoCPP::AESUtils {
 
     typedef bool fieldElement_t;
@@ -69665,46 +69665,48 @@ namespace CryptoCPP::AESUtils {
         1, 1, 0, 1, 1, 0, 0, 0, 1
     };
     inline unsigned int MODULUS = 2;
+    inline uint8_t AES_MODULUS = 0x1B;
 
-    template<int size>
     struct Field {
-        std::array<fieldElement_t, size> polynomial;
-        Field() {
-            for (size_t i = 0; i < size; i++)
-                polynomial[i] = 0;
+        uint8_t value;
+        std::bitset<8> bits;
+        Field() : value(0) {}
+        explicit Field(const uint8_t val) : value(val) {
+            bits = std::bitset<8>(val);
         }
-        explicit Field(const std::array<fieldElement_t, size> &_polynomial): polynomial(_polynomial) {
-        }
+
         Field operator+(const Field &other) const {
-            Field sum;
-            for (size_t i = 0; i < size; i++)
-                sum.polynomial[i] = (polynomial[i] + other.polynomial[i]) % MODULUS;
-            return sum;
+            return Field(value ^ other.value);
         }
+
         Field operator-(const Field &other) const {
-            Field difference;
-            for (size_t i = 0; i < size; i++)
-                difference.polynomial[i] = (polynomial[i] - other.polynomial[i] + MODULUS) % MODULUS;
-            return difference;
+            return *this + other;
         }
+
         Field operator*(const Field &other) const {
-            Field product;
-            for (size_t i = 0; i < size; i++)
-                product.polynomial[i] = (polynomial[i] * other.polynomial[i]) % MODULUS;
-            return product;
+            uint8_t a = value, b = other.value, p = 0;
+            for (int i = 0; i < 8; i++) {
+                if (b & 1) p ^= a;
+                const bool high_bit_set = a & 0x80;
+                a <<= 1;
+                if (high_bit_set) a ^= AES_MODULUS;
+                b >>= 1;
+            }
+            return Field(p);
         }
+
         friend std::ostream &operator<<(std::ostream &os, const Field &field) {
-            for (const auto &element: field.polynomial)
-                os << element << " ";
+            os << std::hex << static_cast<int>(field.value);
             return os;
         }
     };
 
-    typedef Field<8> field8_t;
-    typedef std::array<field8_t, 4> word_t;
-    typedef std::array<word_t, 4> state_t;
-
-    uint8_t fieldToHex(const field8_t &field);
+    typedef std::array<uint8_t, 16> block_t;
+    typedef std::array<uint8_t, 16> key_t;
+    typedef struct State {
+        block_t data;
+        key_t key;
+    } state_t;
 
 }
 # 11 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
@@ -69712,14 +69714,14 @@ namespace CryptoCPP::AESUtils {
 int main() {
     using namespace Classic;
 # 49 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
-    CryptoCPP::AESUtils::Field<8> a({1, 0, 1, 1, 0, 1, 0, 1});
-    CryptoCPP::AESUtils::Field<8> b({1, 1, 0, 1, 0, 1, 0, 1});
-    CryptoCPP::AESUtils::Field<8> c = a + b;
-    CryptoCPP::AESUtils::Field<8> d = a - b;
+    CryptoCPP::AESUtils::Field a(0x33);
+    CryptoCPP::AESUtils::Field b(0xA8);
+    CryptoCPP::AESUtils::Field c = a + b;
+    CryptoCPP::AESUtils::Field d = a - b;
 
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-    std::cout << c << std::endl;
+    std::cout << a.value << std::endl;
+    std::cout << static_cast<int>(b.value) << std::endl;
+    std::cout << c.bits[0] << std::endl;
     std::cout << d << std::endl;
 # 115 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;

@@ -46,14 +46,14 @@ int main() {
     //     std::cout << std::bitset<8>(byte) << " ";
     // }
 
-    CryptoCPP::AESUtils::Field<8> a({1, 0, 1, 1, 0, 1, 0, 1});
-    CryptoCPP::AESUtils::Field<8> b({1, 1, 0, 1, 0, 1, 0, 1});
-    CryptoCPP::AESUtils::Field<8> c = a + b;
-    CryptoCPP::AESUtils::Field<8> d = a - b;
+    CryptoCPP::AESUtils::Field a(0x33);
+    CryptoCPP::AESUtils::Field b(0xA8);
+    CryptoCPP::AESUtils::Field c = a + b;
+    CryptoCPP::AESUtils::Field d = a - b;
 
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-    std::cout << c << std::endl;
+    std::cout << a.value << std::endl;
+    std::cout << static_cast<int>(b.value) << std::endl;
+    std::cout << c.bits << std::endl;
     std::cout << d << std::endl;
 
 
