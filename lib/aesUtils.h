@@ -14,6 +14,8 @@
 #endif //AESUTILS_H
 namespace CryptoCPP::AESUtils {
 
+
+
     typedef bool fieldElement_t;
 
 
@@ -57,11 +59,13 @@ namespace CryptoCPP::AESUtils {
         }
     };
 
-    typedef std::array<uint8_t, 16> block_t;
-    typedef std::array<uint8_t, 16> key_t;
-    typedef struct State {
-        block_t data;
-        key_t key;
-    } state_t;
+    typedef std::array<Field, 4> word_t;
+
+    typedef std::array<word_t, 4> key_t;
+
+    word_t createWord(const std::array<uint8_t, 4> &bytes);
+    word_t _g_function(const word_t &word, const int &round);
+    word_t _xor_words(const word_t &word1, const word_t &word2);
+
 
 }

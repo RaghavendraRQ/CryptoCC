@@ -8,7 +8,8 @@
 
 namespace Modern {
     class AES {
-        key_t generateRoundKey(const key_t &key, int& round);
+    public:
+        CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &key, const int &round);
     };
 }
 

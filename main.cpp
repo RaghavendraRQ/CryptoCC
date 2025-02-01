@@ -7,7 +7,8 @@
 
 #include "attacks/bruteforce.h"
 #include "lib/stringUtils.h"
-#include "lib/aesUtils.h"
+// #include "lib/aesUtils.h"
+#include <modern/aes.h>
 
 // #include <attacks/bruteforce.h>
 // #include <attacks/plaintext.h>
@@ -46,18 +47,19 @@ int main() {
     //     std::cout << std::bitset<8>(byte) << " ";
     // }
 
-    CryptoCPP::AESUtils::Field a(0x33);
-    CryptoCPP::AESUtils::Field b(0xA8);
-    CryptoCPP::AESUtils::Field c = a + b;
-    CryptoCPP::AESUtils::Field d = a - b;
+    CryptoCPP::AESUtils::Field a(0x65);
+    CryptoCPP::AESUtils::Field b(0x74);
+    CryptoCPP::AESUtils::Field c(0x31);
+    CryptoCPP::AESUtils::Field d(0x32);
 
-    std::cout << a.value << std::endl;
-    std::cout << static_cast<int>(b.value) << std::endl;
-    std::cout << c.bits << std::endl;
-    std::cout << d << std::endl;
+    CryptoCPP::AESUtils::word_t word1 = CryptoCPP::AESUtils::createWord({0x63, 0x6F, 0x6D, 0x6D});
+    CryptoCPP::AESUtils::word_t word_2 = CryptoCPP::AESUtils::createWord({0x61, 0x6E, 0x64, 0x6F});
+    CryptoCPP::AESUtils::word_t word_3 = CryptoCPP::AESUtils::createWord({0x73, 0x65, 0x63, 0x72});
+    CryptoCPP::AESUtils::word_t word_4 = CryptoCPP::AESUtils::createWord({0x65, 0x74, 0x31, 0x32});
 
-
-
+    CryptoCPP::AESUtils::key_t key = {word1, word_2, word_3, word_4};
+    Modern::AES aes;
+    aes.generateRoundKey(key, 1);
 
     // printBytes(bytes);
     // std::vector<std::bitset<8>> initial_perm = Modern::DES::impl::initialPermutation(bits);
