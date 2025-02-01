@@ -69689,6 +69689,14 @@ namespace CryptoCPP::AESUtils {
             return Field(value ^ other.value);
         }
 
+        Field operator^(const Field &other) const {
+            return Field(value ^ other.value);
+        }
+
+        Field operator^(const uint8_t &other) const {
+            return Field(value ^ other);
+        }
+
         Field operator-(const Field &other) const {
             return *this + other;
         }
@@ -69712,12 +69720,18 @@ namespace CryptoCPP::AESUtils {
     };
 
     typedef std::array<Field, 4> word_t;
-
+    typedef std::array<word_t, 4> state_t;
     typedef std::array<word_t, 4> key_t;
 
     word_t createWord(const std::array<uint8_t, 4> &bytes);
     word_t _g_function(const word_t &word, const int &round);
     word_t _xor_words(const word_t &word1, const word_t &word2);
+
+
+    void substituteBytes(state_t &state);
+    void shiftRows(state_t &state);
+    void mixColumns(state_t &state);
+    void addRoundKey(state_t &state, const key_t &key, const int &round);
 
 
 }
@@ -69726,7 +69740,7 @@ namespace CryptoCPP::AESUtils {
 namespace Modern {
     class AES {
     public:
-        CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &key, const int &round);
+        static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &key, const int &round);
     };
 }
 # 12 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2

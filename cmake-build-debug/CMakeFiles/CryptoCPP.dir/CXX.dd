@@ -29,3 +29,5 @@ build CMakeFiles/CryptoCPP.dir/src/mycipher.cc.o: dyndep
 
 build CMakeFiles/CryptoCPP.dir/lib/aesUtils.cpp.o: dyndep
 
+build CMakeFiles/CryptoCPP.dir/src/modern/aes.cpp.o: dyndep
+
