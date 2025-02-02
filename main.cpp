@@ -20,6 +20,13 @@
 //     std::cout << std::endl;
 // }
 
+void printState(const CryptoCPP::AESUtils::state_t &state) {
+    for (int i = 0; i < 4; i++) {
+        for (std::cout << "\n"; auto field: state[i])
+            std::cout << field << " ";
+
+    }
+}
 
 
 int main() {
@@ -58,8 +65,25 @@ int main() {
     CryptoCPP::AESUtils::word_t word_4 = CryptoCPP::AESUtils::createWord({0x65, 0x74, 0x31, 0x32});
 
     CryptoCPP::AESUtils::key_t key = {word1, word_2, word_3, word_4};
-    Modern::AES aes;
+    Modern::AES aes(key);
     aes.generateRoundKey(key, 1);
+    printState(key);
+
+    std::cout << "\nSubstitute Bytes: ";
+    CryptoCPP::AESUtils::substituteBytes(key);
+    printState(key);
+
+    CryptoCPP::AESUtils::shiftRows(key);
+    std::cout << "\nShifted Rows: ";
+    printState(key);
+
+    std::cout << "\nMix Columns: ";
+    CryptoCPP::AESUtils::mixColumns(key);
+    printState(key);
+
+    std::cout << "\nadd round key: ";
+    CryptoCPP::AESUtils::addRoundKey(key, key);
+    printState(key);
 
     // printBytes(bytes);
     // std::vector<std::bitset<8>> initial_perm = Modern::DES::impl::initialPermutation(bits);

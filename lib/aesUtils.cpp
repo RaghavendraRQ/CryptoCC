@@ -26,7 +26,7 @@ namespace CryptoCPP::AESUtils {
         for (int i = 0; i < 4; i++) {
             const int row = permuted_word[i].value >> 4 & 0x0F;
             const int col = permuted_word[i].value & 0x0F;
-            substituted_word[i] = static_cast<Field>(Constants::AES::S_BOX[row][col]);
+            substituted_word[i] = Field(Constants::AES::S_BOX[row][col]);
         }
 
         // XOR with round constant
@@ -47,7 +47,7 @@ namespace CryptoCPP::AESUtils {
             for (int j = 0; j < 4; j++) {
                 const int row = state[i][j].value >> 4 & 0x0F;
                 const int col = state[i][j].value & 0x0F;
-                state[i][j] = static_cast<Field>(Constants::AES::S_BOX[row][col]);
+                state[i][j] = Field(Constants::AES::S_BOX[row][col]);
             }
     }
 
@@ -61,11 +61,22 @@ namespace CryptoCPP::AESUtils {
             }
     }
 
+    void mixColumns(state_t &state) {
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                for (int k = 0; k < 4; k++)
+                    if (Constants::AES::MIX_COLUMN_MATRIX[j][k] == 1)
+                        state[i][j] = state[i][j];
+                    else if (Constants::AES::MIX_COLUMN_MATRIX[j][k] == 2)
+                        state[i][j] = state[i][j] << 1;
+                    else
+                        state[i][j] = (state[i][j] << 1) ^ state[i][j];
+    }
 
 
-
-
-
-
-
+    void addRoundKey(state_t &state, const key_t &round_key) {
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                state[i][j] = state[i][j] ^ round_key[i][j];
+    }
 }

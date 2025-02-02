@@ -69701,6 +69701,10 @@ namespace CryptoCPP::AESUtils {
             return *this + other;
         }
 
+        Field operator<<(const int &shift) const {
+            return Field(value << shift);
+        }
+
         Field operator*(const Field &other) const {
             uint8_t a = value, b = other.value, p = 0;
             for (int i = 0; i < 8; i++) {
@@ -69728,26 +69732,46 @@ namespace CryptoCPP::AESUtils {
     word_t _xor_words(const word_t &word1, const word_t &word2);
 
 
+
+
+
     void substituteBytes(state_t &state);
     void shiftRows(state_t &state);
     void mixColumns(state_t &state);
-    void addRoundKey(state_t &state, const key_t &key, const int &round);
+    void addRoundKey(state_t &state, const key_t &round_key);
 
 
 }
 # 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/aes.h" 2
 
+
 namespace Modern {
     class AES {
     public:
-        static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &key, const int &round);
+        CryptoCPP::AESUtils::key_t m_key;
+        std::vector<CryptoCPP::AESUtils::state_t> data;
+
+        static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &previous_key, const int &round);
+        void preProcessData(CryptoCPP::AESUtils::state_t &state) const;
+
+        explicit AES(const CryptoCPP::AESUtils::key_t _key): m_key(_key) {}
+
     };
 }
 # 12 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp" 2
-# 25 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+# 23 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+void printState(const CryptoCPP::AESUtils::state_t &state) {
+    for (int i = 0; i < 4; i++) {
+        for (std::cout << "\n"; auto field: state[i])
+            std::cout << field << " ";
+
+    }
+}
+
+
 int main() {
     using namespace Classic;
-# 50 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+# 57 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     CryptoCPP::AESUtils::Field a(0x65);
     CryptoCPP::AESUtils::Field b(0x74);
     CryptoCPP::AESUtils::Field c(0x31);
@@ -69759,8 +69783,25 @@ int main() {
     CryptoCPP::AESUtils::word_t word_4 = CryptoCPP::AESUtils::createWord({0x65, 0x74, 0x31, 0x32});
 
     CryptoCPP::AESUtils::key_t key = {word1, word_2, word_3, word_4};
-    Modern::AES aes;
+    Modern::AES aes(key);
     aes.generateRoundKey(key, 1);
-# 117 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    printState(key);
+
+    std::cout << "\nSubstitute Bytes: ";
+    CryptoCPP::AESUtils::substituteBytes(key);
+    printState(key);
+
+    CryptoCPP::AESUtils::shiftRows(key);
+    std::cout << "\nShifted Rows: ";
+    printState(key);
+
+    std::cout << "\nMix Columns: ";
+    CryptoCPP::AESUtils::mixColumns(key);
+    printState(key);
+
+    std::cout << "\nadd round key: ";
+    CryptoCPP::AESUtils::addRoundKey(key, key);
+    printState(key);
+# 141 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;
 }

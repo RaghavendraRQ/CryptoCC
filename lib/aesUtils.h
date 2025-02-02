@@ -49,6 +49,10 @@ namespace CryptoCPP::AESUtils {
             return *this + other;
         }
 
+        Field operator<<(const int &shift) const {
+            return Field(value << shift);
+        }
+
         Field operator*(const Field &other) const {
             uint8_t a = value, b = other.value, p = 0;
             for (int i = 0; i < 8; i++) {
@@ -75,11 +79,14 @@ namespace CryptoCPP::AESUtils {
     word_t _g_function(const word_t &word, const int &round);
     word_t _xor_words(const word_t &word1, const word_t &word2);
 
+    //Helper functions
+
+
     // The state is modified in place.
     void substituteBytes(state_t &state);
     void shiftRows(state_t &state);
     void mixColumns(state_t &state);
-    void addRoundKey(state_t &state, const key_t &key, const int &round);
+    void addRoundKey(state_t &state, const key_t &round_key);
 
 
 }

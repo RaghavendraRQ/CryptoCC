@@ -48662,6 +48662,10 @@ namespace CryptoCPP::AESUtils {
             return *this + other;
         }
 
+        Field operator<<(const int &shift) const {
+            return Field(value << shift);
+        }
+
         Field operator*(const Field &other) const {
             uint8_t a = value, b = other.value, p = 0;
             for (int i = 0; i < 8; i++) {
@@ -48689,35 +48693,52 @@ namespace CryptoCPP::AESUtils {
     word_t _xor_words(const word_t &word1, const word_t &word2);
 
 
+
+
+
     void substituteBytes(state_t &state);
     void shiftRows(state_t &state);
     void mixColumns(state_t &state);
-    void addRoundKey(state_t &state, const key_t &key, const int &round);
+    void addRoundKey(state_t &state, const key_t &round_key);
 
 
 }
 # 8 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/include/modern/aes.h" 2
 
+
 namespace Modern {
     class AES {
     public:
-        static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &key, const int &round);
+        CryptoCPP::AESUtils::key_t m_key;
+        std::vector<CryptoCPP::AESUtils::state_t> data;
+
+        static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &previous_key, const int &round);
+        void preProcessData(CryptoCPP::AESUtils::state_t &state) const;
+
+        explicit AES(const CryptoCPP::AESUtils::key_t _key): m_key(_key) {}
+
     };
 }
 # 5 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/src/modern/aes.cpp" 2
 
 namespace Modern {
-    CryptoCPP::AESUtils::key_t AES::generateRoundKey(const CryptoCPP::AESUtils::key_t &key, const int &round) {
+    CryptoCPP::AESUtils::key_t AES::generateRoundKey(const CryptoCPP::AESUtils::key_t &previous_key, const int &round) {
         CryptoCPP::AESUtils::key_t round_key;
 
 
-        round_key[0] = CryptoCPP::AESUtils::_xor_words(key[0], CryptoCPP::AESUtils::_g_function(key[3], round));
+        round_key[0] = CryptoCPP::AESUtils::_xor_words(previous_key[0], CryptoCPP::AESUtils::_g_function(previous_key[3], round));
 
 
         for (int i = 1; i < 4; i++)
-            round_key[i] = CryptoCPP::AESUtils::_xor_words(round_key[i - 1], key[i]);
+            round_key[i] = CryptoCPP::AESUtils::_xor_words(round_key[i - 1], previous_key[i]);
 
         return round_key;
     }
 
+    void AES::preProcessData(CryptoCPP::AESUtils::state_t &state) const {
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                state[i][j] = state[i][j] ^ m_key[i][j];
+
+    }
 }
