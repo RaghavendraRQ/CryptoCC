@@ -39,4 +39,6 @@ add_executable(CryptoCPP main.cpp
         lib/aesUtils.cpp
         include/modern/aes.h
         include/constants.h
-        src/modern/aes.cpp)
+        src/modern/aes.cpp
+        include/modern/blowfish.h
+        lib/blwfsh.h)
