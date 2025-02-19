@@ -31,7 +31,7 @@ namespace Classic::Affine {
      * @param bias: Key to add to the characters
      * @return Encrypted string
      */
-    std::string encrypt(const std::string &plain_text, int multiplier, int bias);
+    std::string encrypt(std::string_view plain_text, int multiplier, int bias);
 
     /**
      * Decrypts the given cipher text using the multiplier and bias provided
@@ -42,7 +42,7 @@ namespace Classic::Affine {
      * @return Decrypted string
      */
 
-    std::string decrypt(const std::string &cipher, int multiplier, int bias);
+    std::string decrypt(std::string_view cipher, int multiplier, int bias);
     /**
      * Calculates the modular inverse of a number
      *

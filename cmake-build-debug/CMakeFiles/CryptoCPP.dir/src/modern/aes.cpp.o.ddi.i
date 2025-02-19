@@ -48715,7 +48715,7 @@ namespace Modern {
         static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &previous_key, const int &round);
         void preProcessData(CryptoCPP::AESUtils::state_t &state) const;
 
-        explicit AES(const CryptoCPP::AESUtils::key_t _key): m_key(_key) {}
+        explicit AES(const CryptoCPP::AESUtils::key_t &_key): m_key(_key) {}
 
     };
 }

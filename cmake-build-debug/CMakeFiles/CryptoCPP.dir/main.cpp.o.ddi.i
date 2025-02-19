@@ -69754,7 +69754,7 @@ namespace Modern {
         static CryptoCPP::AESUtils::key_t generateRoundKey(const CryptoCPP::AESUtils::key_t &previous_key, const int &round);
         void preProcessData(CryptoCPP::AESUtils::state_t &state) const;
 
-        explicit AES(const CryptoCPP::AESUtils::key_t _key): m_key(_key) {}
+        explicit AES(const CryptoCPP::AESUtils::key_t &_key): m_key(_key) {}
 
     };
 }
@@ -69771,37 +69771,17 @@ void printState(const CryptoCPP::AESUtils::state_t &state) {
 
 int main() {
     using namespace Classic;
-# 57 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
-    CryptoCPP::AESUtils::Field a(0x65);
-    CryptoCPP::AESUtils::Field b(0x74);
-    CryptoCPP::AESUtils::Field c(0x31);
-    CryptoCPP::AESUtils::Field d(0x32);
+    std::string name, key;
+    std::cout << "Enter your name: ";
 
-    CryptoCPP::AESUtils::word_t word1 = CryptoCPP::AESUtils::createWord({0x63, 0x6F, 0x6D, 0x6D});
-    CryptoCPP::AESUtils::word_t word_2 = CryptoCPP::AESUtils::createWord({0x61, 0x6E, 0x64, 0x6F});
-    CryptoCPP::AESUtils::word_t word_3 = CryptoCPP::AESUtils::createWord({0x73, 0x65, 0x63, 0x72});
-    CryptoCPP::AESUtils::word_t word_4 = CryptoCPP::AESUtils::createWord({0x65, 0x74, 0x31, 0x32});
-
-    CryptoCPP::AESUtils::key_t key = {word1, word_2, word_3, word_4};
-    Modern::AES aes(key);
-    aes.generateRoundKey(key, 1);
-    printState(key);
-
-    std::cout << "\nSubstitute Bytes: ";
-    CryptoCPP::AESUtils::substituteBytes(key);
-    printState(key);
-
-    CryptoCPP::AESUtils::shiftRows(key);
-    std::cout << "\nShifted Rows: ";
-    printState(key);
-
-    std::cout << "\nMix Columns: ";
-    CryptoCPP::AESUtils::mixColumns(key);
-    printState(key);
-
-    std::cout << "\nadd round key: ";
-    CryptoCPP::AESUtils::addRoundKey(key, key);
-    printState(key);
-# 141 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    std::getline(std::cin, name);
+    std::cout << "Enter the key: ";
+    std::cin >> key;
+# 55 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
+    MyCipher my_cipher(key);
+    std::string cipher = my_cipher.encrypt(name);
+    std::cout << "Encrypted name: " << cipher << std::endl;
+    std::cout << "Decrypted name: " << my_cipher.decrypt(cipher) << std::endl;
+# 144 "/home/raghavendra/Myworkspace/CyberSecurity/CryptoCPP/main.cpp"
     return 0;
 }

@@ -60914,6 +60914,7 @@ namespace Classic {
     std::string MyCipher::encrypt(const std::string& plain_text, const int salt_length) const {
 
         const std::string salt = CryptoCPP::StringUtils::Random::String(salt_length);
+        std::cout << "Salt: " << salt << std::endl;
         const std::array keys = myKDF(salt);
 
         std::string cipher_text = salt;

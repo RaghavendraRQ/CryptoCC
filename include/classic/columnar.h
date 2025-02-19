@@ -8,7 +8,7 @@
 #include <string>
 
 namespace Classic::Columnar {
-    const std::string filling_char = "X";
+    constexpr char filling_char = 'X';
     std::string encrypt(const std::string &plain_text, const std::string &key);
     std::string decrypt(const std::string &cipher_text, const std::string &key);
 

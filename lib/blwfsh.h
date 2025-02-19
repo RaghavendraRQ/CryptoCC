@@ -42,6 +42,8 @@ namespace CryptoCPP::Utils::Blowfish {
     typedef std::array<uint8_t, 8> element_t;
 
 
+
+
 }
 
 #endif //BLWFSH_H

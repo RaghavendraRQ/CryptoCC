@@ -14,14 +14,20 @@ namespace Classic {
         std::string m_key;
         [[nodiscard]] static std::string xorStrings(const std::string& text, const std::string& key);
 
-        [[nodiscard]] auto myKDF(const std::string &salt) const -> std::array<std::string, 3>;
+        [[nodiscard]] std::array<std::string, 3> myKDF(const std::string &salt) const;
 
         [[nodiscard]] static std::string rotateKey(const std::string& key, int shift);
 
     public:
         explicit MyCipher(std::string key) : m_key(std::move(key)) {}
         [[nodiscard]] std::string encrypt(const std::string &plain_text, int salt_length=16) const;
+
         [[nodiscard]] std::string decrypt(std::string& cipher_text, int salt_length=16) const;
+
+        [[nodiscard]] std::string encrypt(const std::string& plain_text) const;
+
+        [[nodiscard]] std::string decrypt(const std::string& plain_text) const;
+
     };
 
 }

@@ -13,7 +13,7 @@ namespace Classic::Affine {
         return 1;
     }
 
-    std::string encrypt(const std::string &plain_text, int multiplier, int bias) {
+    std::string encrypt(const std::string_view plain_text, int multiplier, int bias) {
         if (!inverse_map.contains(multiplier))
             return "Invalid multiplier";
         multiplier %= 26;
@@ -30,7 +30,7 @@ namespace Classic::Affine {
         return cipher_text;
     }
 
-    std::string decrypt(const std::string &cipher, int multiplier, int bias) {
+    std::string decrypt(const std::string_view cipher, int multiplier, int bias) {
         if (!inverse_map.contains(multiplier))
             return "Invalid multiplier";
 

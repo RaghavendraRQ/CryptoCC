@@ -31,13 +31,12 @@ void printState(const CryptoCPP::AESUtils::state_t &state) {
 
 int main() {
     using namespace Classic;
-    // std::string name, key;
-    // std::cout << "Enter your name: ";
-    // // Get a line input
-    // std::getline(std::cin, name);
-    // // std::cin >> name
-    // // std::cout << "Enter the key: ";
-    // // std::cin >> key;
+    std::string name, key;
+    std::cout << "Enter your name: ";
+    // Get a line input
+    std::getline(std::cin, name);
+    std::cout << "Enter the key: ";
+    std::cin >> key;
     // std::vector<uint8_t> bits = CryptoCPP::StringUtils::stringToBits(name);
     // std::vector<uint8_t> key64 = {0xAA, 0xCC, 0xF0, 0x0F, 0xB6, 0xDB};
     // // std::vector<uint8_t> key_bits = CryptoCPP::StringUtils::stringToBits(key);
@@ -53,37 +52,41 @@ int main() {
     // for (uint8_t byte : key64) {
     //     std::cout << std::bitset<8>(byte) << " ";
     // }
+    MyCipher my_cipher(key);
+    std::string cipher = my_cipher.encrypt(name);
+    std::cout << "Encrypted name: " << cipher << std::endl;
+    std::cout << "Decrypted name: " << my_cipher.decrypt(cipher) << std::endl;
 
-    CryptoCPP::AESUtils::Field a(0x65);
-    CryptoCPP::AESUtils::Field b(0x74);
-    CryptoCPP::AESUtils::Field c(0x31);
-    CryptoCPP::AESUtils::Field d(0x32);
-
-    CryptoCPP::AESUtils::word_t word1 = CryptoCPP::AESUtils::createWord({0x63, 0x6F, 0x6D, 0x6D});
-    CryptoCPP::AESUtils::word_t word_2 = CryptoCPP::AESUtils::createWord({0x61, 0x6E, 0x64, 0x6F});
-    CryptoCPP::AESUtils::word_t word_3 = CryptoCPP::AESUtils::createWord({0x73, 0x65, 0x63, 0x72});
-    CryptoCPP::AESUtils::word_t word_4 = CryptoCPP::AESUtils::createWord({0x65, 0x74, 0x31, 0x32});
-
-    CryptoCPP::AESUtils::key_t key = {word1, word_2, word_3, word_4};
-    Modern::AES aes(key);
-    aes.generateRoundKey(key, 1);
-    printState(key);
-
-    std::cout << "\nSubstitute Bytes: ";
-    CryptoCPP::AESUtils::substituteBytes(key);
-    printState(key);
-
-    CryptoCPP::AESUtils::shiftRows(key);
-    std::cout << "\nShifted Rows: ";
-    printState(key);
-
-    std::cout << "\nMix Columns: ";
-    CryptoCPP::AESUtils::mixColumns(key);
-    printState(key);
-
-    std::cout << "\nadd round key: ";
-    CryptoCPP::AESUtils::addRoundKey(key, key);
-    printState(key);
+    // CryptoCPP::AESUtils::Field a(0x65);
+    // CryptoCPP::AESUtils::Field b(0x74);
+    // CryptoCPP::AESUtils::Field c(0x31);
+    // CryptoCPP::AESUtils::Field d(0x32);
+    //
+    // CryptoCPP::AESUtils::word_t word1 = CryptoCPP::AESUtils::createWord({0x63, 0x6F, 0x6D, 0x6D});
+    // CryptoCPP::AESUtils::word_t word_2 = CryptoCPP::AESUtils::createWord({0x61, 0x6E, 0x64, 0x6F});
+    // CryptoCPP::AESUtils::word_t word_3 = CryptoCPP::AESUtils::createWord({0x73, 0x65, 0x63, 0x72});
+    // CryptoCPP::AESUtils::word_t word_4 = CryptoCPP::AESUtils::createWord({0x65, 0x74, 0x31, 0x32});
+    //
+    // CryptoCPP::AESUtils::key_t key = {word1, word_2, word_3, word_4};
+    // Modern::AES aes(key);
+    // aes.generateRoundKey(key, 1);
+    // printState(key);
+    //
+    // std::cout << "\nSubstitute Bytes: ";
+    // CryptoCPP::AESUtils::substituteBytes(key);
+    // printState(key);
+    //
+    // CryptoCPP::AESUtils::shiftRows(key);
+    // std::cout << "\nShifted Rows: ";
+    // printState(key);
+    //
+    // std::cout << "\nMix Columns: ";
+    // CryptoCPP::AESUtils::mixColumns(key);
+    // printState(key);
+    //
+    // std::cout << "\nadd round key: ";
+    // CryptoCPP::AESUtils::addRoundKey(key, key);
+    // printState(key);
 
     // printBytes(bytes);
     // std::vector<std::bitset<8>> initial_perm = Modern::DES::impl::initialPermutation(bits);

@@ -35,6 +35,7 @@ namespace Classic {
     std::string MyCipher::encrypt(const std::string& plain_text, const int salt_length) const {
         //Generate Salt
         const std::string salt = CryptoCPP::StringUtils::Random::String(salt_length);
+        std::cout << "Salt: " << salt << std::endl;
         const std::array keys = myKDF(salt);
         // Append the salt to the cipher text
         std::string cipher_text = salt;
@@ -42,11 +43,10 @@ namespace Classic {
         std::string previous_chunk = salt;
 
         for (size_t i = 0; i < plain_text.size(); i += m_key.size()) {
-            std::string chunk = plain_text.substr(i, m_key.size());
-            chunk = xorStrings(chunk, previous_chunk);
-            chunk = xorStrings(chunk, keys[i % keys.size()]);
+            using std::swap;
+            auto chunk = xorStrings(xorStrings(plain_text.substr(i, m_key.size()), previous_chunk), keys[i % keys.size()]);
             cipher_text += chunk;
-            previous_chunk = chunk;
+            swap(previous_chunk, chunk);
         }
 
         return cipher_text;
