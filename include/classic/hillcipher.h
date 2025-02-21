@@ -9,7 +9,7 @@
 #include <vector>
 
 namespace Classic::HillCipher {
-    typedef std::vector<std::vector<int>> hill_key_t;
+    using hill_key_t =  std::vector<std::vector<int>>;
     std::string encrypt(std::string plain_text, hill_key_t key);
     std::string decrypt(const std::string &cipher_text, const hill_key_t& key);
 

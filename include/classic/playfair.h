@@ -8,7 +8,7 @@
 #include <array>
 namespace Classic::Playfair {
 
-    typedef std::array<std::array<char, 5>, 5> playfair_matrix_t;
+    using playfair_matrix_t =  std::array<std::array<char, 5>, 5>;
     constexpr char filling_char = 'X';
 
     std::string encrypt(std::string &plain_text, std::string &key);

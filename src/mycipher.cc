@@ -8,7 +8,7 @@
 
 namespace Classic {
 
-    std::string MyCipher::xorStrings(const std::string &text, const std::string &key) {
+    std::string MyCipher::xorStrings(const std::string_view text, const std::string_view key) {
         std::string output;
         const size_t length = std::min(text.size(), key.size());
         for (size_t i = 0; i < length; ++i)
@@ -23,7 +23,7 @@ namespace Classic {
         return result;
     }
 
-    std::array<std::string, 3> MyCipher::myKDF(const std::string &salt) const {
+    std::array<std::string, 3> MyCipher::myKDF(const std::string_view salt) const {
         std::array keys = {m_key, m_key, m_key};
         keys[0] = xorStrings(m_key, salt);
         keys[1] = xorStrings(keys[0], rotateKey(m_key, 3)); // TODO: Change the shift value to a random number
@@ -43,10 +43,9 @@ namespace Classic {
         std::string previous_chunk = salt;
 
         for (size_t i = 0; i < plain_text.size(); i += m_key.size()) {
-            using std::swap;
-            auto chunk = xorStrings(xorStrings(plain_text.substr(i, m_key.size()), previous_chunk), keys[i % keys.size()]);
+            std::string chunk = xorStrings(xorStrings(plain_text.substr(i, m_key.size()), previous_chunk), keys[i % keys.size()]);
             cipher_text += chunk;
-            swap(previous_chunk, chunk);
+            std::swap(previous_chunk, chunk);
         }
 
         return cipher_text;

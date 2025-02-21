@@ -39,7 +39,7 @@ namespace CryptoCPP::Utils::Blowfish {
     };
     inline constexpr std::array ALLOWED_KEY_LENGTHS = {8, 16, 24, 32, 40, 48, 56,};
 
-    typedef std::array<uint8_t, 8> element_t;
+    using element_t =  std::array<uint8_t, 8>;
 
 
 

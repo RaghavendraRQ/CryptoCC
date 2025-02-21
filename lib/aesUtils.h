@@ -16,7 +16,6 @@ namespace CryptoCPP::AESUtils {
 
 
 
-    typedef bool fieldElement_t;
 
 
     inline auto IRREDUCIBLE_POLYNOMIAL = std::array{
@@ -71,9 +70,9 @@ namespace CryptoCPP::AESUtils {
         }
     };
 
-    typedef std::array<Field, 4> word_t;
-    typedef std::array<word_t, 4> state_t;
-    typedef std::array<word_t, 4> key_t;
+    using word_t = std::array<Field, 4>;
+    using state_t = std::array<word_t, 4>;
+    using key_t = std::array<word_t, 4>;
 
     word_t createWord(const std::array<uint8_t, 4> &bytes);
     word_t _g_function(const word_t &word, const int &round);

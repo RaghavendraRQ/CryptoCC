@@ -12,11 +12,11 @@ namespace Classic {
     // Creating my own cipher
     class MyCipher {
         std::string m_key;
-        [[nodiscard]] static std::string xorStrings(const std::string& text, const std::string& key);
+        [[nodiscard]] static std::string xorStrings(std::string_view text, std::string_view key);
 
-        [[nodiscard]] std::array<std::string, 3> myKDF(const std::string &salt) const;
+        [[nodiscard]] std::array<std::string, 3> myKDF(std::string_view salt) const;
 
-        [[nodiscard]] static std::string rotateKey(const std::string& key, int shift);
+        [[nodiscard]] static std::string rotateKey(const std::string &key, int shift);
 
     public:
         explicit MyCipher(std::string key) : m_key(std::move(key)) {}
