@@ -1,46 +1,43 @@
 
 # CryptoCC
 
-**CryptoCC** is a C++ cryptography collection that implements a range of cryptographic primitives—from classical ciphers to modern public key encryption, hashing, and digital signatures. This project serves as a foundational toolkit for understanding and building cryptographic systems.
+**Cryptocc** is a modular C++ cryptographic library that implements classical, modern, and custom encryption schemes. It’s built for experimentation, learning, and low-level crypto engineering in C++.
 
 ## 🔐 Features
 
-- Symmetric Key Ciphers (e.g., Caesar, Vigenère)
-- Public Key Cryptosystems
-- Hash Algorithms
-- Digital Signature Schemes
-- Modular, testable C++ architecture with `CMake` build support
+- Classic and modern symmetric encryption
+- Public-key cryptography (RSA, etc.)
+- Custom cipher implementations
+- Cryptanalysis utilities (attacks)
+- Header-based design for reusability
 
-## 🗂️ Project Structure (2-level deep)
+## 🗂️ Project Structure (2 Levels Deep)
 
 ```
 CryptoCC/
-├── .idea/                     # IDE configurations (can be ignored)
-├── cmake-build-debug/        # CMake build output (auto-generated)
-├── include/                  # Header files
-│   ├── ciphers/              # Symmetric encryption headers
-│   ├── hashing/              # Hash function headers
-│   └── signatures/           # Digital signature headers
-├── lib/                      # Static/shared library source files
-│   ├── cipher.cpp
-│   ├── hash.cpp
-│   └── signature.cpp
-├── src/                      # Source files for main logic
-│   ├── encrypt.cpp
+├── include/
+│   ├── attacks/                # Cryptanalysis tools
+│   │   ├── frequency_analysis.h
+│   │   └── brute_force.h
+│   ├── classic/                # Classical ciphers
+│   │   ├── caesar.h
+│   │   └── vigenere.h
+│   ├── modern/                 # Modern crypto schemes
+│   │   ├── rsa.h
+│   │   └── aes.h
+│   ├── cipher.h                # Cipher interface
+│   ├── constants.h             # Project-wide constants
+│   └── mycipher.h              # Custom algorithm definitions
+├── lib/                        # Implementations
+|
+├── src/                        # Demos and test cases
 │   ├── hash_test.cpp
-│   └── sign_verify.cpp
-├── main.cpp                  # Entry point for demonstrating features
-└── CMakeLists.txt            # Build configuration
+│   └── encryption_demo.cpp
+├── CMakeLists.txt              # Build instructions
+└── main.cpp                    # Main demo launcher
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- C++17 compiler (GCC/Clang)
-- CMake 3.15+
-
-### Build & Run
+## 🧪 Building & Running
 
 ```bash
 git clone https://github.com/RaghavendraRQ/CryptoCC.git
@@ -50,17 +47,10 @@ cmake --build build
 ./build/CryptoCC
 ```
 
-## 📌 Roadmap
+## 🚧 Planned Enhancements
 
-- [ ] Add OpenSSL-based alternatives
-- [ ] Benchmark performance vs standard libraries
-- [ ] Add unit and fuzz testing
-- [ ] Containerize for cross-platform portability
+- CLI-based encryption/decryption tool
+- GPG-style interface using OpenSSL
+- Crypto benchmarking mode
+- Unit test coverage (Google Test or Catch2)
 
-## 📄 License
-
-MIT License
-
----
-
-**Note:** This project is for educational use. Do not use in production without formal verification and audit.
